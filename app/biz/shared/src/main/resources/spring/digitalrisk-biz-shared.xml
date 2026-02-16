@@ -1,0 +1,30 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/task
+           http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <!-- Thread pool executor -->
+    <task:executor id="myTaskExecutor" pool-size="5"/>
+
+    <!-- Scheduler using the executor -->
+    <task:scheduler id="myScheduler" pool-size="2"/>
+
+    <!-- Scheduled tasks -->
+    <task:scheduled-tasks scheduler="myScheduler">
+        <!-- Task 1: runs every 5 seconds -->
+        <task:scheduled ref="riskJob" method="executeRiskCheck" fixed-rate="5000"/>
+
+        <!-- Task 2: runs every minute -->
+        <task:scheduled ref="reportJob" method="generateReport" cron="0 */1 * * * *"/>
+    </task:scheduled-tasks>
+
+
+    <!-- Beans containing the scheduled methods -->
+    <bean id="riskJob" class="com.example.jobs.RiskJob"/>
+    <bean id="reportJob" class="com.example.jobs.ReportJob"/>
+
+</beans>

@@ -8,7 +8,7 @@
         <!-- JDBC connection -->
         <jdbcConnection
                 driverClass="org.postgresql.Driver"
-                connectionURL="jdbc:postgresql://localhost:5433/business"
+                connectionURL="jdbc:postgresql://localhost:5433/user"
                 userId="postgres"
                 password="1234" />
 
@@ -25,7 +25,7 @@
         <!-- Mapper interface generation -->
         <javaClientGenerator
                 type="XMLMAPPER"
-                targetPackage="com.alipay.alipay_plus.common.dal.auto.daointerface"
+                targetPackage="com.alipay.alipay_plus.common.dal.auto.mapper"
                 targetProject="src/main/java"/>
 
         <!-- Table(s) to generate -->

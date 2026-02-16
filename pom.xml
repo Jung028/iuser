@@ -5,25 +5,58 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.adam</groupId>
-    <artifactId>business-parent</artifactId>
+    <artifactId>usercenter-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <modules>
+        <module>app/bootstrap</module>
+        <module>app/test</module>
+        <module>app/web</module>
+        <module>app/biz/shared</module>
+        <module>app/common/dal</module>
+        <module>app/common/util</module>
+        <module>app/common/service/facade</module>
+        <module>app/common/service/integration</module>
+        <module>app/biz/service/impl</module>
+        <module>app/core/model</module>
+        <module>app/core/service</module>
+    </modules>
+
     <properties>
-        <ialicore.common.service.facade.version>1.0-SNAPSHOT</ialicore.common.service.facade.version>
-        <usercenter.common.service.facade.version>1.0.0.20260117-SNAPSHOT</usercenter.common.service.facade.version>
-        <accountcenter.common.service.facade.version>1.0.0.20260215-SNAPSHOT</accountcenter.common.service.facade.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <common-service-facade-version>1.0.0.20260118-SNAPSHOT</common-service-facade-version>
     </properties>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
     <dependencyManagement>
         <dependencies>
+            <!-- Source: https://mvnrepository.com/artifact/com.alipay.sofa/rpc-sofa-boot-starter -->
             <dependency>
-                <groupId>com.ialicore.common</groupId>
-                <artifactId>service-facade</artifactId>
-                <version>${ialicore.common.service.facade.version}</version>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>rpc-sofa-boot-starter</artifactId>
+                <version>6.0.4</version>
+                <scope>compile</scope>
+            </dependency>
+            <!-- Spring Framework BOM to align versions -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>6.2.1</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
+                <version>6.2.1</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -58,36 +91,18 @@
                 <artifactId>postgresql</artifactId>
                 <version>42.7.3</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+            </dependency>
 
-
+            <dependency>
+                <groupId>com.alipay</groupId>
+                <artifactId>usercenter-common-service-facade</artifactId>
+                <version>${common-service-facade-version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
-
-
-
-
-    <modules>
-        <module>app/bootstrap</module>
-        <module>app/test</module>
-        <module>app/web</module>
-        <module>app/biz/shared</module>
-        <module>app/common/dal</module>
-        <module>app/common/util</module>
-        <module>app/common/service/facade</module>
-        <module>app/common/service/integration</module>
-        <module>app/biz/service/impl</module>
-        <module>app/core/model</module>
-        <module>app/core/service</module>
-    </modules>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.2</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-
-
 
     <build>
         <plugins>
@@ -113,18 +128,36 @@
             </activation>
             <repositories>
                 <repository>
-                    <id>central_prod</id>
+                    <id>central</id>
                     <url>https://repo1.maven.org/maven2/</url>
+                </repository>
+
+                <repository>
+                    <id>Alipay_Snapshots</id>
+                    <url>http://localhost:8081/repository/maven-snapshots/</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
                     <snapshots>
                         <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+
+                <repository>
+                    <id>Alipay_Releases</id>
+                    <url>http://localhost:8081/repository/maven-releases/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
                     </snapshots>
                 </repository>
             </repositories>
             <distributionManagement>
                 <repository>
-                    <id>central_prod</id>
-                    <name>Central Production Repository</name>
-                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                    <id>Alipay_Releases</id>
+                    <url>http://localhost:8081/repository/maven-snapshots/</url>
                 </repository>
             </distributionManagement>
         </profile>

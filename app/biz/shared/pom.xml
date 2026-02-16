@@ -5,17 +5,25 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.adam</groupId>
-        <artifactId>business-parent</artifactId>
+        <artifactId>usercenter-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>business-biz-shared</artifactId>
+    <artifactId>usercenter-biz-shared</artifactId>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.adam</groupId>
+            <artifactId>usercenter-common-service-facade</artifactId>
+            <version>${common-service-facade-version}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>

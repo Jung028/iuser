@@ -1,3 +1,0 @@
-Module-Name: com.alipay.business.common.service.integration
-Require-Module: com.alipay.business.common.service.api
-Spring-Parent: com.alipay.business.common.dal

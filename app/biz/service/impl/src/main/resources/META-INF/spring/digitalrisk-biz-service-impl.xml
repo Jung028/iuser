@@ -10,11 +10,22 @@
         <property name="testCustomMapper" ref="testCustomMapper"/>
     </bean>
 
-    <!-- Mapper bean -->
-    <bean id="testCustomMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.alipay.alipay_plus.common.service.facade.auto.daointerface.TestCustomMapper"/>
-        <!-- If using SqlSessionFactory, add below -->
-        <!-- <property name="sqlSessionFactory" ref="sqlSessionFactory"/> -->
+    <bean id="riskEventRepository" class="com.alipay.alipay_plus.biz.repository.impl.RiskEventRepositoryImpl">
+    </bean>
+
+    <bean id="abstractRiskBizService" class="com.alipay.alipay_plus.biz.service.impl.AbstractRiskBizService">
+        <property name="riskEventRepository" ref="riskEventRepository"/>
+    </bean>
+
+    <bean id="icbCancelProcessor" class="com.alipay.alipay_plus.biz.service.impl.user.processor.IcbCancelProcessor"/>
+
+
+    <bean id="disposalAbilityFactory" class="com.alipay.alipay_plus.biz.service.impl.disposal.DisposalAbilityFactory">
+            <property name="processorMap">
+                <map>
+                    <entry key="ICB_CANCEL" value-ref="icbCancelProcessor"/>
+                </map>
+            </property>
     </bean>
 
 </beans>

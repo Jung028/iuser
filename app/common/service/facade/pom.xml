@@ -5,12 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.adam</groupId>
-        <artifactId>business-parent</artifactId>
+        <artifactId>usercenter-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../../../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>business-common-service-facade</artifactId>
+    <artifactId>usercenter-common-service-facade</artifactId>
+    <version>${common-service-facade-version}</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -25,15 +26,46 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>javax.money</groupId>
-            <artifactId>money-api</artifactId>
-            <version>1.1</version>
+            <groupId>com.alipay.sofa</groupId>
+            <artifactId>sofa-rpc-all</artifactId>
+            <version>5.8.5</version> <!-- or latest release -->
         </dependency>
         <dependency>
-            <groupId>org.javamoney.moneta</groupId>
-            <artifactId>moneta-core</artifactId>
-            <version>1.4.4</version>
+            <groupId>org.adam</groupId>
+            <artifactId>usercenter-common-dal</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test-autoconfigure</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.11.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test-autoconfigure</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
     <build>
         <plugins>
@@ -45,7 +77,9 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
+
 
 </project>
