@@ -15,17 +15,14 @@ import com.alipay.usercenter.common.util.EventContext;
 import com.alipay.usercenter.core.exception.UserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 
-
+@Service
 public class UserServiceTemplate {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoggerConstant.USER_BIZ_SERVICE_LOG);
-
-    /**
-     * slipExtraDAO
-     */
-    //protected SlipExtraDAO slipExtraDAO;
 
     /**
      * execute

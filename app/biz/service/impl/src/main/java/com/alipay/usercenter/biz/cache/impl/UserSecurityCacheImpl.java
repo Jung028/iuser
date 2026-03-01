@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +16,7 @@ import java.util.Map;
 @Component
 public class UserSecurityCacheImpl implements UserSecurityCache {
 
-    @ Resource
+    @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
     private static final String KEY_PREFIX = "user:security:";
@@ -30,21 +31,28 @@ public class UserSecurityCacheImpl implements UserSecurityCache {
         // initialise if not exists, save to redis and return
         if (!redisTemplate.hasKey(key)) {
             UserSecurity init = UserSecurity.newUser(userId);
+            init.setLockedUntil(Instant.now());  // default to past so NPE never occurs
+
             update(init);
             return init;
         }
 
-        // if existing fetch from redis user security info
         String status = (String) ops.get(key, "status");
-        Integer failedAttempts = (Integer) ops.get(key, "failedAttempts");
-        Long lockedUntil = (Long) ops.get(key, "lockedUntil");
+
+        // Redis might store as Integer or Long
+        Object failedObj = ops.get(key, "failedAttempts");
+        int failedAttempts = failedObj == null ? 0 : ((Number) failedObj).intValue();
+
+        Object lockedObj = ops.get(key, "lockedUntil");
+        Instant lockedUntil = lockedObj == null
+                ? Instant.EPOCH
+                : Instant.ofEpochMilli(((Number) lockedObj).longValue());
 
         UserSecurity security = new UserSecurity();
         security.setUserId(userId);
         security.setStatus(status);
-        security.setFailedAttempts(failedAttempts == null ? 0 : failedAttempts);
-        security.setLockedUntil(lockedUntil == null ? null : new Date(lockedUntil).toInstant());
-
+        security.setFailedAttempts(failedAttempts);
+        security.setLockedUntil(lockedUntil);
         return security;
     }
 
@@ -55,10 +63,11 @@ public class UserSecurityCacheImpl implements UserSecurityCache {
         Map<String, Object> map = new HashMap<>();
         map.put("status", security.getStatus());
         map.put("failedAttempts", security.getFailedAttempts());
-        map.put("lockedUntil",
-                security.getLockedUntil() == null
-                        ? null
-                        : security.getLockedUntil());
+        // store lockedUntil as epoch millis
+        map.put("lockedUntil", security.getLockedUntil() != null
+                ? security.getLockedUntil().toEpochMilli()
+                : Instant.EPOCH.toEpochMilli());
+
 
         redisTemplate.opsForHash().putAll(key, map);
     }

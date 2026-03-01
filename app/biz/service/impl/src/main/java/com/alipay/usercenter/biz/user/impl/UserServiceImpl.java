@@ -8,6 +8,7 @@ import com.alipay.usercenter.common.service.facade.api.UserService;
 import com.alipay.usercenter.biz.util.UserPasswordUtil;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
 import com.alipay.usercenter.common.service.facade.enums.UserResultCode;
+import com.alipay.usercenter.common.service.facade.enums.UserResultEnum;
 import com.alipay.usercenter.common.service.facade.exception.UserBizException;
 import com.alipay.usercenter.common.service.facade.item.OtpVerifiedClaims;
 import com.alipay.usercenter.biz.user.checker.UserRequestChecker;
@@ -23,6 +24,7 @@ import com.alipay.usercenter.core.enums.UserActionEnum;
 import com.alipay.usercenter.core.model.UserSecurity;
 import com.alipay.usercenter.core.util.AssertUtil;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.Date;
@@ -32,6 +34,7 @@ import static com.alipay.usercenter.common.service.facade.constant.GlobalUserCon
 /**
  * author adam
  */
+@Service
 public class UserServiceImpl extends AbstractUserBizService implements UserService {
 
     @Override
@@ -56,11 +59,11 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                 QueryUserSecurityRequest queryUserSecurityRequest = new QueryUserSecurityRequest();
                 queryUserSecurityRequest.setUserId(userInfo.getUserId());
                 UserSecurity userSecurity = userSecurityCache.queryUserSecurity(queryUserSecurityRequest);
-
+                AssertUtil.notNull(userSecurity, UserResultEnum.SYSTEM_EXCEPTION, "User Security is null");
                 //get current datetime
                 Instant now = Instant.now();
                 if (now.isBefore(userSecurity.getLockedUntil())) {
-                    response.setResult("Invalid credentials");
+                    response.setResult("Locked out until" + userSecurity.getLockedUntil());
                     LogUtil.info(LOGGER, "User {} is locked out until {}", userSecurity.getUserId(), userSecurity.getLockedUntil().toString());
                 } else {
                     //Fetch user info from DB and validate password hash.

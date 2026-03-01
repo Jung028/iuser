@@ -1,14 +1,16 @@
-# Use a Java 21 base image
-FROM eclipse-temurin:21-jdk
-
-# Set working directory inside container
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
+COPY target/*.jar app.jar
 
-# Copy the fat JAR
-COPY target/usercenter-web-1.0-SNAPSHOT.jar app.jar
+# Optional: enable remote debug with DEBUG_PORT
+ENV DEBUG_PORT=""
 
-# Expose the port your Spring Boot app runs on
-EXPOSE 8080
-
-# Run the app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["sh", "-c", "\
+if [ -n \"$DEBUG_PORT\" ]; then \
+  echo 'Starting app with remote debug on port '$DEBUG_PORT; \
+  exec java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:$DEBUG_PORT -jar /app/app.jar; \
+else \
+  echo 'Starting app normally'; \
+  exec java -jar /app/app.jar; \
+fi \
+"]

@@ -5,11 +5,6 @@
            http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- Example bean declaration -->
-    <bean id="testCustomDao" class="com.alipay.alipay_plus.common.service.facade.daoimpl.TestCustomDaoImpl">
-        <property name="testCustomMapper" ref="testCustomMapper"/>
-    </bean>
-
     <bean id="riskEventRepository" class="com.alipay.alipay_plus.biz.repository.impl.RiskEventRepositoryImpl">
     </bean>
 

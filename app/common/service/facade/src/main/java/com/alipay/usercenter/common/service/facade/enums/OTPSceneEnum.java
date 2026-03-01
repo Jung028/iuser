@@ -30,4 +30,15 @@ public enum OTPSceneEnum {
         this.scene = scene;
         this.description = description;
     }
+
+    // create method for go through all to find
+    public static boolean exists(String scene) {
+        if  (null == scene) { return false; }
+        for (OTPSceneEnum sceneEnum : OTPSceneEnum.values()) {
+            if (sceneEnum.getScene().equals(scene)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

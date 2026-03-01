@@ -35,18 +35,6 @@
             <artifactId>micrometer-commons</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.adam</groupId>
-            <artifactId>usercenter-common-service-facade</artifactId>
-            <version>${common-service-facade-version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.adam</groupId>
-            <artifactId>usercenter-common-service-facade</artifactId>
-            <version>${common-service-facade-version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
         </dependency>

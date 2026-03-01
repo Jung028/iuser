@@ -1,6 +1,6 @@
 package com.alipay.usercenter.core.util;
 
-import com.alipay.usercenter.common.service.facade.enums.SlipResultEnum;
+import com.alipay.usercenter.common.service.facade.enums.UserResultEnum;
 import com.alipay.usercenter.common.service.facade.enums.UserResultCode;
 import com.alipay.usercenter.core.domain.UserInfo;
 import com.alipay.usercenter.core.enums.BusinessTypeEnum;
@@ -12,13 +12,13 @@ import org.springframework.util.ObjectUtils;
 
 public class AssertUtil {
 
-    public static void notNull(final Object object, final SlipResultEnum slipResultEnum, final String resultMsg) {
+    public static void notNull(final Object object, final UserResultEnum userResultEnum, final String resultMsg) {
         check(new AssertTemplate() {
             @Override
             public void doAssert() {
                 Assert.notNull(object, "resultMsg");
             }
-        }, slipResultEnum, resultMsg);
+        }, userResultEnum, resultMsg);
     }
 
     public static void notNull(final Object object, final UserResultCode userResultCode, final String resultMsg) {
@@ -51,14 +51,14 @@ public class AssertUtil {
     public static interface AssertTemplate {
         public void doAssert();
     }
-    private static void check(AssertTemplate assertTemplate, SlipResultEnum slipResultEnum, String resultMsg) {
+    private static void check(AssertTemplate assertTemplate, UserResultEnum userResultEnum, String resultMsg) {
         try {
             assertTemplate.doAssert();
         } catch (IllegalArgumentException e) {
             if (StringUtils.isBlank(resultMsg)) {
-                throw new BaseSlipException(slipResultEnum);
+                throw new BaseSlipException(userResultEnum);
             } else {
-                throw new BaseSlipException(slipResultEnum, resultMsg);
+                throw new BaseSlipException(userResultEnum, resultMsg);
             }
         }
     }

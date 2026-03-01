@@ -1,6 +1,5 @@
 package com.alipay.usercenter.web.controller;
 
-import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.alipay.usercenter.common.service.facade.api.UserService;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
 import com.alipay.usercenter.common.service.facade.request.LoginRequest;
@@ -8,13 +7,14 @@ import com.alipay.usercenter.common.service.facade.request.OTPRequest;
 import com.alipay.usercenter.common.service.facade.request.RegisterUserRequest;
 import com.alipay.usercenter.common.service.facade.request.VerifyOtpRequest;
 import com.alipay.usercenter.common.service.facade.result.OTPResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user/basic")
 public class UserBasicController {
 
-    @SofaReference
+    @Autowired
     private UserService userService;
 
     @PostMapping("/login.json")

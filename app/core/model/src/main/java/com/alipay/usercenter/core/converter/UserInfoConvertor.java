@@ -4,8 +4,6 @@ import com.alipay.usercenter.common.dal.auto.dataobject.UserInfoDO;
 import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
 import com.alipay.usercenter.core.domain.UserInfo;
 
-import java.util.Date;
-
 public class UserInfoConvertor {
 
     public static UserInfo convertDomain(UserInfoDO userInfoDO) {

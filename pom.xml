@@ -26,7 +26,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+        <java.version>17</java.version>
         <common-service-facade-version>1.0.0.20260118-SNAPSHOT</common-service-facade-version>
     </properties>
 
@@ -38,26 +38,9 @@
     </parent>
     <dependencyManagement>
         <dependencies>
-            <!-- Source: https://mvnrepository.com/artifact/com.alipay.sofa/rpc-sofa-boot-starter -->
-            <dependency>
-                <groupId>com.alipay.sofa</groupId>
-                <artifactId>rpc-sofa-boot-starter</artifactId>
-                <version>6.0.4</version>
-                <scope>compile</scope>
-            </dependency>
+
             <!-- Spring Framework BOM to align versions -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-framework-bom</artifactId>
-                <version>6.2.1</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>6.2.1</version>
-            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
@@ -80,9 +63,10 @@
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>3.0.5</version>
-                <scope>test</scope>
+                <version>4.0.1</version>
+                <scope>compile</scope>
             </dependency>
+
             <!-- MyBatis -->
 
             <!-- PostgreSQL JDBC -->

@@ -8,6 +8,7 @@ import com.alipay.usercenter.biz.template.UserServiceTemplate;
 import com.alipay.usercenter.core.service.repository.UserInfoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.support.TransactionTemplate;
 
 public abstract class AbstractUserBizService {
@@ -19,16 +20,19 @@ public abstract class AbstractUserBizService {
     /**
      * userServiceTemplate
      */
+    @Autowired
     protected UserServiceTemplate userServiceTemplate;
 
     /**
      * userInfoRepository
      */
+    @Autowired
     protected UserInfoRepository userInfoRepository;
 
     /**
      * userSecurityCache
      */
+    @Autowired
     protected UserSecurityCache userSecurityCache;
 
     /**

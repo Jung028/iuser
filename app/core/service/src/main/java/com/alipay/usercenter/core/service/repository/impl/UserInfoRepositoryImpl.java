@@ -5,7 +5,9 @@ import com.alipay.usercenter.core.converter.UserInfoConvertor;
 import com.alipay.usercenter.core.domain.UserInfo;
 import com.alipay.usercenter.core.service.repository.AbstractUserRepository;
 import com.alipay.usercenter.core.service.repository.UserInfoRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserInfoRepositoryImpl extends AbstractUserRepository implements UserInfoRepository {
 
     @Override
