@@ -2,7 +2,7 @@ package com.alipay.usercenter.core.converter;
 
 import com.alipay.usercenter.common.dal.auto.dataobject.UserInfoDO;
 import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
-import com.alipay.usercenter.core.domain.UserInfo;
+import com.alipay.usercenter.core.model.UserInfo;
 
 public class UserInfoConvertor {
 

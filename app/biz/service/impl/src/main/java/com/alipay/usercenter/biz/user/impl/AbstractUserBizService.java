@@ -48,6 +48,7 @@ public abstract class AbstractUserBizService {
     /**
      * jwt token util
      */
+    @Autowired
     protected JwtTokenUtil jwtTokenUtil;
 
     /**

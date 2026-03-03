@@ -20,7 +20,7 @@
 
 
     <select id="queryUserInfo" parameterType="string" resultMap="BaseResultMap">
-        SELECT phone_no, status
+        SELECT user_id, phone_no, status, hashed_password, gmt_create, gmt_modified
         FROM user_info
         WHERE phone_no = #{phoneNo}
     </select>

@@ -1,11 +1,13 @@
 package com.alipay.usercenter.biz.jwt;
 
 import com.alipay.usercenter.common.service.facade.item.OtpChallengeItem;
-import com.alipay.usercenter.core.domain.UserInfo;
+import com.alipay.usercenter.core.model.UserInfo;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.KeyFactory;
@@ -16,7 +18,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 import java.util.Date;
 
-
+@Component
 public class JwtTokenUtil {
 
     /**
@@ -43,7 +45,7 @@ public class JwtTokenUtil {
                 .setExpiration(expiry)
                 .setIssuer("user-center")
                 .setAudience("business-center")
-                .signWith(loadPrivateKey(privateKeyPath))
+                .signWith(loadPrivateKey(privateKeyPath), SignatureAlgorithm.RS256)
                 .compact();
     }
 
@@ -63,26 +65,27 @@ public class JwtTokenUtil {
                 .setExpiration(expiry)
                 .setIssuer("user-center")
                 .setAudience("business-center")
-                .signWith(loadPrivateKey(privateKeyPath), SignatureAlgorithm.HS256)
+                .signWith(loadPrivateKey(privateKeyPath), SignatureAlgorithm.RS256)
                 .compact();
     }
 
     public static PrivateKey loadPrivateKey(String filePath) {
-        String keyPem = null;
-        try {
-            keyPem = new String(Files.readAllBytes(Paths.get(filePath)))
+        try (InputStream is = JwtTokenUtil.class.getResourceAsStream(filePath)) {
+            if (is == null) {
+                throw new RuntimeException("Private key not found: " + filePath);
+            }
+            byte[] keyBytes = is.readAllBytes();
+            String keyPem = new String(keyBytes)
                     .replace("-----BEGIN PRIVATE KEY-----", "")
                     .replace("-----END PRIVATE KEY-----", "")
                     .replaceAll("\\s", "");
-            byte[] keyBytes = Base64.getDecoder().decode(keyPem);
-            PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
-            KeyFactory kf = KeyFactory.getInstance("EC");
+            byte[] decoded = Base64.getDecoder().decode(keyPem);
+            PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(decoded);
+            KeyFactory kf = KeyFactory.getInstance("RSA");
             return kf.generatePrivate(spec);
         } catch (IOException | NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     public String getPrivateKeyPath() {

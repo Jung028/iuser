@@ -18,6 +18,8 @@ public class UserPasswordUtil {
      */
     public static boolean verifyPassword(String password, String hashedUserPassword) {
         if (password == null || hashedUserPassword == null) {
+            System.out.println(password);
+            System.out.println(hashedUserPassword);
             return false;
         }
         try {

@@ -1,14 +1,17 @@
 package com.alipay.usercenter.web.controller;
 
+import com.alipay.usercenter.biz.cache.UserSecurityCache;
 import com.alipay.usercenter.common.service.facade.api.UserService;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
-import com.alipay.usercenter.common.service.facade.request.LoginRequest;
-import com.alipay.usercenter.common.service.facade.request.OTPRequest;
-import com.alipay.usercenter.common.service.facade.request.RegisterUserRequest;
-import com.alipay.usercenter.common.service.facade.request.VerifyOtpRequest;
+import com.alipay.usercenter.common.service.facade.request.*;
 import com.alipay.usercenter.common.service.facade.result.OTPResult;
+import com.alipay.usercenter.core.model.UserSecurity;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.Instant;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/user/basic")
@@ -16,6 +19,24 @@ public class UserBasicController {
 
     @Autowired
     private UserService userService;
+
+    @Resource
+    private UserSecurityCache userSecurityCache;
+
+    @PostMapping("/insert/{userId}")
+    public String insert(@PathVariable Long userId) {
+        UserSecurity userSecurity = UserSecurity.newUser(userId);
+        userSecurity.setLockedUntil(Instant.now()); // default past time
+        userSecurityCache.update(userSecurity);     // insert/update cache
+        return "Inserted user " + userId;
+    }
+
+    @GetMapping("/get/{userId}")
+    public UserSecurity get(@PathVariable Long userId) {
+        QueryUserSecurityRequest request = new QueryUserSecurityRequest();
+        request.setUserId(userId);
+        return userSecurityCache.queryUserSecurity(request); // fetch from cache
+    }
 
     @PostMapping("/login.json")
     public UserBizResult<String> login(@RequestBody LoginRequest request) {

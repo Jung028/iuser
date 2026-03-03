@@ -18,16 +18,17 @@ import com.alipay.usercenter.common.service.facade.result.OTPResult;
 import com.alipay.usercenter.common.util.LogUtil;
 import com.alipay.usercenter.common.service.facade.item.OtpChallengeItem;
 import com.alipay.usercenter.core.converter.UserInfoConvertor;
-import com.alipay.usercenter.core.domain.UserInfo;
+import com.alipay.usercenter.core.model.UserInfo;
 import com.alipay.usercenter.core.enums.UserAccountStatusEnum;
 import com.alipay.usercenter.core.enums.UserActionEnum;
 import com.alipay.usercenter.core.model.UserSecurity;
 import com.alipay.usercenter.core.util.AssertUtil;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
-
-import java.time.Instant;
 import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import static com.alipay.usercenter.common.service.facade.constant.GlobalUserConstant.LOCKOUT_TIME_5_MINUTES;
 
@@ -58,21 +59,23 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                 // query user security cache from redis.
                 QueryUserSecurityRequest queryUserSecurityRequest = new QueryUserSecurityRequest();
                 queryUserSecurityRequest.setUserId(userInfo.getUserId());
+                //get current datetime, before initialize lockout default time
+                Instant now = Instant.now();
                 UserSecurity userSecurity = userSecurityCache.queryUserSecurity(queryUserSecurityRequest);
                 AssertUtil.notNull(userSecurity, UserResultEnum.SYSTEM_EXCEPTION, "User Security is null");
-                //get current datetime
-                Instant now = Instant.now();
-                if (now.isBefore(userSecurity.getLockedUntil())) {
-                    response.setResult("Locked out until" + userSecurity.getLockedUntil());
-                    LogUtil.info(LOGGER, "User {} is locked out until {}", userSecurity.getUserId(), userSecurity.getLockedUntil().toString());
+
+                if (now.isBefore((userSecurity.getLockedUntil()))) {
+                    ZonedDateTime localTime = userSecurity.getLockedUntil().atZone(ZoneId.systemDefault());
+                    System.out.println("Locked until local time: " + localTime);
+                    response.setResult("Locked out until: " + userSecurity.getLockedUntil());
+                    LogUtil.info(LOGGER, "User " + userSecurity.getUserId() + " is locked out until :" + userSecurity.getLockedUntil().toString());
                 } else {
                     //Fetch user info from DB and validate password hash.
                     String hashedUserPassword = userInfo.getHashedPassword();
                     boolean isValidPassword = UserPasswordUtil.verifyPassword(request.getPassword(), hashedUserPassword);
                     if (isValidPassword) {
-                        //Reset failed attempts in cache.
-                        userSecurity.setFailedAttempts(0);
-                        userSecurityCache.update(userSecurity);
+                        //directly delete the security upon success login.
+                        userSecurityCache.delete(userSecurity.getUserId());
                         //Generate JWT token containing user_id, roles, expiration.
                         String jwtToken = jwtTokenUtil.generateTokenForUserInfo(userInfo);
                         //Optionally create session entry in DB (for logout, multi-device, or revocation).

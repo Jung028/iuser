@@ -14,4 +14,6 @@ public interface UserSecurityCache {
     UserSecurity queryUserSecurity(QueryUserSecurityRequest request);
 
     void update(UserSecurity userSecurity);
+
+    void delete(Long userId);
 }

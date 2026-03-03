@@ -1,6 +1,6 @@
 package com.alipay.usercenter.core.service.repository;
 
-import com.alipay.usercenter.core.domain.UserInfo;
+import com.alipay.usercenter.core.model.UserInfo;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -2,7 +2,7 @@ package com.alipay.usercenter.core.util;
 
 import com.alipay.usercenter.common.service.facade.enums.UserResultEnum;
 import com.alipay.usercenter.common.service.facade.enums.UserResultCode;
-import com.alipay.usercenter.core.domain.UserInfo;
+import com.alipay.usercenter.core.model.UserInfo;
 import com.alipay.usercenter.core.enums.BusinessTypeEnum;
 import com.alipay.usercenter.core.exception.BaseSlipException;
 import com.alipay.usercenter.core.exception.UserException;

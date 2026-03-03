@@ -1,4 +1,4 @@
-package com.alipay.usercenter.core.domain;
+package com.alipay.usercenter.core.model;
 
 import java.util.Date;
 

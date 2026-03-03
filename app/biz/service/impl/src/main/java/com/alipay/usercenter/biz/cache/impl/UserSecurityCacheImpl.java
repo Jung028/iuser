@@ -72,5 +72,11 @@ public class UserSecurityCacheImpl implements UserSecurityCache {
         redisTemplate.opsForHash().putAll(key, map);
     }
 
+    @Override
+    public void delete(Long userId) {
+        // delete the record and when user login again then create a new cache record
+        redisTemplate.delete("user:security:" + userId);
+    }
+
 }
 
