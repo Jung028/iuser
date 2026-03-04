@@ -9,7 +9,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +30,7 @@ public class UserSecurityCacheImpl implements UserSecurityCache {
         // initialise if not exists, save to redis and return
         if (!redisTemplate.hasKey(key)) {
             UserSecurity init = UserSecurity.newUser(userId);
-            init.setLockedUntil(Instant.now());  // default to past so NPE never occurs
+            init.setLockedUntil(Instant.EPOCH);  // default to past so NPE never occurs
 
             update(init);
             return init;
@@ -57,7 +56,7 @@ public class UserSecurityCacheImpl implements UserSecurityCache {
     }
 
     @Override
-    public void update(UserSecurity security) {
+    public UserSecurity update(UserSecurity security) {
         String key = KEY_PREFIX + security.getUserId();
 
         Map<String, Object> map = new HashMap<>();
@@ -70,6 +69,13 @@ public class UserSecurityCacheImpl implements UserSecurityCache {
 
 
         redisTemplate.opsForHash().putAll(key, map);
+        redisTemplate.opsForHash().get(KEY_PREFIX, "status");
+        UserSecurity userSecurity = new UserSecurity();
+        userSecurity.setStatus(security.getStatus());
+        userSecurity.setFailedAttempts(security.getFailedAttempts());
+        userSecurity.setLockedUntil(security.getLockedUntil());
+        userSecurity.setUserId(security.getUserId());
+        return userSecurity;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.alipay.usercenter.core.model;
 
+import com.alipay.usercenter.core.enums.UserSecurityStatusEnum;
+
 import java.time.Instant;
 
 public class UserSecurity {
@@ -45,7 +47,7 @@ public class UserSecurity {
     public static UserSecurity newUser(Long userId) {
         UserSecurity u = new UserSecurity();
         u.userId = userId;
-        u.status = "ENABLED";
+        u.status = UserSecurityStatusEnum.ENABLED.getCode();
         u.failedAttempts = 0;
         u.lockedUntil = null;
         return u;

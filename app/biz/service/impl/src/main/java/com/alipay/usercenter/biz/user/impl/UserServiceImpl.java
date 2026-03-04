@@ -1,9 +1,11 @@
 package com.alipay.usercenter.biz.user.impl;
 
+import com.alipay.usercenter.biz.cache.UserSecurityCache;
 import com.alipay.usercenter.biz.jwt.JwtClaims;
 import com.alipay.usercenter.biz.jwt.JwtContextHolder;
 import com.alipay.usercenter.biz.template.UserBizCallback;
 import com.alipay.usercenter.biz.user.helper.BusinessServiceHelper;
+import com.alipay.usercenter.biz.user.helper.ResponseBuilder;
 import com.alipay.usercenter.common.service.facade.api.UserService;
 import com.alipay.usercenter.biz.util.UserPasswordUtil;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
@@ -18,19 +20,24 @@ import com.alipay.usercenter.common.service.facade.result.OTPResult;
 import com.alipay.usercenter.common.util.LogUtil;
 import com.alipay.usercenter.common.service.facade.item.OtpChallengeItem;
 import com.alipay.usercenter.core.converter.UserInfoConvertor;
+import com.alipay.usercenter.core.enums.UserSecurityStatusEnum;
 import com.alipay.usercenter.core.model.UserInfo;
 import com.alipay.usercenter.core.enums.UserAccountStatusEnum;
 import com.alipay.usercenter.core.enums.UserActionEnum;
 import com.alipay.usercenter.core.model.UserSecurity;
 import com.alipay.usercenter.core.util.AssertUtil;
+import jakarta.annotation.Nonnull;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+
+import java.time.Duration;
 import java.util.Date;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 import static com.alipay.usercenter.common.service.facade.constant.GlobalUserConstant.LOCKOUT_TIME_5_MINUTES;
+import static com.alipay.usercenter.common.service.facade.constant.GlobalUserConstant.MAX_FAILED_ATTEMPTS;
 
 /**
  * author adam
@@ -61,14 +68,20 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                 queryUserSecurityRequest.setUserId(userInfo.getUserId());
                 //get current datetime, before initialize lockout default time
                 Instant now = Instant.now();
+
                 UserSecurity userSecurity = userSecurityCache.queryUserSecurity(queryUserSecurityRequest);
                 AssertUtil.notNull(userSecurity, UserResultEnum.SYSTEM_EXCEPTION, "User Security is null");
 
                 if (now.isBefore((userSecurity.getLockedUntil()))) {
-                    ZonedDateTime localTime = userSecurity.getLockedUntil().atZone(ZoneId.systemDefault());
-                    System.out.println("Locked until local time: " + localTime);
-                    response.setResult("Locked out until: " + userSecurity.getLockedUntil());
-                    LogUtil.info(LOGGER, "User " + userSecurity.getUserId() + " is locked out until :" + userSecurity.getLockedUntil().toString());
+                    String timeLeft = calculateTimeout(now, userSecurity);
+                    LogUtil.info(LOGGER, "User locked out: " + userSecurity.getUserId()
+                            + ", Lockout time: " + userSecurity.getLockedUntil()
+                            + ", attempts left: " + userSecurity.getFailedAttempts()
+                            + ", status: " + userSecurity.getStatus());
+                    ResponseBuilder.fail(response, "Locked out until: " + timeLeft, UserActionEnum.LOGIN.getCode());
+                    if (userSecurity.getStatus().equals(UserSecurityStatusEnum.PERMANENT_LOCK.getCode())) {
+                        ResponseBuilder.fail(response, "Locked out p", UserActionEnum.LOGIN.getCode());
+                    }
                 } else {
                     //Fetch user info from DB and validate password hash.
                     String hashedUserPassword = userInfo.getHashedPassword();
@@ -79,22 +92,55 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                         //Generate JWT token containing user_id, roles, expiration.
                         String jwtToken = jwtTokenUtil.generateTokenForUserInfo(userInfo);
                         //Optionally create session entry in DB (for logout, multi-device, or revocation).
-                        response.setResult(jwtToken);
+                        ResponseBuilder.success(response, jwtToken, "Login Success", UserActionEnum.LOGIN.getCode());
                     } else {
                         //Increment failed attempts in cache.
                         int failedAttempts = userSecurity.getFailedAttempts() + 1;
                         userSecurity.setFailedAttempts(failedAttempts);
-                        //If failed attempts to exceed threshold, set lockout time in cache.
                         BusinessServiceHelper.calculateNDecideLockoutTime(failedAttempts, userSecurity);
-                        userSecurityCache.update(userSecurity);
-                        //Return error indicating invalid credentials.
-                        response.setResult("Invalid credentials");
+                        UserSecurity userSecurityResult = userSecurityCache.update(userSecurity);
+
+                        // Determine response based on lock status
+                        String status = userSecurityResult.getStatus();
+
+                        if (UserSecurityStatusEnum.PERMANENT_LOCK.name().equals(status)) {
+                            ResponseBuilder.fail(response, "Locked out permanently", UserActionEnum.LOGIN.getCode());
+                        } else if (UserSecurityStatusEnum.TIMEOUT_LOCK.getCode().equals(status)) {
+                            // Calculate remaining lock time
+                            long remainingMillis = userSecurityResult.getLockedUntil().toEpochMilli() - System.currentTimeMillis();
+                            long minutesLeft = Math.max(1, remainingMillis / (60 * 1000)); // at least 1 min
+                            ResponseBuilder.fail(response, "Incorrect password, timeout (" + minutesLeft + " min left)", UserActionEnum.LOGIN.getCode());
+                        } else {
+                            int attemptsLeft = Math.max(0, MAX_FAILED_ATTEMPTS - failedAttempts);
+                            ResponseBuilder.fail(response, "Incorrect password, attempts left: " + attemptsLeft, UserActionEnum.LOGIN.getCode());
+                        }
                     }
                 }
             }
-            });
+        });
     }
 
+    /**
+     * calculate timeout countdown left to display to user
+     * @param now
+     * @param userSecurity
+     * @return
+     */
+    private static String calculateTimeout(Instant now, UserSecurity userSecurity) {
+        Duration durationLeft = Duration.between(now, userSecurity.getLockedUntil());
+        long minutes = durationLeft.toMinutes();
+        long seconds = durationLeft.minusMinutes(minutes).getSeconds();
+
+        String timeLeft = "";
+        if (minutes > 0) {
+            timeLeft += minutes + " minute" + (minutes > 1 ? "s" : "");
+        }
+        if (seconds > 0) {
+            if (!timeLeft.isEmpty()) timeLeft += " ";
+            timeLeft += seconds + " second" + (seconds > 1 ? "s" : "");
+        }
+        return timeLeft;
+    }
 
 
     @Override

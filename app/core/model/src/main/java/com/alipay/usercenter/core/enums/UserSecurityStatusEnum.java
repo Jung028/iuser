@@ -6,13 +6,16 @@ public enum UserSecurityStatusEnum {
      */
     PERMANENT_LOCK("PERMANENT_LOCK", "Permanently Locked"),
 
+    /**
+     * timeout lock
+     */
     TIMEOUT_LOCK("TIMEOUT_LOCK", "Temporarily Locked"),
 
-    ACTIVE("ACTIVE", "Active Session")
-
-
+    /**
+     * active
+     */
+    ENABLED("ENABLED", "Enabled Session")
     ;
-
 
     /**
      * 锁定类型
