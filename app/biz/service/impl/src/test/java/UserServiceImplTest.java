@@ -78,7 +78,7 @@ class UserServiceImplTest {
 
         // Setup OTP request
         otpRequest = new OTPRequest();
-        otpRequest.setPhoneNo("0123456789");
+        otpRequest.setPhoneNo("012345678922");
         otpRequest.setOtpScene(OTPSceneEnum.REGISTER);
 
         // Setup verify OTP request
@@ -89,8 +89,9 @@ class UserServiceImplTest {
 
         // Setup register request
         registerRequest = new RegisterUserRequest();
-        registerRequest.setPhoneNo("0123456789");
-        registerRequest.setPassword("newPassword");
+        registerRequest.setPhoneNo("0123456789221");
+        registerRequest.setPassword("newPasword123$");
+        registerRequest.setConfirmPassword("newPasword123$");
         registerRequest.setVerifiedToken("verified-token-123");
 
         // Setup query user info request
@@ -404,17 +405,13 @@ class UserServiceImplTest {
     @Test
     void register_success() {
         OtpVerifiedClaims claims = new OtpVerifiedClaims();
-        claims.setPhoneNo("0123456789");
-
-        UserInfo newUserInfo = new UserInfo();
-        newUserInfo.setPhoneNo("0123456789");
-        newUserInfo.setStatus(UserAccountStatusEnum.ACTIVE.getCode());
+        claims.setPhoneNo("0123456789221");
 
         UserBizResult<Void> expectedResult = new UserBizResult<>();
         expectedResult.setSuccess(true);
 
         doReturn(claims).when(otpChallenge).verifyVerifiedToken(anyString());
-        doReturn(newUserInfo).when(userInfoRepository).queryUserInfo(anyString());
+        doReturn(null).when(userInfoRepository).queryUserInfo(anyString());
         doAnswer(invocation -> {
                     var callback = invocation.getArgument(0);
                     return ((org.springframework.transaction.support.TransactionCallback<?>) callback).doInTransaction(null);
@@ -444,21 +441,6 @@ class UserServiceImplTest {
         assertThrows(Exception.class, () -> userService.register(registerRequest));
     }
 
-    @Test
-    void register_user_not_found() {
-        OtpVerifiedClaims claims = new OtpVerifiedClaims();
-        claims.setPhoneNo("0123456789");
-
-        doReturn(claims).when(otpChallenge).verifyVerifiedToken(anyString());
-        doReturn(null).when(userInfoRepository).queryUserInfo(any());
-        doAnswer(invocation -> {
-                    var callback = invocation.getArgument(0);
-                    return ((org.springframework.transaction.support.TransactionCallback<?>) callback).doInTransaction(null);
-                }).when(userTransactionTemplate).execute(any());
-
-        // Should throw user not found exception
-        assertThrows(Exception.class, () -> userService.register(registerRequest));
-    }
 
     // ===============================
     // QUERY USER INFO TESTS
@@ -466,7 +448,7 @@ class UserServiceImplTest {
     @Test
     void queryUserInfo_success() {
         JwtClaims claims = new JwtClaims();
-        claims.setUserId("1");
+        claims.setSubject("1");
         UserInfo userInfo = new UserInfo();
         userInfo.setStatus(UserAccountStatusEnum.ACTIVE.getCode());
 
@@ -484,7 +466,7 @@ class UserServiceImplTest {
 
             assertNotNull(result);
             assertNotNull(result.getResult());
-            verify(userInfoRepository).queryUserInfo(null);
+            verify(userInfoRepository).queryUserInfo(anyString());
         }
     }
 
