@@ -1,6 +1,7 @@
 package com.alipay.usercenter.biz.user.impl;
 
 import com.alipay.usercenter.biz.cache.UserSecurityCache;
+import com.alipay.usercenter.biz.helper.GenerateUserId;
 import com.alipay.usercenter.biz.jwt.JwtClaims;
 import com.alipay.usercenter.biz.jwt.JwtContextHolder;
 import com.alipay.usercenter.biz.template.UserBizCallback;
@@ -62,7 +63,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
             @Override
             protected void process(LoginRequest request, UserBizResult<String> response) {
                 //Check user_security cache for failed attempts/lockout.
-                UserInfo userInfo = userInfoRepository.queryUserInfo(request.getPhoneNumber());
+                UserInfo userInfo = userInfoRepository.queryUserInfo(request.getPhoneNo());
                 // query user security cache from redis.
                 QueryUserSecurityRequest queryUserSecurityRequest = new QueryUserSecurityRequest();
                 queryUserSecurityRequest.setUserId(userInfo.getUserId());
@@ -90,7 +91,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                         //directly delete the security upon success login.
                         userSecurityCache.delete(userSecurity.getUserId());
                         //Generate JWT token containing user_id, roles, expiration.
-                        String jwtToken = jwtTokenUtil.generateTokenForUserInfo(userInfo);
+                        String jwtToken = jwtUtil.generateTokenForUserInfo(userInfo);
                         //Optionally create session entry in DB (for logout, multi-device, or revocation).
                         ResponseBuilder.success(response, jwtToken, "Login Success", UserActionEnum.LOGIN.getCode());
                     } else {
@@ -170,9 +171,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                 result.setSceneCode(challenge.getSceneCode());
                 result.setExpireAt(challenge.getExpireAt());
                 result.setRetryLeft(challenge.getMaxRetry() - challenge.getRetryCount());
-
-                response.setResult(result);
-                response.setSuccess(true);
+                ResponseBuilder.success(response, result, "Successfully sent OTP", UserActionEnum.SEND_OTP.getCode());
             }
         });
     }
@@ -203,7 +202,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                 AssertUtil.notNull(challenge, UserResultCode.OTP_EXPIRED, "OTP challenge not found");
 
                 // when is the lockoutUntil set? - after max retries exceeded
-                if (challenge.getLockoutUntil() != null & Instant.now().isBefore(challenge.getLockoutUntil())) {
+                if (challenge.getLockoutUntil() != null && Instant.now().isBefore(challenge.getLockoutUntil())) {
                     AssertUtil.isTrue(false, UserResultCode.TIMEOUT_LOCK,
                             "OTP locked until " + challenge.getLockoutUntil());
                 }
@@ -242,9 +241,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
 
                 // create a JWT for frontend to verify success created
                 String verifiedToken = otpChallenge.issueJWTToken(challenge);
-
-                response.setResult(verifiedToken);
-                response.setSuccess(true);
+                ResponseBuilder.success(response, verifiedToken, "Verify OTP", UserActionEnum.VERITY_OTP.getCode());
             }
         });
     }
@@ -267,26 +264,31 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
             protected void process(RegisterUserRequest request, UserBizResult<Void> result) {
                 // use a transaction to ensure data consistency
                 userTransactionTemplate.execute(status -> {
-                    // validate the JWT token first
+                    // validate the JWT token first, because when register, we verify phone no
                     OtpVerifiedClaims otpVerifiedClaims = otpChallenge.verifyVerifiedToken(
                             request.getVerifiedToken());
-
+                    System.out.println(otpVerifiedClaims.getPhoneNo());
                     //cross-check phone number
                     AssertUtil.isTrue(otpVerifiedClaims.getPhoneNo().equals(request.getPhoneNo()),
                             UserResultCode.PHONE_NO_MISMATCH,
                             "Phone number does not match with verified OTP phone number");
 
-                    // verify the user exists
+                    // verify password matches
+                    AssertUtil.isTrue(request.getConfirmPassword().equals(request.getPassword()),
+                            UserResultCode.PASSWORD_MISMATCH, "Passwords do not match");
+
+                    // check if there is already an existing account for this phone no
                     UserInfo existingUser = userInfoRepository.queryUserInfo(
                             request.getPhoneNo());
-                    AssertUtil.notNull(existingUser, UserResultCode.USER_NOT_FOUND,
-                            "User not found for phone number: " + request.getPhoneNo());
+                    AssertUtil.isNull(existingUser, UserResultCode.EXISTING_USER,
+                            "user account already exists, " + request.getPhoneNo());
 
                     // hash password
                     String hashedPassword = UserPasswordUtil.hashPassword(request.getPassword());
 
                     // then set the request, and update the db for user info.
                     UserInfo userInfo = new UserInfo();
+                    userInfo.setUserId(GenerateUserId.nextId());
                     userInfo.setGmtCreate(new Date());
                     userInfo.setGmtModified(new Date());
                     userInfo.setPhoneNo(request.getPhoneNo());
@@ -296,8 +298,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                     // insert a new user info
                     userInfoRepository.insertUserInfo(userInfo);
 
-                    result.setSuccess(true);
-                    result.setResultMessage("Successfully created account");
+                    ResponseBuilder.success(result, null, "Registered account", UserActionEnum.REGISTER.getCode());
                     return null;
                 });
             }
@@ -307,7 +308,8 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
 
     @Override
     public UserBizResult<UserInfoItem> queryUserInfo(QueryUserInfoRequest request) {
-        return userServiceTemplate.execute(request, UserActionEnum.QUERY_USER_INFO, new UserBizCallback<>() {
+        return userServiceTemplate.execute(request, UserActionEnum.QUERY_USER_INFO,
+                new UserBizCallback<>() {
             @Override
             protected UserBizResult<UserInfoItem> createDefaultResponse() {
                 return new UserBizResult<>();
@@ -322,11 +324,16 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
             protected void process(QueryUserInfoRequest request, UserBizResult<UserInfoItem> response) {
                 // get the hash otp, verify the user.
                 JwtClaims claims = JwtContextHolder.get();
-                AssertUtil.isTrue(claims.getUserId().equals(request.getUserId()), UserResultCode.NO_PERMISSION, "user has no permission");
+                // get the userId from the header.
+                AssertUtil.isTrue(claims.getSubject().equals(request.getUserId()), UserResultCode.NO_PERMISSION, "user has no permission");
                 UserInfo userInfo = userInfoRepository.queryUserInfo(request.getPhoneNo());
                 // convert userInfo to item
-                UserInfoItem userInfoItem = UserInfoConvertor.convertItem(userInfo);
-                response.setResult(userInfoItem);
+                if (userInfo != null) {
+                    UserInfoItem userInfoItem = UserInfoConvertor.convertItem(userInfo);
+                    ResponseBuilder.success(response, userInfoItem, "Query User Info Item", UserActionEnum.QUERY_USER_INFO.getCode());
+                } else {
+                    ResponseBuilder.fail(response,"Query User Info Item", UserActionEnum.QUERY_USER_INFO.getCode());
+                }
             }
         });
     }

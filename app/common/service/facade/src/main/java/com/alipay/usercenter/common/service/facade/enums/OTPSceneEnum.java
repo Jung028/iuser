@@ -1,7 +1,7 @@
 package com.alipay.usercenter.common.service.facade.enums;
 
 public enum OTPSceneEnum {
-    REGISTER("REGISTER", "User registeration"),
+    REGISTER("REGISTER", "User registration"),
     LOGIN("LOGIN", "User login"),
     RESET_PASSWORD("RESET_PASSWORD", "Reset password"),
     TRANSFER_OVER_LIMIT("TRANSFER_OVER_LIMIT", "Transfer over limit")

@@ -3,10 +3,13 @@ package com.alipay.usercenter.biz.cache;
 import com.alipay.usercenter.common.service.facade.enums.OTPSceneEnum;
 import com.alipay.usercenter.common.service.facade.item.OtpChallengeItem;
 import com.alipay.usercenter.common.service.facade.item.OtpVerifiedClaims;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @Adam
  */
+@Component
 public interface OtpChallenge {
 
     /**

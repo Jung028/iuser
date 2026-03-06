@@ -26,8 +26,8 @@ public class UserInfoConvertor {
             return null;
         }
         UserInfoDO userInfoDO = new UserInfoDO();
-        userInfoDO.setId(userInfo.getId());
         userInfoDO.setPhoneNo(userInfo.getPhoneNo());
+        // should we set user id to incremental in db or random val + index here
         userInfoDO.setUserId(userInfo.getUserId());
         userInfoDO.setGmtModified(userInfo.getGmtModified());
         userInfoDO.setGmtCreate(userInfo.getGmtCreate());

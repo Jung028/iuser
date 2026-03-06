@@ -6,6 +6,7 @@ public class RegisterUserRequest extends UserBaseRequest {
     private String verifiedToken;   // REQUIRED
     private String phoneNo;
     private String password;
+    private String confirmPassword;
 
     public String getVerifiedToken() {
         return verifiedToken;
@@ -29,5 +30,13 @@ public class RegisterUserRequest extends UserBaseRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

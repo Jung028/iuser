@@ -2,7 +2,9 @@ package com.alipay.usercenter.biz.cache;
 
 import com.alipay.usercenter.common.service.facade.request.QueryUserSecurityRequest;
 import com.alipay.usercenter.core.model.UserSecurity;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface UserSecurityCache {
 
     /**

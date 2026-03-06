@@ -4,7 +4,7 @@ import com.alipay.usercenter.common.service.facade.enums.OTPSceneEnum;
 
 import java.time.Instant;
 
-public class OTPResult extends Result{
+public class OTPResult {
     private String challengeId;
     private OTPSceneEnum sceneCode;
     private Instant expireAt;

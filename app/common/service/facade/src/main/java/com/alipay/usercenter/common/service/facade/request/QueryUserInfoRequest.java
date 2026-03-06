@@ -30,7 +30,7 @@ public class QueryUserInfoRequest extends UserBaseRequest {
     }
 
     /**
-     * getPhoneNo
+     * get phone no
      * @return
      */
     public String getPhoneNo() {
@@ -38,9 +38,10 @@ public class QueryUserInfoRequest extends UserBaseRequest {
     }
 
     /**
-     * setPhoneNo
+     * set phone no
      * @param phoneNo
      */
-    public void setPhoneNo(String phoneNo) {}
-
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
 }

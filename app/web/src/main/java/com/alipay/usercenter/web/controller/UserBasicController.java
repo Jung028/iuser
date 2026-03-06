@@ -3,6 +3,7 @@ package com.alipay.usercenter.web.controller;
 import com.alipay.usercenter.biz.cache.UserSecurityCache;
 import com.alipay.usercenter.common.service.facade.api.UserService;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
+import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
 import com.alipay.usercenter.common.service.facade.request.*;
 import com.alipay.usercenter.common.service.facade.result.OTPResult;
 import com.alipay.usercenter.core.model.UserSecurity;
@@ -70,6 +71,15 @@ public class UserBasicController {
     public UserBizResult<Void> register(@RequestBody RegisterUserRequest request) {
         try {
             return userService.register(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PostMapping("/queryUserInfo.json")
+    public UserBizResult<UserInfoItem> queryUserInfo(@RequestBody QueryUserInfoRequest request) {
+        try {
+            return userService.queryUserInfo(request);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

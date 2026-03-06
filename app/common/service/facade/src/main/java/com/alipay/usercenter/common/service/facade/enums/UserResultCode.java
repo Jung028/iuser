@@ -68,10 +68,11 @@ public enum UserResultCode {
     /**
      * OTP scene mismatch
      */
-    OTP_SCENE_MISMATCH(ResultCodeLevel.ERROR, ResultCodeType.SYS_ERROR, UserBizType.OTP_COMMON, "11", "Cannot verify otp that is not for its intended purpose" )
-
-
-    ;
+    OTP_SCENE_MISMATCH(ResultCodeLevel.ERROR, ResultCodeType.SYS_ERROR, UserBizType.OTP_COMMON, "11", "Cannot verify otp that is not for its intended purpose" ),
+    /**
+     * Password Mismatch
+     */
+    PASSWORD_MISMATCH(ResultCodeLevel.WARN, ResultCodeType.BIZ_ERROR, UserBizType.USER_COMMON, "12", "Password Mismatch");
     /**
      * code 码
      */

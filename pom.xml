@@ -27,7 +27,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
-        <common-service-facade-version>1.0.0.20260118-SNAPSHOT</common-service-facade-version>
+        <common-service-facade-version>1.0.0.20260306-SNAPSHOT</common-service-facade-version>
     </properties>
 
     <parent>

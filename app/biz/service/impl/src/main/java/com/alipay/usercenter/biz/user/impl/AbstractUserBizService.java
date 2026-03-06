@@ -3,7 +3,7 @@ package com.alipay.usercenter.biz.user.impl;
 
 import com.alipay.usercenter.biz.cache.OtpChallenge;
 import com.alipay.usercenter.biz.cache.UserSecurityCache;
-import com.alipay.usercenter.biz.jwt.JwtTokenUtil;
+import com.alipay.usercenter.biz.jwt.JwtUtil;
 import com.alipay.usercenter.biz.template.UserServiceTemplate;
 import com.alipay.usercenter.core.service.repository.UserInfoRepository;
 import org.slf4j.Logger;
@@ -38,18 +38,20 @@ public abstract class AbstractUserBizService {
     /**
      * otpChallenge
      */
+    @Autowired
     protected OtpChallenge otpChallenge;
 
     /**
      * userTransactionTemplate
      */
+    @Autowired
     protected TransactionTemplate userTransactionTemplate;
 
     /**
      * jwt token util
      */
     @Autowired
-    protected JwtTokenUtil jwtTokenUtil;
+    protected JwtUtil jwtUtil;
 
     /**
      * setUserServiceTemplate
@@ -92,10 +94,10 @@ public abstract class AbstractUserBizService {
     }
 
     /**
-     * setJwtTokenUtil
-     * @param jwtTokenUtil
+     * set jwt util
+     * @param jwtUtil
      */
-    public void setJwtTokenUtil(JwtTokenUtil jwtTokenUtil) {
-        this.jwtTokenUtil = jwtTokenUtil;
+    public void setJwtUtil(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
     }
 }

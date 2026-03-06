@@ -25,4 +25,17 @@
         WHERE phone_no = #{phoneNo}
     </select>
 
+
+    <select id="insertUserInfo" parameterType="com.alipay.usercenter.common.dal.auto.dataobject.UserInfoDO" resultMap="BaseResultMap">
+        INSERT into user_info (user_id, phone_no, status, hashed_password, gmt_create, gmt_modified)
+        VALUES (
+        #{userId,jdbcType=BIGINT},
+        #{phoneNo,jdbcType=VARCHAR},
+        #{status,jdbcType=VARCHAR},
+        #{hashedPassword,jdbcType=VARCHAR},
+        #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtModified,jdbcType=TIMESTAMP}
+        )
+    </select>
+
 </mapper>
