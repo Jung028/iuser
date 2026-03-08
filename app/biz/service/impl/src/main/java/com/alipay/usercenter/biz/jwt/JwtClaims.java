@@ -20,7 +20,6 @@ public class JwtClaims {
     private String audience;
     private Instant issuedAt;
     private Instant expiresAt;
-    private TokenType tokenType;
 
 
     public String getSubject() {
@@ -87,11 +86,4 @@ public class JwtClaims {
         this.expiresAt = expiresAt;
     }
 
-    public TokenType getTokenType() {
-        return tokenType;
-    }
-
-    public void setTokenType(TokenType tokenType) {
-        this.tokenType = tokenType;
-    }
 }

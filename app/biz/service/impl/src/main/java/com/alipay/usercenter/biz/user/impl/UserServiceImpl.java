@@ -27,15 +27,12 @@ import com.alipay.usercenter.core.enums.UserAccountStatusEnum;
 import com.alipay.usercenter.core.enums.UserActionEnum;
 import com.alipay.usercenter.core.model.UserSecurity;
 import com.alipay.usercenter.core.util.AssertUtil;
-import jakarta.annotation.Nonnull;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.Date;
 import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 import static com.alipay.usercenter.common.service.facade.constant.GlobalUserConstant.LOCKOUT_TIME_5_MINUTES;
 import static com.alipay.usercenter.common.service.facade.constant.GlobalUserConstant.MAX_FAILED_ATTEMPTS;
@@ -329,7 +326,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                 UserInfo userInfo = userInfoRepository.queryUserInfo(request.getPhoneNo());
                 // convert userInfo to item
                 if (userInfo != null) {
-                    UserInfoItem userInfoItem = UserInfoConvertor.convertItem(userInfo);
+                    UserInfoItem userInfoItem = UserInfoConvertor.convertToItem(userInfo);
                     ResponseBuilder.success(response, userInfoItem, "Query User Info Item", UserActionEnum.QUERY_USER_INFO.getCode());
                 } else {
                     ResponseBuilder.fail(response,"Query User Info Item", UserActionEnum.QUERY_USER_INFO.getCode());

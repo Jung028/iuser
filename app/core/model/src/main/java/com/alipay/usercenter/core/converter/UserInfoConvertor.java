@@ -6,7 +6,7 @@ import com.alipay.usercenter.core.model.UserInfo;
 
 public class UserInfoConvertor {
 
-    public static UserInfo convertDomain(UserInfoDO userInfoDO) {
+    public static UserInfo convertToDomain(UserInfoDO userInfoDO) {
         if (userInfoDO == null) {
             return null;
         }
@@ -21,7 +21,7 @@ public class UserInfoConvertor {
         return userInfo;
     }
 
-    public static UserInfoDO convertDO(UserInfo userInfo) {
+    public static UserInfoDO convertToDO(UserInfo userInfo) {
         if (userInfo == null) {
             return null;
         }
@@ -36,7 +36,7 @@ public class UserInfoConvertor {
         return userInfoDO;
     }
 
-    public static UserInfoItem convertItem(UserInfo userInfo) {
+    public static UserInfoItem convertToItem(UserInfo userInfo) {
         if (userInfo == null) {
             return null;
         }

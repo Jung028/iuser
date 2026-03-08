@@ -16,12 +16,12 @@ public class UserInfoRepositoryImpl extends AbstractUserRepository implements Us
         if(userInfoDO == null) {
             return null;
         }
-        return UserInfoConvertor.convertDomain(userInfoDO);
+        return UserInfoConvertor.convertToDomain(userInfoDO);
     }
 
     @Override
     public void insertUserInfo(UserInfo userInfo) {
-        UserInfoDO userInfoDO = UserInfoConvertor.convertDO(userInfo);
+        UserInfoDO userInfoDO = UserInfoConvertor.convertToDO(userInfo);
         try {
             userInfoDAO.insertUserInfo(userInfoDO);
         } catch (Exception e) {
