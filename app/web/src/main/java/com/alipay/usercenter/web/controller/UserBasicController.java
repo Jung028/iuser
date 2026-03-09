@@ -1,5 +1,6 @@
 package com.alipay.usercenter.web.controller;
 
+import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.alipay.usercenter.biz.cache.UserSecurityCache;
 import com.alipay.usercenter.common.service.facade.api.UserService;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
@@ -8,17 +9,15 @@ import com.alipay.usercenter.common.service.facade.request.*;
 import com.alipay.usercenter.common.service.facade.result.OTPResult;
 import com.alipay.usercenter.core.model.UserSecurity;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/user/basic")
 public class UserBasicController {
 
-    @Autowired
+    @SofaReference
     private UserService userService;
 
     @Resource

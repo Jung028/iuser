@@ -1,6 +1,7 @@
 package com.alipay.usercenter.biz.user.impl;
 
-import com.alipay.usercenter.biz.cache.UserSecurityCache;
+import com.alipay.sofa.runtime.api.annotation.SofaService;
+import com.alipay.sofa.runtime.api.annotation.SofaServiceBinding;
 import com.alipay.usercenter.biz.helper.GenerateUserId;
 import com.alipay.usercenter.biz.jwt.JwtClaims;
 import com.alipay.usercenter.biz.jwt.JwtContextHolder;
@@ -40,6 +41,14 @@ import static com.alipay.usercenter.common.service.facade.constant.GlobalUserCon
 /**
  * author adam
  */
+@SofaService(
+        interfaceType = UserService.class,
+        uniqueId = "",
+        bindings = {
+                @SofaServiceBinding(bindingType = "bolt"),
+                @SofaServiceBinding(bindingType = "rest")
+        }
+)
 @Service
 public class UserServiceImpl extends AbstractUserBizService implements UserService {
 

@@ -49,15 +49,21 @@ public class JwtUtil {
                 .compact();
     }
 
-    // create another for otp challenge
+    /**
+     * generate token for otp challenge
+     * @param challenge
+     * @return
+     */
     public String generateTokenForOtpChallenge(OtpChallengeItem challenge){
         long currentMillis = System.currentTimeMillis();
         Date now = new Date(currentMillis);
         // 5 min expiration
         Date expiry = new Date(currentMillis + 5 * 60 * 1000);
+        JwtClaims claims = JwtContextHolder.get();
+        System.out.println(claims.getSubject());
 
         return Jwts.builder()
-                .setSubject("otp_verification")
+                .setSubject(String.valueOf(claims.getSubject()))
                 .claim("challengeId", challenge.getChallengeId())
                 .claim("phoneNo", challenge.getPhoneNo())
                 .claim("scene", challenge.getSceneCode())
@@ -69,6 +75,11 @@ public class JwtUtil {
                 .compact();
     }
 
+    /**
+     * load private key
+     * @param filePath
+     * @return
+     */
     public static PrivateKey loadPrivateKey(String filePath) {
         try (InputStream is = JwtUtil.class.getResourceAsStream(filePath)) {
             if (is == null) {
@@ -88,6 +99,11 @@ public class JwtUtil {
         }
     }
 
+    /**
+     * load public key
+     * @param filePath
+     * @return
+     */
     public static PublicKey loadPublicKey(String filePath) {
         try (InputStream is = JwtUtil.class.getResourceAsStream(filePath)) {
             if (is == null) {
@@ -107,6 +123,11 @@ public class JwtUtil {
         }
     }
 
+    /**
+     * extract token
+     * @param request
+     * @return
+     */
     public String extractToken(HttpServletRequest request) {
 
         String authHeader = request.getHeader(AUTH);
@@ -116,10 +137,13 @@ public class JwtUtil {
         return null;
     }
 
+    /**
+     * validate
+     * @param token
+     * @return
+     */
     public boolean validate(String token) {
         try {
-            System.out.println(loadPublicKey(publicKeyPath));
-
             Jwts.parser()
                     .setSigningKey(loadPublicKey(publicKeyPath))
                     .build()
@@ -131,6 +155,11 @@ public class JwtUtil {
         }
     }
 
+    /**
+     * parse
+     * @param token
+     * @return
+     */
     public JwtClaims parse(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(loadPublicKey(publicKeyPath))

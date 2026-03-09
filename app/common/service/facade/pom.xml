@@ -20,6 +20,11 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>3.5.19</version>
@@ -62,6 +67,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/com.alipay.sofa/rpc-sofa-boot-starter -->
+        <dependency>
+            <groupId>com.alipay.sofa</groupId>
+            <artifactId>rpc-sofa-boot-starter</artifactId>
+            <version>6.0.4</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     <build>

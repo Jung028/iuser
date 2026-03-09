@@ -1,7 +1,5 @@
 package com.alipay.usercenter.biz.jwt;
 
-import com.alipay.usercenter.core.enums.TokenType;
-
 import java.time.Instant;
 import java.util.Set;
 
@@ -14,14 +12,35 @@ public class JwtClaims {
      * userId
      */
     private String userId;
+    /**
+     * phoneNo
+     */
     private String phoneNo;
+    /**
+     * scopes
+     */
     private Set<String> scopes;
+    /**
+     * issuer
+     */
     private String issuer;
+    /**
+     * audience
+     */
     private String audience;
+    /**
+     * issuedAt
+     */
     private Instant issuedAt;
+    /**
+     * expiresAt
+     */
     private Instant expiresAt;
 
-
+    /**
+     * getSubject
+     * @return
+     */
     public String getSubject() {
         return subject;
     }
