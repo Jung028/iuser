@@ -37,4 +37,5 @@ public class UserPasswordUtil {
     public static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
+    //TODO: in the future there will more more ways to hash password, from faceId credentials
 }

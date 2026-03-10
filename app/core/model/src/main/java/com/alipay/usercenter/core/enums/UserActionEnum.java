@@ -2,18 +2,21 @@ package com.alipay.usercenter.core.enums;
 
 
 public enum UserActionEnum {
-    SEND_OTP("SEND_OTP", UserActionTypeEnum.SEND_OTP),
-    LOGIN("LOGIN", UserActionTypeEnum.LOGIN),
-    REGISTER("REGISTER", UserActionTypeEnum.REGISTER ),
-    VERITY_OTP("VERIFY_OTP", UserActionTypeEnum.VERIFY_OTP),
-    QUERY_USER_INFO("QUERY_USER_INFO", UserActionTypeEnum.QUERY_USER_INFO);
+    SEND_OTP("SEND_OTP", "send otp"),
+    LOGIN("LOGIN", "login"),
+    REGISTER("REGISTER", "register"),
+    VERITY_OTP("VERIFY_OTP", "verify otp"),
+    QUERY_USER_INFO("QUERY_USER_INFO", "query user info"),
+    VERIFY_USER_AUTH("VERIFY_USER_AUTH", "verify user credentials");
+
+    UserActionEnum(String code, String desc) {
+        this.code = code;
+        this.desc = desc;
+    }
 
     private String code;
 
-    private IdigitalriskActionTypeEnum actionTypeEnum;
-
-    UserActionEnum(String disposalRiskEvent, UserActionTypeEnum userActionTypeEnum) {
-    }
+    private String desc;
 
     public String getCode() {
         return code;
@@ -23,11 +26,11 @@ public enum UserActionEnum {
         this.code = code;
     }
 
-    public IdigitalriskActionTypeEnum getActionTypeEnum() {
-        return actionTypeEnum;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setActionTypeEnum(IdigitalriskActionTypeEnum actionTypeEnum) {
-        this.actionTypeEnum = actionTypeEnum;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

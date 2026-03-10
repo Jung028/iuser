@@ -16,6 +16,7 @@ import com.alipay.usercenter.common.service.facade.enums.UserResultEnum;
 import com.alipay.usercenter.common.service.facade.exception.UserBizException;
 import com.alipay.usercenter.common.service.facade.item.OtpVerifiedClaims;
 import com.alipay.usercenter.biz.user.checker.UserRequestChecker;
+import com.alipay.usercenter.common.service.facade.item.UserAuthItem;
 import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
 import com.alipay.usercenter.common.service.facade.request.*;
 import com.alipay.usercenter.common.service.facade.result.OTPResult;
@@ -23,6 +24,7 @@ import com.alipay.usercenter.common.util.LogUtil;
 import com.alipay.usercenter.common.service.facade.item.OtpChallengeItem;
 import com.alipay.usercenter.core.converter.UserInfoConvertor;
 import com.alipay.usercenter.core.enums.UserSecurityStatusEnum;
+import com.alipay.usercenter.core.model.UserAuth;
 import com.alipay.usercenter.core.model.UserInfo;
 import com.alipay.usercenter.core.enums.UserAccountStatusEnum;
 import com.alipay.usercenter.core.enums.UserActionEnum;
@@ -304,6 +306,8 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                     // insert a new user info
                     userInfoRepository.insertUserInfo(userInfo);
 
+                    // insertinto user_auth
+
                     ResponseBuilder.success(result, null, "Registered account", UserActionEnum.REGISTER.getCode());
                     return null;
                 });
@@ -339,6 +343,37 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                     ResponseBuilder.success(response, userInfoItem, "Query User Info Item", UserActionEnum.QUERY_USER_INFO.getCode());
                 } else {
                     ResponseBuilder.fail(response,"Query User Info Item", UserActionEnum.QUERY_USER_INFO.getCode());
+                }
+            }
+        });
+    }
+
+    @Override
+    public UserBizResult<String> verifyUserAuth(VerifyUserAuthRequest request) {
+        return userServiceTemplate.execute(request, UserActionEnum.VERIFY_USER_AUTH, new UserBizCallback<>() {
+            @Override
+            protected UserBizResult<String> createDefaultResponse() {
+                return new UserBizResult<>();
+            }
+
+            @Override
+            protected void checkParams(VerifyUserAuthRequest request) {
+                UserRequestChecker.checkUserAuthRequest(request);
+            }
+
+            @Override
+            protected void process(VerifyUserAuthRequest request, UserBizResult<String> response) {
+                // query user_auth
+                UserAuth userAuth = userAuthRepository.queryUserAuth(request.getUserId());
+
+                // validate
+                String credentialHash = userAuth.getCredentialHash();
+                boolean isValidPassword = UserPasswordUtil.verifyPassword(request.getCredential(), credentialHash);
+                if (isValidPassword) {
+                    ResponseBuilder.success(response, "Password verified", UserActionEnum.VERIFY_USER_AUTH.getCode(),
+                            UserActionEnum.VERIFY_USER_AUTH.getDesc());
+                } else {
+                    ResponseBuilder.fail(response, UserActionEnum.VERIFY_USER_AUTH.getDesc(), "Password incorrect");
                 }
             }
         });

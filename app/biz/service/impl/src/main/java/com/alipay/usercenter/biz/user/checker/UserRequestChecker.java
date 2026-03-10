@@ -45,4 +45,8 @@ public class UserRequestChecker {
         AssertUtil.notBlank(request.getPhoneNo(), UserResultCode.PARAM_ILLEGAL, "phoneNo cannot be blank");
         AssertUtil.notBlank(request.getUserId(), UserResultCode.PARAM_ILLEGAL, "User id cannot be blank");
     }
+
+    public static void checkUserAuthRequest(VerifyUserAuthRequest request) {
+
+    }
 }

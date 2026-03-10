@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alipay.usercenter.common.dal.auto.custom.UserAuthDAO">
+    <resultMap id="BaseResultMap" type="com.alipay.usercenter.common.dal.auto.dataobject.UserAuthDO">
+        <id column="auth_id" jdbcType="OTHER" property="authId" />
+        <result column="user_id" jdbcType="OTHER" property="userId" />
+        <result column="auth_type" jdbcType="VARCHAR" property="authType" />
+        <result column="credential_hash" jdbcType="VARCHAR" property="credentialHash" />
+        <result column="failed_attempts" jdbcType="INTEGER" property="failedAttempts" />
+        <result column="lock_until" jdbcType="TIMESTAMP" property="lockUntil" />
+        <result column="is_active" jdbcType="BIT" property="isActive" />
+        <result column="last_used" jdbcType="TIMESTAMP" property="lastUsed" />
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    </resultMap>
+
+    <select id="queryUserAuth" parameterType="string" resultMap="BaseResultMap">
+        SELECT auth_id, user_id, auth_type, credential_hash, failed_attempts, lock_until, is_active, last_used, gmt_create, gmt_modified
+        FROM user_auth
+        WHERE user_id = #{userId}
+    </select>
+
+
+    <select id="insertUserInfo" parameterType="com.alipay.usercenter.common.dal.auto.dataobject.UserInfoDO" resultMap="BaseResultMap">
+        INSERT into user_info (user_id, phone_no, status, hashed_password, gmt_create, gmt_modified)
+        VALUES (
+        #{userId,jdbcType=BIGINT},
+        #{phoneNo,jdbcType=VARCHAR},
+        #{status,jdbcType=VARCHAR},
+        #{hashedPassword,jdbcType=VARCHAR},
+        #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtModified,jdbcType=TIMESTAMP}
+        )
+    </select>
+
+</mapper>

@@ -30,6 +30,7 @@
 
         <!-- Table(s) to generate -->
         <table tableName="user_info" domainObjectName="UserInfoDO" />
+        <table tableName="user_auth" domainObjectName="UserAuthDO" />
 
 
     </context>
