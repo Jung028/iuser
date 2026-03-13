@@ -45,7 +45,6 @@ import static com.alipay.usercenter.common.service.facade.constant.GlobalUserCon
  */
 @SofaService(
         interfaceType = UserService.class,
-        uniqueId = "",
         bindings = {
                 @SofaServiceBinding(bindingType = "bolt"),
                 @SofaServiceBinding(bindingType = "rest")

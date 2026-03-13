@@ -10,6 +10,5 @@ public interface UserAuthDAO {
     // Custom query selecting specific columns
     UserAuthDO queryUserAuth(@Param("userId") String userId);
 
-
-    void insertUserAuth(UserAuthDO userAuthDO);
+    int insertUserAuth(UserAuthDO userAuthDO);
 }

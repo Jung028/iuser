@@ -4,6 +4,7 @@ import com.alipay.usercenter.common.dal.auto.dataobject.UserAuthDO;
 import com.alipay.usercenter.common.dal.auto.dataobject.UserInfoDO;
 import com.alipay.usercenter.core.converter.UserAuthConvertor;
 import com.alipay.usercenter.core.converter.UserInfoConvertor;
+import com.alipay.usercenter.core.exception.RepositoryException;
 import com.alipay.usercenter.core.model.UserAuth;
 import com.alipay.usercenter.core.model.UserInfo;
 import com.alipay.usercenter.core.service.repository.AbstractUserRepository;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Repository;
 public class UserAuthRepositoryImpl extends AbstractUserRepository implements UserAuthRepository {
     @Override
     public UserAuth queryUserAuth(String userId) {
+        if (userId == null) {
+            return null;
+        }
         UserAuthDO userAuthDO = userAuthDAO.queryUserAuth(userId);
         if (userAuthDO == null) {
             return null;
@@ -24,11 +28,16 @@ public class UserAuthRepositoryImpl extends AbstractUserRepository implements Us
 
     @Override
     public void insertUserAuth(UserAuth userAuth) {
-        UserAuthDO userAuthDO = UserAuthConvertor.convertToDO(userAuth);
         try {
-            userAuthDAO.insertUserAuth(userAuthDO);
+            UserAuthDO userAuthDO = UserAuthConvertor.convertToDO(userAuth);
+            int rows = userAuthDAO.insertUserAuth(userAuthDO);
+            if (rows <= 0) {
+                throw new RepositoryException("Insert failed for userId: " + userAuth.getUserId());
+            }
+        } catch (RepositoryException e) {
+            throw e;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RepositoryException("DB error during insert user auth", e);
         }
     }
 }
