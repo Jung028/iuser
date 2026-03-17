@@ -1,3 +1,6 @@
+import com.alipay.account_center.common.service.facade.api.AccountService;
+import com.alipay.account_center.common.service.facade.baseresult.AccountBizResult;
+import com.alipay.account_center.common.service.facade.item.AccountInfoItem;
 import com.alipay.usercenter.biz.cache.OtpChallenge;
 import com.alipay.usercenter.biz.cache.UserSecurityCache;
 import com.alipay.usercenter.biz.jwt.JwtClaims;
@@ -13,7 +16,9 @@ import com.alipay.usercenter.common.service.facade.item.OtpChallengeItem;
 import com.alipay.usercenter.common.service.facade.item.OtpVerifiedClaims;
 import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
 import com.alipay.usercenter.common.service.facade.request.*;
+import com.alipay.usercenter.common.service.facade.result.LoginResult;
 import com.alipay.usercenter.common.service.facade.result.OTPResult;
+import com.alipay.usercenter.common.service.integration.account.AccountServiceClient;
 import com.alipay.usercenter.core.enums.UserAccountStatusEnum;
 import com.alipay.usercenter.core.enums.UserSecurityStatusEnum;
 import com.alipay.usercenter.core.exception.BaseSlipException;
@@ -53,6 +58,9 @@ class UserServiceImplTest {
 
     @Mock
     private UserSecurityCache userSecurityCache;
+
+    @Mock
+    private AccountServiceClient accountServiceClient;
 
     @Mock
     private JwtUtil jwtUtil;
@@ -139,14 +147,19 @@ class UserServiceImplTest {
         security.setLockedUntil(Instant.now().minusSeconds(60));
         security.setStatus("ACTIVE");
 
+        AccountBizResult<AccountInfoItem> accountBizResult = new AccountBizResult<>();
+        accountBizResult.setResult(new AccountInfoItem());
+        accountBizResult.setSuccess(true);
+
         doReturn(userInfo).when(userInfoRepository).queryUserInfo("0123456789");
         doReturn(security).when(userSecurityCache).queryUserSecurity(any());
         doReturn("mocked-jwt").when(jwtUtil).generateTokenForUserInfo(any());
+        doReturn(accountBizResult).when(accountServiceClient).queryAccountInfoByUserId(any());
 
-        UserBizResult<String> result = userService.login(loginRequest);
+        UserBizResult<LoginResult> result = userService.login(loginRequest);
 
         assertTrue(result.isSuccess());
-        assertEquals("mocked-jwt", result.getResult());
+        assertEquals("mocked-jwt", result.getResult().getJwtToken());
         verify(userSecurityCache).delete(1L);
         verify(jwtUtil).generateTokenForUserInfo(userInfo);
     }
@@ -166,7 +179,7 @@ class UserServiceImplTest {
         doReturn(userInfo).when(userInfoRepository).queryUserInfo(anyString());
         doReturn(security).when(userSecurityCache).queryUserSecurity(any());
 
-        UserBizResult<String> result = userService.login(loginRequest);
+        UserBizResult<LoginResult> result = userService.login(loginRequest);
 
         assertFalse(result.isSuccess());
         verify(jwtUtil, never()).generateTokenForUserInfo(any());
@@ -189,7 +202,7 @@ class UserServiceImplTest {
         doReturn(security).when(userSecurityCache).queryUserSecurity(any());
         doAnswer(invocation -> invocation.getArgument(0)).when(userSecurityCache).update(any());
 
-        UserBizResult<String> result = userService.login(loginRequest);
+        UserBizResult<LoginResult> result = userService.login(loginRequest);
 
         assertFalse(result.isSuccess());
         verify(userSecurityCache).update(any());
@@ -212,7 +225,7 @@ class UserServiceImplTest {
         doReturn(security).when(userSecurityCache).queryUserSecurity(any());
         doReturn(security).when(userSecurityCache).update(any());
 
-        UserBizResult<String> result = userService.login(loginRequest);
+        UserBizResult<LoginResult> result = userService.login(loginRequest);
 
         assertFalse(result.isSuccess());
         verify(userSecurityCache).update(any());
@@ -409,6 +422,9 @@ class UserServiceImplTest {
 
         UserBizResult<Void> expectedResult = new UserBizResult<>();
         expectedResult.setSuccess(true);
+        AccountBizResult<String> accountBizResult = new AccountBizResult<>();
+        accountBizResult.setSuccess(true);
+
 
         doReturn(claims).when(otpChallenge).verifyVerifiedToken(anyString());
         doReturn(null).when(userInfoRepository).queryUserInfo(anyString());
@@ -416,6 +432,7 @@ class UserServiceImplTest {
                     var callback = invocation.getArgument(0);
                     return ((org.springframework.transaction.support.TransactionCallback<?>) callback).doInTransaction(null);
                 }).when(userTransactionTemplate).execute(any());
+        doReturn(accountBizResult).when(accountServiceClient).createAccount(any());
 
         UserBizResult<Void> result = userService.register(registerRequest);
 

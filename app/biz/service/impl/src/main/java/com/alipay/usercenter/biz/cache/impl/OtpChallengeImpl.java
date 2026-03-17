@@ -176,14 +176,20 @@ public class OtpChallengeImpl implements OtpChallenge {
         }
         // verify purpose of JWT
         String subject = claims.getSubject();
-        if (!subject.equals("otp_verification")) {
-            throw new UserBizException(UserResultCode.OTP_VERIFIED_TOKEN_INVALID.getCode(), "OTP verified token is invalid");
-        }
 
         //extract claims challengeId, phoneNo, scene, then assert
         String challengeId = claims.get("challengeId", String.class);
         String phoneNo = claims.get("phoneNo", String.class);
         String scene = claims.get("scene", String.class);
+
+        // skip check for subject since otp verification is used by register otp, which dont need user id yet.
+        // but in iwallet, we need otp for over limit, which need the subject to be userId
+        // so during registration it will not get userId since we dont need yet.
+        if (!scene.equals(OTPSceneEnum.TRANSFER_OVER_LIMIT.getScene())) {
+            if (!subject.equals("otp_verification")) {
+                throw new UserBizException(UserResultCode.OTP_VERIFIED_TOKEN_INVALID.getCode(), "OTP verified token is invalid");
+            }
+        }
 
         // verify claims are not blank
         AssertUtil.notBlank(challengeId, UserResultCode.PARAM_ILLEGAL, "challengeId in token cannot be blank");
@@ -191,7 +197,7 @@ public class OtpChallengeImpl implements OtpChallenge {
         AssertUtil.notBlank(scene, UserResultCode.PARAM_ILLEGAL, "scene in token cannot be blank");
 
         // replay protection
-        String replayKey = "otp:verify" + challengeId;
+        String replayKey = "otp:verify:" + subject + ":" + challengeId;
         // set the key to true with expiry if the key is absent, else will return false and is asserted.
         // this is to prevent the same otp verify code from being used multiple times.
         Boolean firstUse = otpVerifiedClaimsRedisTemplate.opsForValue().setIfAbsent(replayKey, true, 5, TimeUnit.MINUTES);
@@ -205,6 +211,7 @@ public class OtpChallengeImpl implements OtpChallenge {
         verifiedClaims.setChallengeId(challengeId);
         verifiedClaims.setPhoneNo(phoneNo);
         verifiedClaims.setScene(scene);
+        //todo: fix
         verifiedClaims.setVerifiedAt(claims.getIssuedAt().toInstant());
 
         return verifiedClaims;

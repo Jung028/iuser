@@ -1,5 +1,6 @@
 package com.alipay.usercenter.biz.jwt;
 
+import com.alipay.usercenter.common.service.facade.enums.OTPSceneEnum;
 import com.alipay.usercenter.common.service.facade.item.OtpChallengeItem;
 import com.alipay.usercenter.core.model.UserInfo;
 import io.jsonwebtoken.Claims;
@@ -10,8 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
@@ -59,11 +58,14 @@ public class JwtUtil {
         Date now = new Date(currentMillis);
         // 5 min expiration
         Date expiry = new Date(currentMillis + 5 * 60 * 1000);
-        JwtClaims claims = JwtContextHolder.get();
-        System.out.println(claims.getSubject());
+        String subject = "otp_verification";
+        if (challenge.getSceneCode().equals(OTPSceneEnum.TRANSFER_OVER_LIMIT)) {
+            JwtClaims claims = JwtContextHolder.get();
+            subject = claims.getSubject();
+        }
 
         return Jwts.builder()
-                .setSubject(String.valueOf(claims.getSubject()))
+                .setSubject(subject)
                 .claim("challengeId", challenge.getChallengeId())
                 .claim("phoneNo", challenge.getPhoneNo())
                 .claim("scene", challenge.getSceneCode())

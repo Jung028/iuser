@@ -3,6 +3,7 @@ package com.alipay.usercenter.common.util;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBaseRequest;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBaseResult;
 import com.alipay.usercenter.common.service.facade.enums.UserResultCode;
+import com.alipay.usercenter.core.exception.BaseSlipException;
 import com.alipay.usercenter.core.exception.UserException;
 import org.slf4j.Logger;
 

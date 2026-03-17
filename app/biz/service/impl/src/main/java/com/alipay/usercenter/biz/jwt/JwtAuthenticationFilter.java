@@ -31,24 +31,28 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain chain)
             throws ServletException, IOException {
 
-        String token = jwtUtils.extractToken(request);
+        try {
+            String token = jwtUtils.extractToken(request);
 
-        if (token != null && jwtUtils.validate(token)) {
+            if (token != null && jwtUtils.validate(token)) {
 
-            JwtClaims claims = jwtUtils.parse(token);
-            System.out.println("JWT valid for user: " + claims.getSubject());
+                JwtClaims claims = jwtUtils.parse(token);
+                System.out.println("JWT valid for user: " + claims.getSubject());
 
-            Authentication auth = new UsernamePasswordAuthenticationToken(
-                    claims,
-                    null,
-                    List.of()
-            );
+                Authentication auth = new UsernamePasswordAuthenticationToken(
+                        claims,
+                        null,
+                        List.of()
+                );
 
-            JwtContextHolder.set(claims);
+                JwtContextHolder.set(claims);
 
-            SecurityContextHolder.getContext().setAuthentication(auth);
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            }
+
+            chain.doFilter(request, response);
+        } finally {
+            JwtContextHolder.clear();
         }
-
-        chain.doFilter(request, response);
     }
 }

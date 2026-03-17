@@ -7,7 +7,8 @@ public enum UserActionEnum {
     REGISTER("REGISTER", "register"),
     VERITY_OTP("VERIFY_OTP", "verify otp"),
     QUERY_USER_INFO("QUERY_USER_INFO", "query user info"),
-    VERIFY_USER_AUTH("VERIFY_USER_AUTH", "verify user credentials");
+    VERIFY_USER_AUTH("VERIFY_USER_AUTH", "verify user credentials"),
+    VERIFY_VERIFIED_TOKEN("VERIFY_VERIFIED_TOKEN", "verify verified token result");
 
     UserActionEnum(String code, String desc) {
         this.code = code;

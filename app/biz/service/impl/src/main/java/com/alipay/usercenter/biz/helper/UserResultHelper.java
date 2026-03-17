@@ -7,8 +7,13 @@ public class UserResultHelper {
 
 
     public static <R extends UserBaseResult> void fillExceptionResultCode(R result, UserResultCode userResultCode) {
+        result.setResultCode(userResultCode.getCode());
+        result.setResultMessage(userResultCode.getDescription());
+        result.setSuccess(false);
     }
 
     public static <R extends UserBaseResult> void fillSuccessResultCode(R result) {
+        result.setSuccess(true);
     }
+
 }

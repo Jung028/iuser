@@ -9,4 +9,8 @@ public class GlobalUserConstant {
      * lockout time in seconds (5 minutes)
      */
     public static final Integer LOCKOUT_TIME_5_MINUTES = 300;
+    /**
+     * default currency
+     */
+    public static final String DEFAULT_CURRENCY = "AUD";
 }

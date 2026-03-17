@@ -1,9 +1,11 @@
 package com.alipay.usercenter.common.service.facade.api;
 
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
+import com.alipay.usercenter.common.service.facade.item.OtpVerifiedClaims;
 import com.alipay.usercenter.common.service.facade.item.UserAuthItem;
 import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
 import com.alipay.usercenter.common.service.facade.request.*;
+import com.alipay.usercenter.common.service.facade.result.LoginResult;
 import com.alipay.usercenter.common.service.facade.result.OTPResult;
 
 
@@ -26,7 +28,7 @@ public interface UserService {
      */
     @POST
     @Path("/login")
-    UserBizResult<String> login(LoginRequest request);
+    UserBizResult<LoginResult> login(LoginRequest request);
 
     /**
      * send OTP
@@ -76,4 +78,13 @@ public interface UserService {
     @POST
     @Path("/verifyUserAuth")
     UserBizResult<String> verifyUserAuth(VerifyUserAuthRequest request);
+
+    /**
+     * verify verified jwtToken
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/verifyVerifiedToken")
+    UserBizResult<OtpVerifiedClaims> verifyVerifiedToken(VerifyVerifiedTokenRequest request);
 }

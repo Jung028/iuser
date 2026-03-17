@@ -31,7 +31,7 @@ public class ResponseBuilder {
      * @param code
      * @param <T>
      */
-    public static <T> void fail(UserBizResult<T> response, String message, String code) {
+    public static <T> void fail(UserBizResult<T> response, String code, String message) {
         response.setResult(null);
         response.setResultMessage(message);
         response.setResultCode(code);

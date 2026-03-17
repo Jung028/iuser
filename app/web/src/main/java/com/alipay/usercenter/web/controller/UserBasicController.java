@@ -6,13 +6,14 @@ import com.alipay.usercenter.common.service.facade.api.UserService;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
 import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
 import com.alipay.usercenter.common.service.facade.request.*;
+import com.alipay.usercenter.common.service.facade.result.LoginResult;
 import com.alipay.usercenter.common.service.facade.result.OTPResult;
 import com.alipay.usercenter.core.model.UserSecurity;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
-
+@CrossOrigin(origins = "http://localhost:8083")
 @RestController
 @RequestMapping("/user/basic")
 public class UserBasicController {
@@ -39,7 +40,7 @@ public class UserBasicController {
     }
 
     @PostMapping("/login.json")
-    public UserBizResult<String> login(@RequestBody LoginRequest request) {
+    public UserBizResult<LoginResult> login(@RequestBody LoginRequest request) {
         try {
              return userService.login(request);
         } catch (Exception e) {
