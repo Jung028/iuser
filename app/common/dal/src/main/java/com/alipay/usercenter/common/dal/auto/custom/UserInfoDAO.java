@@ -10,4 +10,6 @@ public interface UserInfoDAO {
     UserInfoDO queryUserInfo(@Param("phoneNo") String phoneNo);
 
     void insertUserInfo(UserInfoDO userInfo);
+
+    int updateExtInfo(@Param("userId") String userId, @Param("extInfo") String extInfo);
 }

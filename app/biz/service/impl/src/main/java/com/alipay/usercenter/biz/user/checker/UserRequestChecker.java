@@ -49,4 +49,17 @@ public class UserRequestChecker {
     public static void checkUserAuthRequest(VerifyUserAuthRequest request) {
 
     }
+
+    public static void checkQueryCardDetailsRequest(QueryCardDetailsRequest request) {
+    }
+
+    public static void checkUpdateAutoReloadConfigRequest(UpdateAutoReloadConfigRequest request) {
+    }
+
+    public static void checkInsertNewCardRequest(InsertNewCardRequest request) {
+    }
+
+    public static void checkToggleAutoReloadConfigRequest(ToggleAutoReloadConfigRequest request) {
+
+    }
 }

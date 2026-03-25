@@ -40,4 +40,18 @@ public class UserAuthRepositoryImpl extends AbstractUserRepository implements Us
             throw new RepositoryException("DB error during insert user auth", e);
         }
     }
+
+    @Override
+    public void updateUserAuthPassword(String userId, String hashedPassword) {
+        if (hashedPassword == null) {
+            return;
+        }
+        try {
+            userAuthDAO.updateUserAuthPassword(userId, hashedPassword);
+        } catch (RepositoryException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RepositoryException("DB error during insert user auth", e);
+        }
+    }
 }

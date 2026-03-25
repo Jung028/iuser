@@ -16,26 +16,24 @@
         <result column="hashed_password" jdbcType="VARCHAR" property="hashedPassword" />
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+        <result column="contact_config" jdbcType="OTHER" property="contactConfig" />
     </resultMap>
 
 
     <select id="queryUserInfo" parameterType="string" resultMap="BaseResultMap">
-        SELECT user_id, phone_no, status, hashed_password, gmt_create, gmt_modified
+        SELECT user_id, phone_no, status, hashed_password, gmt_create, gmt_modified, contact_config
         FROM user_info
         WHERE phone_no = #{phoneNo}
     </select>
 
 
     <select id="insertUserInfo" parameterType="com.alipay.usercenter.common.dal.auto.dataobject.UserInfoDO" resultMap="BaseResultMap">
-        INSERT into user_info (user_id, phone_no, status, hashed_password, gmt_create, gmt_modified)
-        VALUES (
-        #{userId,jdbcType=BIGINT},
-        #{phoneNo,jdbcType=VARCHAR},
-        #{status,jdbcType=VARCHAR},
-        #{hashedPassword,jdbcType=VARCHAR},
-        #{gmtCreate,jdbcType=TIMESTAMP},
-        #{gmtModified,jdbcType=TIMESTAMP}
-        )
+        insert into user_info (id, user_id, phone_no,
+        status, hashed_password, gmt_create,
+        gmt_modified, contact_config)
+        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{phoneNo,jdbcType=VARCHAR},
+        #{status,jdbcType=VARCHAR}, #{hashedPassword,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtModified,jdbcType=TIMESTAMP}, #{contactConfig,jdbcType=OTHER})
     </select>
 
 </mapper>

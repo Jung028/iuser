@@ -7,6 +7,7 @@ import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
 import com.alipay.usercenter.common.service.facade.request.*;
 import com.alipay.usercenter.common.service.facade.result.LoginResult;
 import com.alipay.usercenter.common.service.facade.result.OTPResult;
+import com.alipay.usercenter.common.service.facade.result.QueryCardDetailsResult;
 
 
 import javax.ws.rs.Consumes;
@@ -87,4 +88,21 @@ public interface UserService {
     @POST
     @Path("/verifyVerifiedToken")
     UserBizResult<OtpVerifiedClaims> verifyVerifiedToken(VerifyVerifiedTokenRequest request);
+
+    /**
+     * change password
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/changePassword")
+    UserBizResult<String> changePassword(ChangeAuthPasswordRequest request);
+
+    /**
+     * update user info
+     * @param request
+     * @return
+     */
+    UserBizResult<String> updateExtInfo(UpdateUserInfoRequest request);
+
 }

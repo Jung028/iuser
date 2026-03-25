@@ -11,4 +11,6 @@ public interface UserAuthDAO {
     UserAuthDO queryUserAuth(@Param("userId") String userId);
 
     int insertUserAuth(UserAuthDO userAuthDO);
+
+    void updateUserAuthPassword(@Param("userId") String userId, @Param("hashedPassword") String hashedPassword);
 }

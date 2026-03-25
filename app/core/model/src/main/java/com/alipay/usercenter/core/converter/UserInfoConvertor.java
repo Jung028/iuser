@@ -1,15 +1,19 @@
 package com.alipay.usercenter.core.converter;
 
+import com.alipay.sofa.rpc.common.json.JSON;
+import com.alipay.sofa.rpc.common.utils.JSONUtils;
 import com.alipay.usercenter.common.dal.auto.dataobject.UserInfoDO;
+import com.alipay.usercenter.common.service.facade.config.ContactConfig;
 import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
 import com.alipay.usercenter.core.model.UserInfo;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UserInfoConvertor {
 
     public static UserInfo convertToDomain(UserInfoDO userInfoDO) {
-        if (userInfoDO == null) {
-            return null;
-        }
+        if (userInfoDO == null) return null;
+
         UserInfo userInfo = new UserInfo();
         userInfo.setId(userInfoDO.getId());
         userInfo.setPhoneNo(userInfoDO.getPhoneNo());
@@ -18,6 +22,27 @@ public class UserInfoConvertor {
         userInfo.setGmtCreate(userInfoDO.getGmtCreate());
         userInfo.setHashedPassword(userInfoDO.getHashedPassword());
         userInfo.setStatus(userInfoDO.getStatus());
+
+        // to map object to ContactConfig instance
+        ObjectMapper objectMapper = new ObjectMapper();
+        if (userInfoDO.getContactConfig() != null) {
+            try {
+                ContactConfig config = objectMapper.readValue(userInfoDO.getContactConfig().toString(),
+                        ContactConfig.class);
+                userInfo.setContactConfig(config);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException("Failed to parse contactConfig JSON", e);
+            }
+        }
+
+        Object extInfo = null;
+        try {
+            extInfo = objectMapper.readValue(userInfoDO.getExtInfo().toString(), Object.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        userInfo.setExtInfo(extInfo);
+
         return userInfo;
     }
 
@@ -33,6 +58,8 @@ public class UserInfoConvertor {
         userInfoDO.setGmtCreate(userInfo.getGmtCreate());
         userInfoDO.setHashedPassword(userInfo.getHashedPassword());
         userInfoDO.setStatus(userInfo.getStatus());
+        userInfoDO.setContactConfig(userInfo.getContactConfig());
+        userInfoDO.setExtInfo(userInfo.getExtInfo());
         return userInfoDO;
     }
 
@@ -48,6 +75,8 @@ public class UserInfoConvertor {
         userInfoItem.setPhoneNo(userInfo.getPhoneNo());
         userInfoItem.setStatus(userInfo.getStatus());
         userInfoItem.setUserId(userInfo.getUserId());
+        userInfoItem.setContactConfig((ContactConfig) userInfo.getContactConfig());
+        userInfoItem.setExtInfo(JSONUtils.toJSONString(userInfo.getExtInfo()));
         return userInfoItem;
     }
 }

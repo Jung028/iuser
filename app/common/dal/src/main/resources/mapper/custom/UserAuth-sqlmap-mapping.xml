@@ -23,16 +23,23 @@
     </select>
 
 
-    <select id="insertUserInfo" parameterType="com.alipay.usercenter.common.dal.auto.dataobject.UserInfoDO" resultMap="BaseResultMap">
-        INSERT into user_info (user_id, phone_no, status, hashed_password, gmt_create, gmt_modified)
-        VALUES (
-        #{userId,jdbcType=BIGINT},
-        #{phoneNo,jdbcType=VARCHAR},
-        #{status,jdbcType=VARCHAR},
-        #{hashedPassword,jdbcType=VARCHAR},
-        #{gmtCreate,jdbcType=TIMESTAMP},
-        #{gmtModified,jdbcType=TIMESTAMP}
-        )
+    <select id="insertUserAuth" parameterType="com.alipay.usercenter.common.dal.auto.dataobject.UserAuthDO" resultMap="BaseResultMap">
+        insert into user_auth (auth_id, user_id, auth_type,
+        credential_hash, failed_attempts, lock_until,
+        is_active, last_used, gmt_create,
+        gmt_modified)
+        values (#{authId,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{authType,jdbcType=VARCHAR},
+        #{credentialHash,jdbcType=VARCHAR}, #{failedAttempts,jdbcType=INTEGER}, #{lockUntil,jdbcType=TIMESTAMP},
+        #{isActive,jdbcType=BIT}, #{lastUsed,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtModified,jdbcType=TIMESTAMP})
     </select>
+
+
+    <update id="updateUserAuthPassword" parameterType="String">
+        UPDATE user_auth
+        SET credential_hash = #{hashedPassword}
+        WHERE user_id = #{userId}
+    </update>
+
 
 </mapper>

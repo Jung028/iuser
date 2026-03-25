@@ -9,4 +9,6 @@ public interface UserInfoRepository {
     UserInfo queryUserInfo(String phoneNo);
 
     void insertUserInfo(UserInfo userInfo);
+
+    void updateExtInfo(String userId, String extInfo);
 }

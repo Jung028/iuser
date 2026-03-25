@@ -86,6 +86,18 @@ public class UserBasicController {
     }
 
 
+    @PostMapping("/changePassword.json")
+    public UserBizResult<String> changePassword(@RequestBody ChangeAuthPasswordRequest request) {
+        try {
+            // should this be able to change user login password as well?
+            return userService.changePassword(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
     public void setUserService(UserService userService) {
         this.userService = userService;
     }

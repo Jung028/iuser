@@ -10,4 +10,6 @@ public interface UserAuthRepository {
     UserAuth queryUserAuth(String userId);
 
     void insertUserAuth(UserAuth userAuth);
+
+    void updateUserAuthPassword(String userId, String hashed);
 }

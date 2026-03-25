@@ -5,6 +5,7 @@ import com.alipay.account_center.common.service.facade.enums.AccountTypeEnum;
 import com.alipay.account_center.common.service.facade.item.AccountInfoItem;
 import com.alipay.account_center.common.service.facade.request.CreateAccountRequest;
 import com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest;
+import com.alipay.sofa.rpc.common.utils.JSONUtils;
 import com.alipay.sofa.runtime.api.annotation.SofaService;
 import com.alipay.sofa.runtime.api.annotation.SofaServiceBinding;
 import com.alipay.usercenter.biz.helper.GenerateUserId;
@@ -13,7 +14,6 @@ import com.alipay.usercenter.biz.jwt.JwtContextHolder;
 import com.alipay.usercenter.biz.template.UserBizCallback;
 import com.alipay.usercenter.biz.user.helper.BusinessServiceHelper;
 import com.alipay.usercenter.biz.user.helper.ResponseBuilder;
-import com.alipay.usercenter.biz.validate.PasswordValidator;
 import com.alipay.usercenter.common.service.facade.api.UserService;
 import com.alipay.usercenter.biz.util.UserPasswordUtil;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
@@ -22,7 +22,6 @@ import com.alipay.usercenter.common.service.facade.enums.UserResultEnum;
 import com.alipay.usercenter.common.service.facade.exception.UserBizException;
 import com.alipay.usercenter.common.service.facade.item.OtpVerifiedClaims;
 import com.alipay.usercenter.biz.user.checker.UserRequestChecker;
-import com.alipay.usercenter.common.service.facade.item.UserAuthItem;
 import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
 import com.alipay.usercenter.common.service.facade.request.*;
 import com.alipay.usercenter.common.service.facade.result.LoginResult;
@@ -37,7 +36,10 @@ import com.alipay.usercenter.core.enums.UserAccountStatusEnum;
 import com.alipay.usercenter.core.enums.UserActionEnum;
 import com.alipay.usercenter.core.model.UserSecurity;
 import com.alipay.usercenter.core.util.AssertUtil;
-import io.jsonwebtoken.lang.Assert;
+import com.alipay.usercenter.common.service.facade.config.ExtInfo;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +47,7 @@ import java.time.Duration;
 import java.util.Date;
 import java.time.Instant;
 
+import static com.alipay.usercenter.biz.util.UserPasswordUtil.hashPassword;
 import static com.alipay.usercenter.common.service.facade.constant.GlobalUserConstant.*;
 
 /**
@@ -313,7 +316,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                             "user account already exists, " + request.getPhoneNo());
 
                     // hash password
-                    String hashedPassword = UserPasswordUtil.hashPassword(request.getPassword());
+                    String hashedPassword = hashPassword(request.getPassword());
 
                     // then set the request, and update the db for user info.
                     UserInfo userInfo = new UserInfo();
@@ -429,4 +432,89 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                     }
                 });
     }
+
+    @Override
+    public UserBizResult<String> changePassword(ChangeAuthPasswordRequest request) {
+        return userServiceTemplate.execute(request, UserActionEnum.QUERY_USER_INFO,
+                new UserBizCallback<>() {
+                    @Override
+                    protected UserBizResult<String> createDefaultResponse() {
+                        return new UserBizResult<>();
+                    }
+
+                    @Override
+                    protected void checkParams(ChangeAuthPasswordRequest request) {
+
+                    }
+
+                    @Override
+                    protected void process(ChangeAuthPasswordRequest request, UserBizResult<String> response) {
+                        if (request.getNewPassword().isBlank() || request.getConfirmNewPassword().isEmpty()) {
+                            throw new IllegalArgumentException("Password cannot be empty");
+                        }
+                        if (!request.getNewPassword().equals(request.getConfirmNewPassword())) {
+                            throw new IllegalArgumentException("Passwords don't match");
+                        }
+                        // Hash the new password
+                        String hashedPassword = hashPassword(request.getNewPassword());
+                        // Persist to DB
+                        userAuthRepository.updateUserAuthPassword(request.getUserId(), hashedPassword); // pseudo code, replace with your DAO/Repository call
+                    }
+                });
+    }
+
+    @Override
+    public UserBizResult<String> updateExtInfo(UpdateUserInfoRequest request) {
+        return userServiceTemplate.execute(request, UserActionEnum.UPDATE_USER_INFO,
+                new UserBizCallback<>() {
+
+                    @Override
+                    protected UserBizResult<String> createDefaultResponse() {
+                        return new UserBizResult<>();
+                    }
+
+                    @Override
+                    protected void checkParams(UpdateUserInfoRequest request) {
+
+                    }
+
+                    @Override
+                    protected void process(UpdateUserInfoRequest request, UserBizResult<String> response) {
+                        ObjectMapper objectMapper = new ObjectMapper();
+
+                        // 1. Fetch user by userId
+                        UserInfo userInfo = userInfoRepository.queryUserInfo(request.getUserId());
+                        if (userInfo == null) {
+                            throw new RuntimeException("User not found for userId=" + request.getUserId());
+                        }
+
+                        ExtInfo extInfo;
+                        try {
+                            // 2. Parse existing extInfo or create new
+                            if (userInfo.getExtInfo() != null) {
+                                extInfo = objectMapper.readValue(JSONUtils.toJSONString(userInfo.getExtInfo()), ExtInfo.class);
+                            } else {
+                                extInfo = new ExtInfo();
+                            }
+
+                            // 3. Append new data from request
+                            if (request.getExtInfo() != null) {
+                                JsonNode newNode = objectMapper.readTree(request.getExtInfo());
+                                extInfo.append(newNode); // append to a dynamic list inside ExtInfo
+                            }
+
+                            // 4. Serialize back to string
+                            String extInfoJson = objectMapper.writeValueAsString(extInfo);
+
+                            // 5. Partial update using userId
+                            userInfoRepository.updateExtInfo(request.getUserId(), extInfoJson);
+
+                        } catch (JsonProcessingException e) {
+                            throw new RuntimeException("Failed to append extInfo", e);
+                        }
+                    }
+                });
+    }
+
+
 }

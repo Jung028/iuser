@@ -1,5 +1,9 @@
 package com.alipay.usercenter.common.service.facade.item;
 
+import com.alipay.usercenter.common.service.facade.config.Contact;
+import com.alipay.usercenter.common.service.facade.config.ContactConfig;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class UserInfoItem {
@@ -10,6 +14,8 @@ public class UserInfoItem {
     private Date gmtModified;
     private Long userId;
     private String status;
+    private ContactConfig contactConfig;
+    private String extInfo;
 
     public Long getId() {
         return id;
@@ -65,5 +71,25 @@ public class UserInfoItem {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public ContactConfig getContactConfig() {
+        return contactConfig;
+    }
+
+    public void setContactConfig(ContactConfig contactConfig) {
+        this.contactConfig = contactConfig;
+    }
+
+    public String getExtInfo() {
+        return extInfo;
+    }
+
+    public void setExtInfo(String extInfo) {
+        this.extInfo = extInfo;
     }
 }
