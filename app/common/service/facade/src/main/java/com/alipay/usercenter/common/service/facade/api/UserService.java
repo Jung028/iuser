@@ -2,12 +2,10 @@ package com.alipay.usercenter.common.service.facade.api;
 
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
 import com.alipay.usercenter.common.service.facade.item.OtpVerifiedClaims;
-import com.alipay.usercenter.common.service.facade.item.UserAuthItem;
 import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
 import com.alipay.usercenter.common.service.facade.request.*;
 import com.alipay.usercenter.common.service.facade.result.LoginResult;
 import com.alipay.usercenter.common.service.facade.result.OTPResult;
-import com.alipay.usercenter.common.service.facade.result.QueryCardDetailsResult;
 
 
 import javax.ws.rs.Consumes;

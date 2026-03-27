@@ -19,7 +19,7 @@ public enum UserActionEnum {
     QUERY_DEFAULT_CARD("QUERY_DEFAULT_CARD", "query default card"),
 
 
-    ;
+    QUERY_AUTO_RELOAD_CONFIG("QUERY_AUTO_RELOAD_CONFIG", "query auto reload config"),;
 
     UserActionEnum(String code, String desc) {
         this.code = code;

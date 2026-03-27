@@ -62,4 +62,12 @@ public class UserRequestChecker {
     public static void checkToggleAutoReloadConfigRequest(ToggleAutoReloadConfigRequest request) {
 
     }
+
+    public static void checkQueryAutoReloadConfigRequest(QueryAutoReloadConfigRequest request) {
+
+    }
+
+    public static void checkQueryDefaultCardRequest(QueryDefaultCardRequest request) {
+
+    }
 }

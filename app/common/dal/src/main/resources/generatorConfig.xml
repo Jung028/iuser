@@ -31,7 +31,8 @@
         <!-- Table(s) to generate -->
         <table tableName="user_info" domainObjectName="UserInfoDO" />
         <table tableName="user_auth" domainObjectName="UserAuthDO" />
-        <table tableName="user_card_detail" domainObjectName="UserCardDetailDO" />
+        <table tableName="user_card_detail" domainObjectName="UserCardDetailDO"/>
+        <table tableName="auto_reload_config" domainObjectName="AutoReloadConfigDO" />
 
 
     </context>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alipay.usercenter.common.dal.auto.custom.AutoReloadConfigDAO">
+    <resultMap id="BaseResultMap" type="com.alipay.usercenter.common.dal.auto.dataobject.AutoReloadConfigDO">
+        <id column="config_id" jdbcType="OTHER" property="configId" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="user_card_id" jdbcType="OTHER" property="userCardId" />
+        <result column="is_active" jdbcType="BIT" property="isActive" />
+        <result column="threshold_amount" jdbcType="NUMERIC" property="thresholdAmount" />
+        <result column="reload_amount" jdbcType="NUMERIC" property="reloadAmount" />
+        <result column="is_reload_in_flight" jdbcType="BIT" property="isReloadInFlight" />
+        <result column="last_triggered_at" jdbcType="TIMESTAMP" property="lastTriggeredAt" />
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+        <result column="currency" jdbcType="VARCHAR" property="currency" />
+    </resultMap>
+
+    <select id="queryAutoReloadConfig" parameterType="string" resultMap="BaseResultMap">
+        SELECT auth_id, user_id, auth_type, credential_hash, failed_attempts, lock_until, is_active, last_used, gmt_create, gmt_modified
+        FROM user_auth
+        WHERE user_id = #{userId}
+    </select>
+
+
+
+</mapper>

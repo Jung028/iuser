@@ -1,8 +1,6 @@
 package com.alipay.usercenter.common.service.facade.item;
 
-import com.alipay.usercenter.common.service.facade.config.Contact;
 import com.alipay.usercenter.common.service.facade.config.ContactConfig;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 

@@ -4,9 +4,9 @@ import com.alipay.usercenter.common.service.facade.baseresult.UserBaseRequest;
 
 /**
  * @author adam
- * @date 23/3/2026 3:18 PM
+ * @date 26/3/2026 4:57 PM
  */
-public class QueryCardDetailsRequest extends UserBaseRequest {
+public class QueryAutoReloadConfigRequest extends UserBaseRequest {
     private String userId;
 
     public String getUserId() {
