@@ -33,6 +33,7 @@
         <table tableName="user_auth" domainObjectName="UserAuthDO" />
         <table tableName="user_card_detail" domainObjectName="UserCardDetailDO"/>
         <table tableName="auto_reload_config" domainObjectName="AutoReloadConfigDO" />
+        <table tableName="user_card_provider" domainObjectName="UserCardProviderDO" />
 
 
     </context>

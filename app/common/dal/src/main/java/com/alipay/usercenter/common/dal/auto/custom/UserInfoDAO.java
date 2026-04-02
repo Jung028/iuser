@@ -12,4 +12,6 @@ public interface UserInfoDAO {
     void insertUserInfo(UserInfoDO userInfo);
 
     int updateExtInfo(@Param("userId") String userId, @Param("extInfo") String extInfo);
+
+    UserInfoDO queryUserInfoByUserId(@Param("userId") long userId);
 }

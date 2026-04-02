@@ -6,10 +6,7 @@ import com.alipay.usercenter.biz.cache.UserSecurityCache;
 import com.alipay.usercenter.biz.jwt.JwtUtil;
 import com.alipay.usercenter.biz.template.UserServiceTemplate;
 import com.alipay.usercenter.common.service.integration.account.AccountServiceClient;
-import com.alipay.usercenter.core.service.repository.AutoReloadConfigRepository;
-import com.alipay.usercenter.core.service.repository.UserAuthRepository;
-import com.alipay.usercenter.core.service.repository.UserCardDetailRepository;
-import com.alipay.usercenter.core.service.repository.UserInfoRepository;
+import com.alipay.usercenter.core.service.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +35,12 @@ public abstract class AbstractUserBizService {
      */
     @Autowired
     protected UserCardDetailRepository userCardDetailRepository;
+
+    /**
+     * userCardProviderRepository
+     */
+    @Autowired
+    protected UserCardProviderRepository userCardProviderRepository;
 
     /**
      * userAuthRepository

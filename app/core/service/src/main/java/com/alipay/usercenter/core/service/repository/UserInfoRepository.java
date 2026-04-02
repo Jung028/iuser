@@ -8,6 +8,8 @@ public interface UserInfoRepository {
 
     UserInfo queryUserInfo(String phoneNo);
 
+    UserInfo queryUserInfoByUserId(String userId);
+
     void insertUserInfo(UserInfo userInfo);
 
     void updateExtInfo(String userId, String extInfo);

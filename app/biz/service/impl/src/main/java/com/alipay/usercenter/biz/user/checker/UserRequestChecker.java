@@ -56,7 +56,7 @@ public class UserRequestChecker {
     public static void checkUpdateAutoReloadConfigRequest(UpdateAutoReloadConfigRequest request) {
     }
 
-    public static void checkInsertNewCardRequest(InsertNewCardRequest request) {
+    public static void checkCreateNewCardRequest(CreateNewCardRequest request) {
     }
 
     public static void checkToggleAutoReloadConfigRequest(ToggleAutoReloadConfigRequest request) {

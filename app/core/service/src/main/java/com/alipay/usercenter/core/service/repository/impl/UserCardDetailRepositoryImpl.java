@@ -1,9 +1,13 @@
 package com.alipay.usercenter.core.service.repository.impl;
 
-import com.alipay.usercenter.common.service.facade.item.UserCardDetailItem;
-import com.alipay.usercenter.common.service.facade.request.InsertNewCardRequest;
+import com.alipay.usercenter.common.dal.auto.custom.UserCardDetailDAO;
+import com.alipay.usercenter.common.dal.auto.dataobject.UserCardDetailDO;
+import com.alipay.usercenter.core.converter.UserCardDetailConvertor;
+import com.alipay.usercenter.core.exception.RepositoryException;
 import com.alipay.usercenter.core.model.UserCardDetail;
 import com.alipay.usercenter.core.service.repository.UserCardDetailRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,26 +15,51 @@ import java.util.List;
  * @author adam
  * @date 24/3/2026 11:12 PM
  */
+@Repository
 public class UserCardDetailRepositoryImpl implements UserCardDetailRepository {
+
+    @Autowired
+    private UserCardDetailDAO userCardDetailDAO;
 
     @Override
     public UserCardDetail queryDefaultCard(String userId) {
-        return null;
+        try {
+            UserCardDetailDO userCardDetailDO =
+                    userCardDetailDAO.queryDefaultCard(Long.parseLong(userId));
+            return UserCardDetailConvertor.convertToDomain(userCardDetailDO);
+        } catch (RepositoryException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RepositoryException("DB error during query user card detail list", e);
+        }
     }
 
     @Override
     public List<UserCardDetail> queryCardDetailList(String userId) {
-        return List.of();
+        try {
+            List<UserCardDetailDO> userCardDetailDOList =
+                    userCardDetailDAO.queryCardDetailList(Long.parseLong(userId));
+            return UserCardDetailConvertor.convertToDomain(userCardDetailDOList);
+        } catch (RepositoryException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RepositoryException("DB error during query user card detail list", e);
+        }
     }
 
     @Override
-    public void insertNewCard(InsertNewCardRequest request) {
-
-    }
-
-    @Override
-    public void toggleAutoReloadConfig(boolean autoReload) {
-
+    public void insertNewCard(UserCardDetail userCardDetail) {
+        try {
+            UserCardDetailDO userCardDetailDO = UserCardDetailConvertor.convertToDO(userCardDetail);
+            int rows = userCardDetailDAO.insertNewCard(userCardDetailDO);
+            if (rows > 0) {
+                throw new RepositoryException("Insert new card detail failed, no record exists");
+            }
+        } catch (RepositoryException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RepositoryException("DB error during query user card detail list", e);
+        }
     }
 
 }

@@ -27,6 +27,13 @@
     </select>
 
 
+    <select id="queryUserInfoByUserId" parameterType="long" resultMap="BaseResultMap">
+        SELECT user_id, phone_no, status, hashed_password, gmt_create, gmt_modified, contact_config
+        FROM user_info
+        WHERE user_id = #{userId}
+    </select>
+
+
     <select id="insertUserInfo" parameterType="com.alipay.usercenter.common.dal.auto.dataobject.UserInfoDO" resultMap="BaseResultMap">
         insert into user_info (id, user_id, phone_no,
         status, hashed_password, gmt_create,
@@ -35,5 +42,12 @@
         #{status,jdbcType=VARCHAR}, #{hashedPassword,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP},
         #{gmtModified,jdbcType=TIMESTAMP}, #{contactConfig,jdbcType=OTHER})
     </select>
+
+    <update id="updateExtInfo">
+        UPDATE user_info
+        SET ext_info = #{extInfo},
+            gmt_modified = NOW()
+        WHERE user_id = #{userId}
+    </update>
 
 </mapper>

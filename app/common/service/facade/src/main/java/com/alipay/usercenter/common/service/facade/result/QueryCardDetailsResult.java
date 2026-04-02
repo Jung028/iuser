@@ -10,7 +10,7 @@ import java.util.List;
  * @author adam
  * @date 23/3/2026 3:18 PM
  */
-public class QueryCardDetailsResult extends UserBaseResult {
+public class QueryCardDetailsResult {
     private List<UserCardDetailItem> cardDetailsList;
 
     public List<UserCardDetailItem> getCardDetailsList() {

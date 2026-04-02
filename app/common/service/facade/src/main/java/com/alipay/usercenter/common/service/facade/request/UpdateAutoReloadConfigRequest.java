@@ -12,7 +12,7 @@ public class UpdateAutoReloadConfigRequest extends UserBaseRequest {
     private Integer thresholdAmount;
     private Integer autoReloadAmount;
     private boolean isActive;
-    private String gmtModified;
+
 
     public String getCardId() {
         return cardId;
@@ -52,13 +52,5 @@ public class UpdateAutoReloadConfigRequest extends UserBaseRequest {
 
     public void setActive(boolean active) {
         isActive = active;
-    }
-
-    public String getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(String gmtModified) {
-        this.gmtModified = gmtModified;
     }
 }

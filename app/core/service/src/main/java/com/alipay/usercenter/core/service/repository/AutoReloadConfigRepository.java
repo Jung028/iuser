@@ -9,7 +9,10 @@ import com.alipay.usercenter.core.model.AutoReloadConfig;
  */
 public interface AutoReloadConfigRepository {
 
-    AutoReloadConfig queryAutoReloadConfig(String userId);
+    AutoReloadConfig queryAutoReloadConfig(long userId);
 
     void updateAutoReloadConfig(UpdateAutoReloadConfigRequest request);
+
+    void toggleAutoReloadConfig(String userId, boolean autoReload);
+
 }

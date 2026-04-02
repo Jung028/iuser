@@ -21,6 +21,15 @@ public class UserInfoRepositoryImpl extends AbstractUserRepository implements Us
     }
 
     @Override
+    public UserInfo queryUserInfoByUserId(String userId) {
+        UserInfoDO userInfoDO = userInfoDAO.queryUserInfoByUserId(Long.parseLong(userId));
+        if(userInfoDO == null) {
+            return null;
+        }
+        return UserInfoConvertor.convertToDomain(userInfoDO);
+    }
+
+    @Override
     public void insertUserInfo(UserInfo userInfo) {
         UserInfoDO userInfoDO = UserInfoConvertor.convertToDO(userInfo);
         try {

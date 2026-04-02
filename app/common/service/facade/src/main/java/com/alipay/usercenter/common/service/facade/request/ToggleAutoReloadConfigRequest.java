@@ -7,13 +7,22 @@ import com.alipay.usercenter.common.service.facade.baseresult.UserBaseRequest;
  * @date 23/3/2026 3:19 PM
  */
 public class ToggleAutoReloadConfigRequest extends UserBaseRequest {
-    private boolean autoReload;
+    private String userId;
+    private boolean active;
 
-    public boolean isAutoReload() {
-        return autoReload;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setAutoReload(boolean autoReload) {
-        this.autoReload = autoReload;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

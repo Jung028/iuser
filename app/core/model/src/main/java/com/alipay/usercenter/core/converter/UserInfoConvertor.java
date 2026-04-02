@@ -37,7 +37,9 @@ public class UserInfoConvertor {
 
         Object extInfo = null;
         try {
-            extInfo = objectMapper.readValue(userInfoDO.getExtInfo().toString(), Object.class);
+            if (userInfoDO.getExtInfo() != null) {
+                extInfo = objectMapper.readValue(userInfoDO.getExtInfo().toString(), Object.class);
+            }
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
