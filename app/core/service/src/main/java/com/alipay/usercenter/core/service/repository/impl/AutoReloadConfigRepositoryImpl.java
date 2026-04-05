@@ -37,6 +37,21 @@ public class AutoReloadConfigRepositoryImpl implements AutoReloadConfigRepositor
     }
 
     @Override
+    public void insertAutoReloadConfig(AutoReloadConfig autoReloadConfig) {
+        try {
+            AutoReloadConfigDO autoReloadConfigDO = AutoReloadConfigConvertor.convertToDO(autoReloadConfig);
+            int rows = autoReloadConfigDAO.insertAutoReloadConfig(autoReloadConfigDO);
+            if (rows <= 0) {
+                throw new RepositoryException("AutoReloadConfig insert failed");
+            }
+        } catch (RepositoryException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public void updateAutoReloadConfig(UpdateAutoReloadConfigRequest request) {
         try {
             if (request == null) {
@@ -67,4 +82,5 @@ public class AutoReloadConfigRepositoryImpl implements AutoReloadConfigRepositor
             throw new RepositoryException("DB error during query user card detail list", e);
         }
     }
+
 }

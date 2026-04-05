@@ -27,7 +27,6 @@ public class UserCardDetailConvertor {
             userCardDetailItem.setCardholderName(userCardDetail.getCardholderName());
             userCardDetailItem.setExpiryMonth(userCardDetail.getExpiryMonth());
             userCardDetailItem.setExpiryYear(userCardDetail.getExpiryYear());
-            userCardDetailItem.setIsDefault(userCardDetail.getIsDefault());
             userCardDetailItem.setLastFour(userCardDetail.getLastFour());
             userCardDetailItem.setProvider(userCardDetail.getProvider());
             userCardDetailItem.setProviderToken(userCardDetail.getProviderToken());
@@ -39,6 +38,9 @@ public class UserCardDetailConvertor {
     }
 
     public static UserCardDetailItem convertToItem(UserCardDetail userCardDetail) {
+        if (userCardDetail == null) {
+            return null;
+        }
         UserCardDetailItem userCardDetailItem = new UserCardDetailItem();
         userCardDetailItem.setCardNetwork(userCardDetail.getCardNetwork());
         userCardDetailItem.setUserId(userCardDetail.getUserId());
@@ -49,7 +51,6 @@ public class UserCardDetailConvertor {
         userCardDetailItem.setCardholderName(userCardDetail.getCardholderName());
         userCardDetailItem.setExpiryMonth(userCardDetail.getExpiryMonth());
         userCardDetailItem.setExpiryYear(userCardDetail.getExpiryYear());
-        userCardDetailItem.setIsDefault(userCardDetail.getIsDefault());
         userCardDetailItem.setLastFour(userCardDetail.getLastFour());
         userCardDetailItem.setProvider(userCardDetail.getProvider());
         userCardDetailItem.setProviderToken(userCardDetail.getProviderToken());
@@ -59,6 +60,9 @@ public class UserCardDetailConvertor {
     }
 
     public static UserCardDetail convertToDomain(UserCardDetailDO userCardDetailDO) {
+        if (userCardDetailDO == null) {
+            return null;
+        }
         UserCardDetail userCardDetail = new UserCardDetail();
         userCardDetail.setUserId(userCardDetailDO.getUserId());
         userCardDetail.setCardNetwork(userCardDetailDO.getCardNetwork());
@@ -69,7 +73,6 @@ public class UserCardDetailConvertor {
         userCardDetail.setCardholderName(userCardDetailDO.getCardholderName());
         userCardDetail.setExpiryMonth(userCardDetailDO.getExpiryMonth());
         userCardDetail.setExpiryYear(userCardDetailDO.getExpiryYear());
-        userCardDetail.setIsDefault(userCardDetailDO.getIsDefault());
         userCardDetail.setLastFour(userCardDetailDO.getLastFour());
         userCardDetail.setProvider(userCardDetailDO.getProvider());
         userCardDetail.setProviderToken(userCardDetailDO.getProviderToken());
@@ -91,7 +94,6 @@ public class UserCardDetailConvertor {
             userCardDetail.setCardholderName(userCardDetailDO.getCardholderName());
             userCardDetail.setExpiryMonth(userCardDetailDO.getExpiryMonth());
             userCardDetail.setExpiryYear(userCardDetailDO.getExpiryYear());
-            userCardDetail.setIsDefault(userCardDetailDO.getIsDefault());
             userCardDetail.setLastFour(userCardDetailDO.getLastFour());
             userCardDetail.setProvider(userCardDetailDO.getProvider());
             userCardDetail.setProviderToken(userCardDetailDO.getProviderToken());
@@ -104,6 +106,7 @@ public class UserCardDetailConvertor {
 
     public static UserCardDetailDO convertToDO(UserCardDetail userCardDetail) {
         UserCardDetailDO userCardDetailDO = new UserCardDetailDO();
+        userCardDetailDO.setUserCardId(userCardDetail.getUserCardId());
         userCardDetailDO.setCardNetwork(userCardDetail.getCardNetwork());
         userCardDetailDO.setUserId(userCardDetail.getUserId());
         userCardDetailDO.setCardType(String.valueOf(userCardDetail.getCardType()));
@@ -112,7 +115,6 @@ public class UserCardDetailConvertor {
         userCardDetailDO.setCardholderName(userCardDetail.getCardholderName());
         userCardDetailDO.setExpiryMonth(userCardDetail.getExpiryMonth());
         userCardDetailDO.setExpiryYear(userCardDetail.getExpiryYear());
-        userCardDetailDO.setIsDefault(userCardDetail.getIsDefault());
         userCardDetailDO.setLastFour(userCardDetail.getLastFour());
         userCardDetailDO.setProvider(userCardDetail.getProvider());
         userCardDetailDO.setProviderToken(userCardDetail.getProviderToken());

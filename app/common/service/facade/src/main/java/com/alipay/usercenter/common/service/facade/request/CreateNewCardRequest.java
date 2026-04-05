@@ -1,7 +1,7 @@
 package com.alipay.usercenter.common.service.facade.request;
 
 import com.alipay.usercenter.common.service.facade.baseresult.UserBaseRequest;
-import com.alipay.usercenter.common.service.facade.enums.CardIssuer;
+import com.alipay.usercenter.common.service.facade.enums.CardNetwork;
 import com.alipay.usercenter.common.service.facade.enums.CardStatus;
 import com.alipay.usercenter.common.service.facade.enums.CardType;
 import com.alipay.usercenter.common.service.facade.enums.Provider;
@@ -16,7 +16,7 @@ public class CreateNewCardRequest extends UserBaseRequest {
     private String userId;
     private String cardNo;
     private CardType cardType;
-    private CardIssuer cardIssuer;
+    private CardNetwork cardProvider;
     private Long expiryMonth;
     private Long expiryYear;
     private boolean saveCard;
@@ -47,12 +47,12 @@ public class CreateNewCardRequest extends UserBaseRequest {
         this.cardType = cardType;
     }
 
-    public CardIssuer getCardIssuer() {
-        return cardIssuer;
+    public CardNetwork getCardProvider() {
+        return cardProvider;
     }
 
-    public void setCardIssuer(CardIssuer cardIssuer) {
-        this.cardIssuer = cardIssuer;
+    public void setCardProvider(CardNetwork cardProvider) {
+        this.cardProvider = cardProvider;
     }
 
     public Long getExpiryMonth() {

@@ -10,6 +10,7 @@ import com.alipay.usercenter.common.service.facade.result.LoginResult;
 import com.alipay.usercenter.common.service.facade.result.OTPResult;
 import com.alipay.usercenter.core.model.UserSecurity;
 import jakarta.annotation.Resource;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
@@ -97,8 +98,25 @@ public class UserBasicController {
     }
 
 
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    @PostMapping("/updateUserInfo.json")
+    public UserBizResult<String> updateUserInfo(@RequestBody UpdateUserInfoRequest request) {
+        try {
+            // should this be able to change user login password as well?
+            return userService.updateUserInfo(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    @PostMapping("/setPasswordPin.json")
+    public UserBizResult<String> setPasswordPin(@RequestBody SetPasswordPinRequest request) {
+        try {
+            // should this be able to change user login password as well?
+            return userService.setPasswordPin(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

@@ -17,6 +17,7 @@ import com.alipay.usercenter.biz.user.helper.ResponseBuilder;
 import com.alipay.usercenter.common.service.facade.api.UserService;
 import com.alipay.usercenter.biz.util.UserPasswordUtil;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
+import com.alipay.usercenter.common.service.facade.enums.AuthType;
 import com.alipay.usercenter.common.service.facade.enums.UserResultCode;
 import com.alipay.usercenter.common.service.facade.enums.UserResultEnum;
 import com.alipay.usercenter.common.service.facade.exception.UserBizException;
@@ -338,6 +339,18 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                     createAccountRequest.setCurrency(DEFAULT_CURRENCY);
                     AccountBizResult<String> createAccount = accountServiceClient.createAccount(createAccountRequest);
                     AssertUtil.isTrue(createAccount.isSuccess(), UserResultCode.SYSTEM_EXCEPTION, "Failed to create account");
+
+                    // after success creation of account, insert password into user_auth table
+                    userAuthRepository.insertUserAuth(new UserAuth() {{
+                        setUserId(userInfo.getUserId().toString());
+                        setAuthType(AuthType.LOGIN_PASSWORD.getCode());
+                        setIsActive(true);
+                        setLastUsed(new Date());
+                        setCredentialHash(hashedPassword);
+                        setGmtCreate(new Date());
+                        setGmtModified(new Date());
+                    }});
+
                     // insertinto user_auth
                     ResponseBuilder.success(result, null, UserActionEnum.REGISTER.getCode(), "Registered account");
                     return null;
@@ -395,7 +408,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
             @Override
             protected void process(VerifyUserAuthRequest request, UserBizResult<String> response) {
                 // query user_auth
-                UserAuth userAuth = userAuthRepository.queryUserAuth(request.getUserId());
+                UserAuth userAuth = userAuthRepository.queryUserAuth(request.getUserId(), request.getAuthScene().getCode(), request.getAuthType().getCode());
 
                 // validate
                 String credentialHash = userAuth.getCredentialHash();
@@ -464,7 +477,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
     }
 
     @Override
-    public UserBizResult<String> updateExtInfo(UpdateUserInfoRequest request) {
+    public UserBizResult<String> updateUserInfo(UpdateUserInfoRequest request) {
         return userServiceTemplate.execute(request, UserActionEnum.UPDATE_USER_INFO,
                 new UserBizCallback<>() {
 
@@ -480,38 +493,84 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
 
                     @Override
                     protected void process(UpdateUserInfoRequest request, UserBizResult<String> response) {
-                        ObjectMapper objectMapper = new ObjectMapper();
 
                         // 1. Fetch user by userId
-                        UserInfo userInfo = userInfoRepository.queryUserInfo(request.getUserId());
+                        UserInfo userInfo = userInfoRepository.queryUserInfoByUserId(request.getUserId());
                         if (userInfo == null) {
                             throw new RuntimeException("User not found for userId=" + request.getUserId());
                         }
 
-                        ExtInfo extInfo;
-                        try {
-                            // 2. Parse existing extInfo or create new
-                            if (userInfo.getExtInfo() != null) {
-                                extInfo = objectMapper.readValue(JSONUtils.toJSONString(userInfo.getExtInfo()), ExtInfo.class);
-                            } else {
-                                extInfo = new ExtInfo();
-                            }
+                        // update user name
+                        userInfoRepository.updateUserName(request.getUserId(), request.getUserName());
+                    }
+                });
+    }
 
-                            // 3. Append new data from request
-                            if (request.getExtInfo() != null) {
-                                JsonNode newNode = objectMapper.readTree(request.getExtInfo());
-                                extInfo.append(newNode); // append to a dynamic list inside ExtInfo
-                            }
+    @Override
+    public UserBizResult<UserInfoItem> queryUserInfoByUserId(QueryUserInfoRequest request) {
+        return userServiceTemplate.execute(request, UserActionEnum.QUERY_USER_INFO,
+                new UserBizCallback<>() {
+                    @Override
+                    protected UserBizResult<UserInfoItem> createDefaultResponse() {
+                        return new UserBizResult<>();
+                    }
 
-                            // 4. Serialize back to string
-                            String extInfoJson = objectMapper.writeValueAsString(extInfo);
+                    @Override
+                    protected void checkParams(QueryUserInfoRequest request) {
+                        UserRequestChecker.checkQueryUserInfoByUserIdRequest(request);
+                    }
 
-                            // 5. Partial update using userId
-                            userInfoRepository.updateExtInfo(request.getUserId(), extInfoJson);
-
-                        } catch (JsonProcessingException e) {
-                            throw new RuntimeException("Failed to append extInfo", e);
+                    @Override
+                    protected void process(QueryUserInfoRequest request, UserBizResult<UserInfoItem> response) {
+                        UserInfo userInfo = userInfoRepository.queryUserInfoByUserId(request.getUserId());
+                        // convert userInfo to item
+                        if (userInfo != null) {
+                            UserInfoItem userInfoItem = UserInfoConvertor.convertToItem(userInfo);
+                            ResponseBuilder.success(response, userInfoItem, UserActionEnum.QUERY_USER_INFO.getCode(), "Query User Info Item by userId");
+                        } else {
+                            ResponseBuilder.fail(response, UserActionEnum.QUERY_USER_INFO.getCode(), "Query User Info Item by userId");
                         }
+                    }
+                });
+    }
+
+    @Override
+    public UserBizResult<String> setPasswordPin(SetPasswordPinRequest request) {
+        return userServiceTemplate.execute(request, UserActionEnum.SET_PASSWORD_PIN,
+                new UserBizCallback<>() {
+                    @Override
+                    protected UserBizResult<String> createDefaultResponse() {
+                        return new UserBizResult<>();
+                    }
+
+                    @Override
+                    protected void checkParams(SetPasswordPinRequest request) {
+                        UserRequestChecker.checkSetPasswordPinRequest(request);
+                    }
+
+                    @Override
+                    protected void process(SetPasswordPinRequest request, UserBizResult<String> response) {
+                        // verify password pin is 6 digits.
+                        request.validate();
+
+                        // ensure there isnt already an existing hash.
+                        UserAuth userAuth = userAuthRepository.queryUserAuth(request.getUserId(),
+                                request.getAuthScene(), request.getAuthType());
+                        AssertUtil.notNull(userAuth, UserResultEnum.PARAM_ILLEGAL, "User Auth not exist");
+
+                        // hash the user password
+                        String hashedPassword = UserPasswordUtil.hashPassword(request.getPasswordPin());
+
+                        // insert a new user auth.
+                        userAuthRepository.insertUserAuth(new UserAuth() {{
+                            setUserId(request.getUserId());
+                            setAuthType(request.getAuthType());
+                            setIsActive(true);
+                            setLastUsed(new Date());
+                            setCredentialHash(hashedPassword);
+                            setGmtCreate(new Date());
+                            setGmtModified(new Date());
+                        }});
                     }
                 });
     }

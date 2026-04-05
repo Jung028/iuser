@@ -1,6 +1,5 @@
 package com.alipay.usercenter.core.converter;
 
-import com.alipay.sofa.rpc.common.json.JSON;
 import com.alipay.sofa.rpc.common.utils.JSONUtils;
 import com.alipay.usercenter.common.dal.auto.dataobject.UserInfoDO;
 import com.alipay.usercenter.common.service.facade.config.ContactConfig;
@@ -44,7 +43,7 @@ public class UserInfoConvertor {
             throw new RuntimeException(e);
         }
         userInfo.setExtInfo(extInfo);
-
+        userInfo.setUserName(userInfoDO.getUserName());
         return userInfo;
     }
 
@@ -62,6 +61,7 @@ public class UserInfoConvertor {
         userInfoDO.setStatus(userInfo.getStatus());
         userInfoDO.setContactConfig(userInfo.getContactConfig());
         userInfoDO.setExtInfo(userInfo.getExtInfo());
+        userInfoDO.setUserName(userInfo.getUserName());
         return userInfoDO;
     }
 
@@ -73,12 +73,13 @@ public class UserInfoConvertor {
         userInfoItem.setGmtCreate(userInfo.getGmtCreate());
         userInfoItem.setGmtModified(userInfo.getGmtModified());
         userInfoItem.setId(userInfo.getId());
-        userInfoItem.setPassword(userInfo.getHashedPassword());
+        userInfoItem.setHashedPassword(userInfo.getHashedPassword());
         userInfoItem.setPhoneNo(userInfo.getPhoneNo());
         userInfoItem.setStatus(userInfo.getStatus());
         userInfoItem.setUserId(userInfo.getUserId());
-        userInfoItem.setContactConfig((ContactConfig) userInfo.getContactConfig());
+        userInfoItem.setContactConfig(userInfo.getContactConfig());
         userInfoItem.setExtInfo(JSONUtils.toJSONString(userInfo.getExtInfo()));
+        userInfoItem.setUserName(userInfo.getUserName());
         return userInfoItem;
     }
 }

@@ -52,4 +52,8 @@ public class AutoReloadConfigConvertor {
         autoReloadConfig.setLastTriggeredAt(autoReloadConfigDO.getLastTriggeredAt());
         return autoReloadConfig;
     }
+
+    public static AutoReloadConfigDO convertToDO(AutoReloadConfig autoReloadConfig) {
+        return null;
+    }
 }

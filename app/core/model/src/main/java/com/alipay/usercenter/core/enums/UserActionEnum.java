@@ -19,7 +19,11 @@ public enum UserActionEnum {
     QUERY_DEFAULT_CARD("QUERY_DEFAULT_CARD", "query default card"),
 
 
-    QUERY_AUTO_RELOAD_CONFIG("QUERY_AUTO_RELOAD_CONFIG", "query auto reload config"),;
+    QUERY_AUTO_RELOAD_CONFIG("QUERY_AUTO_RELOAD_CONFIG", "query auto reload config"),
+
+    QUERY_USER_CARD_PROVIDER("QUERY_USER_CARD_PROVIDER", "query user card provider"),
+
+    SET_PASSWORD_PIN("SET_PASSWORD_PIN", "set password pin" ),;
 
     UserActionEnum(String code, String desc) {
         this.code = code;

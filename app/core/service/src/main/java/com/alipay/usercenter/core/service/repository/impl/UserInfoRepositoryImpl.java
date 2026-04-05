@@ -42,10 +42,25 @@ public class UserInfoRepositoryImpl extends AbstractUserRepository implements Us
     @Override
     public void updateExtInfo(String userId, String extInfo) {
         try {
-            int rows = userInfoDAO.updateExtInfo(userId, extInfo);
+            int rows = userInfoDAO.updateExtInfo(Long.parseLong(userId), extInfo);
             if (rows <= 0) {
                 throw new RepositoryException("Update affected 0 rows for extInfo: "
                         + extInfo);
+            }
+        } catch (RepositoryException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RepositoryException("DB error during update user info ", e);
+        }
+    }
+
+    @Override
+    public void updateUserName(String userId, String userName) {
+        try {
+            int rows = userInfoDAO.updateUserName(Long.parseLong(userId), userName);
+            if (rows <= 0) {
+                throw new RepositoryException("Update affected 0 rows for extInfo: "
+                        + userName);
             }
         } catch (RepositoryException e) {
             throw e;

@@ -18,8 +18,8 @@
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     </resultMap>
 
-    <select id="findByUserIdAndProvider">
-        SELECT user_card_provider id, user_id, provider,
+    <select id="findByUserIdAndProvider" resultMap="BaseResultMap">
+        SELECT id, user_id, provider,
         provider_customer_id, status, gmt_create,
         gmt_modified
         FROM user_card_provider
@@ -28,10 +28,10 @@
     </select>
 
     <insert id="insertNewCardProvider" parameterType="com.alipay.usercenter.common.dal.auto.dataobject.UserCardProviderDO">
-        insert into user_card_provider (id, user_id, provider,
+        insert into user_card_provider (user_id, provider,
         provider_customer_id, status, gmt_create,
         gmt_modified)
-        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{provider,jdbcType=VARCHAR},
+        values (#{userId,jdbcType=BIGINT}, #{provider,jdbcType=VARCHAR},
         #{providerCustomerId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP},
         #{gmtModified,jdbcType=TIMESTAMP})
     </insert>

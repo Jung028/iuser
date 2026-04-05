@@ -7,15 +7,16 @@ import com.alipay.usercenter.common.service.facade.baseresult.UserBaseRequest;
  * @date 24/3/2026 7:22 PM
  */
 public class UpdateUserInfoRequest extends UserBaseRequest {
-    private String extInfo;
+     private String userName;
     private String userId;
 
-    public String getExtInfo() {
-        return extInfo;
+
+    public String getUserName() {
+        return userName;
     }
 
-    public void setExtInfo(String extInfo) {
-        this.extInfo = extInfo;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getUserId() {

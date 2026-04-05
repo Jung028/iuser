@@ -9,7 +9,11 @@ public enum AuthScene {
     VIEW_BALANCE("VIEW_BALANCE", "to view balance"),
     LOGIN("LOGIN", "user login password"),
     CHANGE_PASSWORD("CHANGE_PASSWORD", "change password"),
-    WITHDRAW("WITHDRAW", "atm machine require enter password pin");
+    WITHDRAW("WITHDRAW", "atm machine require enter password pin"),
+    TOP_UP_CONFIRM("TOP_UP_CONFIRM", "top up confirmation")
+
+
+    ;
 
     AuthScene(String code, String desc) {
         this.code = code;

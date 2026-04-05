@@ -13,4 +13,6 @@ public interface UserInfoRepository {
     void insertUserInfo(UserInfo userInfo);
 
     void updateExtInfo(String userId, String extInfo);
+
+    void updateUserName(String userId, String userName);
 }

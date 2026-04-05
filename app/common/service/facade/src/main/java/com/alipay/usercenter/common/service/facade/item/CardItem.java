@@ -1,6 +1,6 @@
 package com.alipay.usercenter.common.service.facade.item;
 
-import com.alipay.usercenter.common.service.facade.enums.CardIssuer;
+import com.alipay.usercenter.common.service.facade.enums.CardNetwork;
 import com.alipay.usercenter.common.service.facade.enums.CardStatus;
 import com.alipay.usercenter.common.service.facade.enums.CardType;
 import com.alipay.usercenter.common.service.facade.enums.Provider;
@@ -13,7 +13,7 @@ public class CardItem {
     // CardItem
     private String userId;
     private CardType cardType; // DEBIT/CREDIT
-    private CardIssuer cardNetwork; // VISA/MASTERCARD
+    private CardNetwork cardNetwork; // VISA/MASTERCARD
     private Provider provider; // STRIPE/PBE
     private String providerToken;
     private String cardHolderName;
@@ -37,11 +37,11 @@ public class CardItem {
         this.cardType = cardType;
     }
 
-    public CardIssuer getCardNetwork() {
+    public CardNetwork getCardNetwork() {
         return cardNetwork;
     }
 
-    public void setCardNetwork(CardIssuer cardNetwork) {
+    public void setCardNetwork(CardNetwork cardNetwork) {
         this.cardNetwork = cardNetwork;
     }
 

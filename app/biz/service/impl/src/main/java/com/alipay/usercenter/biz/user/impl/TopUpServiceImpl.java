@@ -11,14 +11,18 @@ import com.alipay.usercenter.biz.user.helper.ResponseBuilder;
 import com.alipay.usercenter.common.service.facade.api.TopUpService;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
 import com.alipay.usercenter.common.service.facade.config.ExtInfo;
+import com.alipay.usercenter.common.service.facade.enums.CardNetwork;
+import com.alipay.usercenter.common.service.facade.enums.Provider;
 import com.alipay.usercenter.common.service.facade.enums.UserResultCode;
 import com.alipay.usercenter.common.service.facade.item.AutoReloadConfigItem;
 import com.alipay.usercenter.common.service.facade.item.UserCardDetailItem;
+import com.alipay.usercenter.common.service.facade.item.UserCardProviderItem;
 import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
 import com.alipay.usercenter.common.service.facade.request.*;
 import com.alipay.usercenter.common.service.facade.result.QueryCardDetailsResult;
 import com.alipay.usercenter.core.converter.AutoReloadConfigConvertor;
 import com.alipay.usercenter.core.converter.UserCardDetailConvertor;
+import com.alipay.usercenter.core.converter.UserCardProviderConvertor;
 import com.alipay.usercenter.core.enums.UserActionEnum;
 import com.alipay.usercenter.core.model.AutoReloadConfig;
 import com.alipay.usercenter.core.model.UserCardDetail;
@@ -35,6 +39,7 @@ import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.CustomerUpdateParams;
 import com.stripe.param.PaymentMethodAttachParams;
 import com.stripe.param.PaymentMethodCreateParams;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -105,7 +110,12 @@ public class TopUpServiceImpl extends AbstractUserBizService implements TopUpSer
                     @Override
                     protected void process(UpdateAutoReloadConfigRequest request, UserBizResult<String> response) {
                         // update threshold amount, auto-reload amount and which card to auto-relaod
-                        UserCardDetail userCardDetail = userCardDetailRepository.queryDefaultCard(request.getUserId());
+                        // to query default card, we need to first query the auto reload config.
+                        AutoReloadConfig autoReloadConfig = autoReloadConfigRepository.queryAutoReloadConfig(Long.parseLong(request.getUserId()));
+                        AssertUtil.notNull(autoReloadConfig, UserResultCode.PARAM_ILLEGAL, "auto reload config is null");
+
+                        UserCardDetail userCardDetail = userCardDetailRepository.queryDefaultCard(
+                                UUID.fromString(autoReloadConfig.getUserCardId().toString()));
                         AssertUtil.notNull(userCardDetail, UserResultCode.PARAM_ILLEGAL, "user default card not exist");
 
                         //check auto-reload amount must be more than threshold amount.
@@ -167,6 +177,13 @@ public class TopUpServiceImpl extends AbstractUserBizService implements TopUpSer
                     protected void process(CreateNewCardRequest request, UserBizResult<String> response) {
                        // cvv, expiry, thats it. then the rest is to be extracted internally and inserted in database.
 
+                        UserCardDetail existing =
+                                userCardDetailRepository.findByProviderToken(request.getPaymentMethodId(), STRIPE);
+
+                        if (existing != null) {
+                            throw new RuntimeException("Duplicate request: card with the same payment method id already exists");
+                        }
+
                         try {
                             // getOrCreateStripeCustomer
                             String stripeCustomerId = getOrCreateStripeCustomer(request.getUserId());
@@ -188,22 +205,23 @@ public class TopUpServiceImpl extends AbstractUserBizService implements TopUpSer
                                 );
                             }
 
+                            // we do not need to check or set isDefault in card detail. it will be done using auto-reload-config
+                            // queryAutoReloadConfig user_card_id to know which card, and is_active to know if its active
                             UserCardDetail userCardDetail = new UserCardDetail();
                             // pm values
                             userCardDetail.setProviderCustomerId(stripeCustomerId);
-                            userCardDetail.setCardType(pm.getCard().getBrand());
+                            userCardDetail.setCardType(request.getCardType().toString());
                             userCardDetail.setLastFour(pm.getCard().getLast4());
                             userCardDetail.setExpiryMonth(pm.getCard().getExpMonth().shortValue());
                             userCardDetail.setExpiryYear(pm.getCard().getExpYear().shortValue());
 
                             // default values
-                            userCardDetail.setUserCardId(UUID.randomUUID().toString());
+                            userCardDetail.setUserCardId(UUID.randomUUID());
                             userCardDetail.setUserId(Long.parseLong(request.getUserId()));
-                            userCardDetail.setCardNetwork(null);
+                            userCardDetail.setCardNetwork(CardNetwork.fromStripe(pm.getCard().getBrand()).toString());
                             userCardDetail.setProvider(STRIPE);
                             userCardDetail.setProviderToken(pm.getId());
                             userCardDetail.setCardholderName(request.getCardHolderName());
-                            userCardDetail.setIsDefault(false);
                             userCardDetail.setStatus(ACTIVE);
                             Timestamp now = Timestamp.valueOf(LocalDateTime.now());
                             userCardDetail.setGmtCreate(now);
@@ -212,12 +230,20 @@ public class TopUpServiceImpl extends AbstractUserBizService implements TopUpSer
                             userCardDetailRepository.insertNewCard(userCardDetail);
                         } catch (StripeException e) {
                             throw new RuntimeException(e);
+                        } catch (DuplicateKeyException e) {
+                            throw new RuntimeException("Duplicate request: card with the same provider customer id already exists");
                         }
 
                     }
                 });
     }
 
+    /**
+     * create a new stripe customer from the userId if stripe userId not yet exists
+     * @param userId
+     * @return
+     * @throws StripeException
+     */
     private String createCustomer(String userId) throws StripeException {
         CustomerCreateParams params = CustomerCreateParams.builder()
                 .putMetadata("userId", userId)
@@ -246,6 +272,9 @@ public class TopUpServiceImpl extends AbstractUserBizService implements TopUpSer
             String customerId = createCustomer(userId);
 
             UserCardProvider newProvider = new UserCardProvider();
+            newProvider.setStatus(ACTIVE);
+            newProvider.setGmtCreate(Timestamp.valueOf(LocalDateTime.now()));
+            newProvider.setGmtModified(Timestamp.valueOf(LocalDateTime.now()));
             newProvider.setUserId(Long.parseLong(userId));
             newProvider.setProvider(STRIPE);
             newProvider.setProviderCustomerId(customerId);
@@ -292,11 +321,39 @@ public class TopUpServiceImpl extends AbstractUserBizService implements TopUpSer
                     @Override
                     protected void process(QueryDefaultCardRequest request, UserBizResult<UserCardDetailItem> response) {
                         // query user_card_details where userId and isDefault is true
-                        UserCardDetail userCardDetail = userCardDetailRepository.queryDefaultCard(request.getUserId());
+                        AutoReloadConfig autoReloadConfig = autoReloadConfigRepository.queryAutoReloadConfig(Long.parseLong(request.getUserId()));
+                        AssertUtil.notNull(autoReloadConfig, UserResultCode.SYSTEM_EXCEPTION, "auto reload config not exist for user, cannot get default card");
+
+                        UserCardDetail userCardDetail = userCardDetailRepository.queryDefaultCard(
+                                UUID.fromString(autoReloadConfig.getUserCardId().toString()));
                         ResponseBuilder.success(response, UserCardDetailConvertor.convertToItem(userCardDetail),
                                 UserActionEnum.QUERY_DEFAULT_CARD.getCode(),
                                 UserActionEnum.QUERY_DEFAULT_CARD.getDesc());
 
+                    }
+                });
+    }
+
+    @Override
+    public UserBizResult<UserCardProviderItem> queryUserCardProvider(QueryUserCardProviderRequest request) {
+        return userServiceTemplate.execute(request, UserActionEnum.QUERY_USER_CARD_PROVIDER,
+                new UserBizCallback<>() {
+
+                    @Override
+                    protected UserBizResult<UserCardProviderItem> createDefaultResponse() {
+                        return new UserBizResult<>();
+                    }
+
+                    @Override
+                    protected void checkParams(QueryUserCardProviderRequest request) {
+
+                    }
+
+                    @Override
+                    protected void process(QueryUserCardProviderRequest request, UserBizResult<UserCardProviderItem> response) {
+                        UserCardProvider userCardProvider = userCardProviderRepository.findByUserIdAndProvider(request.getUserId(), request.getProvider().toString());
+                        ResponseBuilder.success(response, UserCardProviderConvertor.convertToItem(userCardProvider), UserActionEnum.QUERY_USER_CARD_PROVIDER.getCode(),
+                                UserActionEnum.QUERY_USER_CARD_PROVIDER.getDesc());
                     }
                 });
     }

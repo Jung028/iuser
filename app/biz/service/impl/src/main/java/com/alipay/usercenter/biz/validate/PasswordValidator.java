@@ -21,34 +21,34 @@ public class PasswordValidator {
      * @param password
      */
     public static void check(String password) {
-        // Not null
-        AssertUtil.notNull(password, UserResultCode.PARAM_ILLEGAL, "Password cannot be null");
-
-        // Length check
-        AssertUtil.isTrue(password.length() >= 6 && password.length() <= 20,
-                UserResultCode.PARAM_ILLEGAL, "Password must be 6–20 characters long");
-
-        // Uppercase
-        AssertUtil.isTrue(UPPERCASE.matcher(password).find(),
-                UserResultCode.PARAM_ILLEGAL, "Password must contain at least one uppercase letter");
-
-        // Lowercase
-        AssertUtil.isTrue(LOWERCASE.matcher(password).find(),
-                UserResultCode.PARAM_ILLEGAL, "Password must contain at least one lowercase letter");
-
-        // Digit
-        AssertUtil.isTrue(DIGIT.matcher(password).find(),
-                UserResultCode.PARAM_ILLEGAL, "Password must contain at least one digit");
-
-        // Special character
-        AssertUtil.isTrue(SPECIAL.matcher(password).find(),
-                UserResultCode.PARAM_ILLEGAL, "Password must contain at least one special character");
-
-        // No repeated consecutive characters
-        char[] chars = password.toCharArray();
-        for (int i = 1; i < chars.length; i++) {
-            AssertUtil.isTrue(chars[i] != chars[i - 1],
-                    UserResultCode.PARAM_ILLEGAL, "Password cannot have consecutive identical characters");
-        }
+//        // Not null
+//        AssertUtil.notNull(password, UserResultCode.PARAM_ILLEGAL, "Password cannot be null");
+//
+//        // Length check
+//        AssertUtil.isTrue(password.length() >= 6 && password.length() <= 20,
+//                UserResultCode.PARAM_ILLEGAL, "Password must be 6–20 characters long");
+//
+//        // Uppercase
+//        AssertUtil.isTrue(UPPERCASE.matcher(password).find(),
+//                UserResultCode.PARAM_ILLEGAL, "Password must contain at least one uppercase letter");
+//
+//        // Lowercase
+//        AssertUtil.isTrue(LOWERCASE.matcher(password).find(),
+//                UserResultCode.PARAM_ILLEGAL, "Password must contain at least one lowercase letter");
+//
+//        // Digit
+//        AssertUtil.isTrue(DIGIT.matcher(password).find(),
+//                UserResultCode.PARAM_ILLEGAL, "Password must contain at least one digit");
+//
+//        // Special character
+//        AssertUtil.isTrue(SPECIAL.matcher(password).find(),
+//                UserResultCode.PARAM_ILLEGAL, "Password must contain at least one special character");
+//
+//        // No repeated consecutive characters
+//        char[] chars = password.toCharArray();
+//        for (int i = 1; i < chars.length; i++) {
+//            AssertUtil.isTrue(chars[i] != chars[i - 1],
+//                    UserResultCode.PARAM_ILLEGAL, "Password cannot have consecutive identical characters");
+//        }
     }
 }

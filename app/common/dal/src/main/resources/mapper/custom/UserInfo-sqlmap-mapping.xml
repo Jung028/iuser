@@ -17,36 +17,44 @@
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
         <result column="contact_config" jdbcType="OTHER" property="contactConfig" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
     </resultMap>
 
 
     <select id="queryUserInfo" parameterType="string" resultMap="BaseResultMap">
-        SELECT user_id, phone_no, status, hashed_password, gmt_create, gmt_modified, contact_config
+        SELECT user_id, phone_no, status, hashed_password, gmt_create, gmt_modified, contact_config, user_name
         FROM user_info
         WHERE phone_no = #{phoneNo}
     </select>
 
 
     <select id="queryUserInfoByUserId" parameterType="long" resultMap="BaseResultMap">
-        SELECT user_id, phone_no, status, hashed_password, gmt_create, gmt_modified, contact_config
+        SELECT user_id, phone_no, status, hashed_password, gmt_create, gmt_modified, contact_config, user_name
         FROM user_info
         WHERE user_id = #{userId}
     </select>
 
 
     <select id="insertUserInfo" parameterType="com.alipay.usercenter.common.dal.auto.dataobject.UserInfoDO" resultMap="BaseResultMap">
-        insert into user_info (id, user_id, phone_no,
+        insert into user_info (user_id, phone_no,
         status, hashed_password, gmt_create,
-        gmt_modified, contact_config)
-        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{phoneNo,jdbcType=VARCHAR},
+        gmt_modified, contact_config, user_name)
+        values (#{userId,jdbcType=BIGINT}, #{phoneNo,jdbcType=VARCHAR},
         #{status,jdbcType=VARCHAR}, #{hashedPassword,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP},
-        #{gmtModified,jdbcType=TIMESTAMP}, #{contactConfig,jdbcType=OTHER})
+        #{gmtModified,jdbcType=TIMESTAMP}, #{contactConfig,jdbcType=OTHER}, #{userName,jdbcType=VARCHAR})
     </select>
 
     <update id="updateExtInfo">
         UPDATE user_info
         SET ext_info = #{extInfo},
             gmt_modified = NOW()
+        WHERE user_id = #{userId}
+    </update>
+
+    <update id="updateUserName">
+        UPDATE user_info
+        SET user_name = #{userName},
+        gmt_modified = NOW()
         WHERE user_id = #{userId}
     </update>
 

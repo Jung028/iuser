@@ -101,6 +101,26 @@ public interface UserService {
      * @param request
      * @return
      */
-    UserBizResult<String> updateExtInfo(UpdateUserInfoRequest request);
+    @POST
+    @Path("/updateUserInfo")
+    UserBizResult<String> updateUserInfo(UpdateUserInfoRequest request);
 
+    /**
+     *
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/queryUserInfoByUserId")
+    UserBizResult<UserInfoItem> queryUserInfoByUserId(QueryUserInfoRequest request);
+
+    /**
+     * set password pin
+     *
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/setPasswordPin")
+    UserBizResult<String> setPasswordPin(SetPasswordPinRequest request);
 }

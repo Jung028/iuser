@@ -11,6 +11,8 @@ public interface AutoReloadConfigRepository {
 
     AutoReloadConfig queryAutoReloadConfig(long userId);
 
+    void insertAutoReloadConfig(AutoReloadConfig autoReloadConfig);
+
     void updateAutoReloadConfig(UpdateAutoReloadConfigRequest request);
 
     void toggleAutoReloadConfig(String userId, boolean autoReload);

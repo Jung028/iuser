@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author adam
@@ -22,10 +23,10 @@ public class UserCardDetailRepositoryImpl implements UserCardDetailRepository {
     private UserCardDetailDAO userCardDetailDAO;
 
     @Override
-    public UserCardDetail queryDefaultCard(String userId) {
+    public UserCardDetail queryDefaultCard(UUID userCardId) {
         try {
             UserCardDetailDO userCardDetailDO =
-                    userCardDetailDAO.queryDefaultCard(Long.parseLong(userId));
+                    userCardDetailDAO.queryDefaultCard(userCardId);
             return UserCardDetailConvertor.convertToDomain(userCardDetailDO);
         } catch (RepositoryException e) {
             throw e;
@@ -52,9 +53,22 @@ public class UserCardDetailRepositoryImpl implements UserCardDetailRepository {
         try {
             UserCardDetailDO userCardDetailDO = UserCardDetailConvertor.convertToDO(userCardDetail);
             int rows = userCardDetailDAO.insertNewCard(userCardDetailDO);
-            if (rows > 0) {
+            if (rows < 0) {
                 throw new RepositoryException("Insert new card detail failed, no record exists");
             }
+        } catch (RepositoryException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RepositoryException("DB error during query user card detail list", e);
+        }
+    }
+
+    @Override
+    public UserCardDetail findByProviderToken(String providerToken, String stripe) {
+        try {
+            UserCardDetailDO userCardDetailDO =
+                    userCardDetailDAO.findByProviderToken(providerToken, stripe);
+            return UserCardDetailConvertor.convertToDomain(userCardDetailDO);
         } catch (RepositoryException e) {
             throw e;
         } catch (Exception e) {

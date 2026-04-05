@@ -20,24 +20,33 @@
         <result column="provider_token" jdbcType="VARCHAR" property="providerToken" />
         <result column="provider_customer_id" jdbcType="VARCHAR" property="providerCustomerId" />
         <result column="cardholder_name" jdbcType="VARCHAR" property="cardholderName" />
-        <result column="is_default" jdbcType="BIT" property="isDefault" />
         <result column="status" jdbcType="VARCHAR" property="status" />
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     </resultMap>
 
+    <select id="queryDefaultCard" resultMap="BaseResultMap">
+        SELECT user_card_id, user_id, card_type,
+        card_network, last_four, expiry_month,
+        expiry_year, provider, provider_token,
+        provider_customer_id, cardholder_name,
+        status, gmt_create, gmt_modified
+        FROM user_card_detail
+        WHERE user_card_id = #{userCardId}::uuid
+    </select>
+
     <insert id="insertNewCard" parameterType="com.alipay.usercenter.common.dal.auto.dataobject.UserCardDetailDO">
         insert into user_card_detail (user_card_id, user_id, card_type,
         card_network, last_four, expiry_month,
         expiry_year, provider, provider_token,
-        provider_customer_id, cardholder_name, is_default,
+        provider_customer_id, cardholder_name,
         status, gmt_create, gmt_modified
         )
-        values (#{userCardId,jdbcType=OTHER}, #{userId,jdbcType=BIGINT}, #{cardType,jdbcType=VARCHAR},
-        #{cardIssuer,jdbcType=VARCHAR}, #{lastFour,jdbcType=CHAR}, #{expiryMonth,jdbcType=SMALLINT},
-        #{expiryYear,jdbcType=SMALLINT}, #{provider,jdbcType=VARCHAR}, #{providerToken,jdbcType=VARCHAR},
-        #{stripeCustomerId,jdbcType=VARCHAR}, #{cardholderName,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT},
-        #{status,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+        values (#{userCardId,jdbcType=OTHER}, #{userId,jdbcType=BIGINT}, #{cardType,jdbcType=VARCHAR}::card_type,
+        #{cardNetwork,jdbcType=VARCHAR}::card_network, #{lastFour,jdbcType=CHAR}, #{expiryMonth,jdbcType=SMALLINT},
+        #{expiryYear,jdbcType=SMALLINT}, #{provider,jdbcType=VARCHAR}::card_provider, #{providerToken,jdbcType=VARCHAR},
+        #{providerCustomerId,jdbcType=VARCHAR}, #{cardholderName,jdbcType=VARCHAR},
+        #{status,jdbcType=VARCHAR}::card_status, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
         )
     </insert>
 
@@ -45,21 +54,21 @@
         SELECT user_card_id, user_id, card_type,
         card_network, last_four, expiry_month,
         expiry_year, provider, provider_token,
-        provider_customer_id, cardholder_name, is_default,
+        provider_customer_id, cardholder_name,
         status, gmt_create, gmt_modified
         FROM user_card_detail
         WHERE user_id = #{userId}
     </select>
 
-    <select id="queryDefaultCard" parameterType="long" resultMap="BaseResultMap">
+    <select id="findByProviderToken" resultMap="BaseResultMap">
         SELECT user_card_id, user_id, card_type,
         card_network, last_four, expiry_month,
         expiry_year, provider, provider_token,
-        provider_customer_id, cardholder_name, is_default,
+        provider_customer_id, cardholder_name,
         status, gmt_create, gmt_modified
         FROM user_card_detail
-        WHERE user_id = #{userId}
-        AND is_default = true
+        WHERE provider_token = #{providerToken}
+        AND provider = #{provider}::card_provider
     </select>
 
 </mapper>

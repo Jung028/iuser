@@ -3,6 +3,7 @@ package com.alipay.usercenter.common.service.facade.api;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
 import com.alipay.usercenter.common.service.facade.item.AutoReloadConfigItem;
 import com.alipay.usercenter.common.service.facade.item.UserCardDetailItem;
+import com.alipay.usercenter.common.service.facade.item.UserCardProviderItem;
 import com.alipay.usercenter.common.service.facade.request.*;
 import com.alipay.usercenter.common.service.facade.result.QueryCardDetailsResult;
 
@@ -74,5 +75,14 @@ public interface TopUpService {
     @POST
     @Path("/queryDefaultCard")
     UserBizResult<UserCardDetailItem> queryDefaultCard(QueryDefaultCardRequest request);
+
+    /**
+     * query user card provider
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/queryUserCardProvider")
+    UserBizResult<UserCardProviderItem> queryUserCardProvider(QueryUserCardProviderRequest request);
 
 }

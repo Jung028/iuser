@@ -11,4 +11,6 @@ import java.util.List;
 public interface UserCardProviderDAO {
 
     UserCardProviderDO findByUserIdAndProvider(@Param("userId") long userId, @Param("provider") String provider);
+
+    void insertNewCardProvider(UserCardProviderDO userCardProviderDO);
 }

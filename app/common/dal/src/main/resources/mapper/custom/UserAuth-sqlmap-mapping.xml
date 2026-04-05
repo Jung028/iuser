@@ -20,19 +20,21 @@
         SELECT auth_id, user_id, auth_type, credential_hash, failed_attempts, lock_until, is_active, last_used, gmt_create, gmt_modified
         FROM user_auth
         WHERE user_id = #{userId}
+        AND auth_scene = #{authScene}
+        AND auth_type = #{authType}
     </select>
 
 
-    <select id="insertUserAuth" parameterType="com.alipay.usercenter.common.dal.auto.dataobject.UserAuthDO" resultMap="BaseResultMap">
-        insert into user_auth (auth_id, user_id, auth_type,
+    <insert id="insertUserAuth" parameterType="com.alipay.usercenter.common.dal.auto.dataobject.UserAuthDO">
+        insert into user_auth (user_id, auth_type,
         credential_hash, failed_attempts, lock_until,
         is_active, last_used, gmt_create,
         gmt_modified)
-        values (#{authId,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{authType,jdbcType=VARCHAR},
+        values (#{userId,jdbcType=VARCHAR}, #{authType,jdbcType=VARCHAR},
         #{credentialHash,jdbcType=VARCHAR}, #{failedAttempts,jdbcType=INTEGER}, #{lockUntil,jdbcType=TIMESTAMP},
         #{isActive,jdbcType=BIT}, #{lastUsed,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP},
         #{gmtModified,jdbcType=TIMESTAMP})
-    </select>
+    </insert>
 
 
     <update id="updateUserAuthPassword" parameterType="String">
