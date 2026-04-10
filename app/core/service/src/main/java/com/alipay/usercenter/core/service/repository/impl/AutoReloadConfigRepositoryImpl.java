@@ -75,7 +75,10 @@ public class AutoReloadConfigRepositoryImpl implements AutoReloadConfigRepositor
     @Override
     public void toggleAutoReloadConfig(String userId, boolean isActive) {
         try {
-            autoReloadConfigDAO.toggleAutoReloadConfig(Long.parseLong(userId), isActive);
+            int rows = autoReloadConfigDAO.toggleAutoReloadConfig(Long.parseLong(userId), isActive);
+            if (rows <= 0) {
+                throw new RepositoryException("failed to toggle auto reload config");
+            }
         } catch (RepositoryException e) {
             throw e;
         } catch (Exception e) {

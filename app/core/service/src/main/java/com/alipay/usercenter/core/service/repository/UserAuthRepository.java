@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserAuthRepository {
 
-    UserAuth queryUserAuth(String userId, String authScene, String authType);
+    UserAuth queryUserAuth(String userId, String authType);
 
     void insertUserAuth(UserAuth userAuth);
 

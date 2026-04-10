@@ -20,7 +20,6 @@
         SELECT auth_id, user_id, auth_type, credential_hash, failed_attempts, lock_until, is_active, last_used, gmt_create, gmt_modified
         FROM user_auth
         WHERE user_id = #{userId}
-        AND auth_scene = #{authScene}
         AND auth_type = #{authType}
     </select>
 

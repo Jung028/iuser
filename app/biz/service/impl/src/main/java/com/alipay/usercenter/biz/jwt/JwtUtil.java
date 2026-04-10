@@ -35,7 +35,7 @@ public class JwtUtil {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
         // expires in 10 minutes
-        Date expiry = new Date(nowMillis + 10 * 60 * 1000);
+        Date expiry = new Date(nowMillis + 100 * 60 * 100000);
 
         return Jwts.builder()
                 .setSubject(String.valueOf(userInfo.getUserId()))

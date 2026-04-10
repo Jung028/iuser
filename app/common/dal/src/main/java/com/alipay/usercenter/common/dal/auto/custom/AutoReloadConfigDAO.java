@@ -19,7 +19,7 @@ public interface AutoReloadConfigDAO {
 
     AutoReloadConfigDO queryAutoReloadConfig(@Param("userId") long userId);
 
-    void toggleAutoReloadConfig(@Param("userId") long userId, @Param("isActive") boolean isActive);
+    int toggleAutoReloadConfig(@Param("userId") long userId, @Param("isActive") boolean isActive);
 
     int insertAutoReloadConfig(AutoReloadConfigDO autoReloadConfigDO);
 }

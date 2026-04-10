@@ -20,10 +20,7 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import static com.alipay.usercenter.biz.constants.GlobalBizConstants.publicKeyPath;
@@ -159,6 +156,8 @@ public class OtpChallengeImpl implements OtpChallenge {
         AssertUtil.notBlank(verifiedToken, UserResultCode.PARAM_ILLEGAL, "Verified token cannot be blank");
 
         // get claims from JWT
+        System.out.println(verifiedToken);
+
         Claims claims;
         try {
              claims = Jwts.parser()
@@ -212,8 +211,7 @@ public class OtpChallengeImpl implements OtpChallenge {
         verifiedClaims.setPhoneNo(phoneNo);
         verifiedClaims.setScene(scene);
         //todo: fix
-        verifiedClaims.setVerifiedAt(claims.getIssuedAt().toInstant());
-
+        verifiedClaims.setVerifiedAt(new Date());
         return verifiedClaims;
     }
 

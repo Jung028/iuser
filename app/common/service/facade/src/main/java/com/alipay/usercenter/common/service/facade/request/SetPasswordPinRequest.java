@@ -10,7 +10,6 @@ import com.alipay.usercenter.common.service.facade.enums.AuthType;
  */
 public class SetPasswordPinRequest extends UserBaseRequest {
     private String passwordPin;
-    private String authScene;
     private String authType;
     private String userId;
 
@@ -20,14 +19,6 @@ public class SetPasswordPinRequest extends UserBaseRequest {
 
     public void setPasswordPin(String passwordPin) {
         this.passwordPin = passwordPin;
-    }
-
-    public String getAuthScene() {
-        return authScene;
-    }
-
-    public void setAuthScene(String authScene) {
-        this.authScene = authScene;
     }
 
     public String getAuthType() {

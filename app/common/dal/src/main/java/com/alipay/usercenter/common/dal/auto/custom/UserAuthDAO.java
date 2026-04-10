@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UserAuthDAO {
     // Custom query selecting specific columns
-    UserAuthDO queryUserAuth(@Param("userId") String userId, @Param("authScene") String authScene, @Param("authType") String authType);
+    UserAuthDO queryUserAuth(@Param("userId") String userId, @Param("authType") String authType);
 
     int insertUserAuth(UserAuthDO userAuthDO);
 

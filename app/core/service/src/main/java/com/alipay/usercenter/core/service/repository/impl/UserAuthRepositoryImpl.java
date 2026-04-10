@@ -15,11 +15,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserAuthRepositoryImpl extends AbstractUserRepository implements UserAuthRepository {
     @Override
-    public UserAuth queryUserAuth(String userId, String authScene, String authType) {
+    public UserAuth queryUserAuth(String userId, String authType) {
         if (userId == null) {
             return null;
         }
-        UserAuthDO userAuthDO = userAuthDAO.queryUserAuth(userId, authScene, authType);
+        UserAuthDO userAuthDO = userAuthDAO.queryUserAuth(userId, authType);
         if (userAuthDO == null) {
             return null;
         }

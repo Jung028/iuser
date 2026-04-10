@@ -10,8 +10,7 @@ import com.alipay.usercenter.common.service.facade.enums.AuthType;
  */
 public class VerifyUserAuthRequest extends UserBaseRequest {
     private String userId;
-    private AuthType authType;
-    private AuthScene authScene;
+    private String authType;
     private String credential; // password
 
     public String getUserId() {
@@ -22,20 +21,12 @@ public class VerifyUserAuthRequest extends UserBaseRequest {
         this.userId = userId;
     }
 
-    public AuthType getAuthType() {
+    public String getAuthType() {
         return authType;
     }
 
-    public void setAuthType(AuthType authType) {
+    public void setAuthType(String authType) {
         this.authType = authType;
-    }
-
-    public AuthScene getAuthScene() {
-        return authScene;
-    }
-
-    public void setAuthScene(AuthScene authScene) {
-        this.authScene = authScene;
     }
 
     public String getCredential() {

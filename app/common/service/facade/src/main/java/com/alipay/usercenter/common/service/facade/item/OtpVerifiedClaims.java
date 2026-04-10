@@ -1,13 +1,13 @@
 package com.alipay.usercenter.common.service.facade.item;
 
-import java.time.Instant;
+import java.util.Date;
 
 
 public class OtpVerifiedClaims {
     private String challengeId;
     private String phoneNo;
     private String scene;
-    private Instant verifiedAt;
+    private Date verifiedAt;
 
     public String getChallengeId() {
         return challengeId;
@@ -33,11 +33,11 @@ public class OtpVerifiedClaims {
         this.scene = scene;
     }
 
-    public Instant getVerifiedAt() {
+    public Date getVerifiedAt() {
         return verifiedAt;
     }
 
-    public void setVerifiedAt(Instant verifiedAt) {
+    public void setVerifiedAt(Date verifiedAt) {
         this.verifiedAt = verifiedAt;
     }
 }

@@ -6,8 +6,7 @@ package com.alipay.usercenter.common.service.facade.enums;
  */
 public enum AuthType {
     LOGIN_PASSWORD(AuthScene.LOGIN, AuthMode.PASSWORD, "LOGIN_PASSWORD", "login password"),
-    TRANSFER_PIN(AuthScene.TRANSFER_CONFIRM, AuthMode.PIN, "TRANSFER_PIN", "transfer pin"),
-    TOP_UP_PIN(AuthScene.TOP_UP_CONFIRM, AuthMode.PIN, "TOP_UP_PIN", "top up pin");
+    TRANSFER_PIN(AuthScene.TRANSFER_CONFIRM, AuthMode.PIN, "TRANSFER_PIN", "transfer pin");
 
     private AuthScene authScene;
     private AuthMode authMode;

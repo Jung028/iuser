@@ -10,7 +10,6 @@ public enum AuthScene {
     LOGIN("LOGIN", "user login password"),
     CHANGE_PASSWORD("CHANGE_PASSWORD", "change password"),
     WITHDRAW("WITHDRAW", "atm machine require enter password pin"),
-    TOP_UP_CONFIRM("TOP_UP_CONFIRM", "top up confirmation")
 
 
     ;

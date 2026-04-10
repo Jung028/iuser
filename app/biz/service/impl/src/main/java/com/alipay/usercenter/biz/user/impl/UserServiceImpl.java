@@ -408,7 +408,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
             @Override
             protected void process(VerifyUserAuthRequest request, UserBizResult<String> response) {
                 // query user_auth
-                UserAuth userAuth = userAuthRepository.queryUserAuth(request.getUserId(), request.getAuthScene().getCode(), request.getAuthType().getCode());
+                UserAuth userAuth = userAuthRepository.queryUserAuth(request.getUserId(), request.getAuthType());
 
                 // validate
                 String credentialHash = userAuth.getCredentialHash();
@@ -439,7 +439,8 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
 
                     @Override
                     protected void process(VerifyVerifiedTokenRequest request, UserBizResult<OtpVerifiedClaims> response) {
-                        OtpVerifiedClaims claims = otpChallenge.verifyVerifiedToken(request.getVerifiedToken());
+                        OtpVerifiedClaims claims = otpChallenge.
+                                verifyVerifiedToken(request.getVerifiedToken());
                         ResponseBuilder.success(response, claims, UserActionEnum.VERIFY_VERIFIED_TOKEN.getCode(),
                                 UserActionEnum.VERIFY_VERIFIED_TOKEN.getDesc());
                     }
@@ -554,8 +555,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                         request.validate();
 
                         // ensure there isnt already an existing hash.
-                        UserAuth userAuth = userAuthRepository.queryUserAuth(request.getUserId(),
-                                request.getAuthScene(), request.getAuthType());
+                        UserAuth userAuth = userAuthRepository.queryUserAuth(request.getUserId(), request.getAuthType());
                         AssertUtil.notNull(userAuth, UserResultEnum.PARAM_ILLEGAL, "User Auth not exist");
 
                         // hash the user password

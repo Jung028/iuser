@@ -299,7 +299,10 @@ public class TopUpServiceImpl extends AbstractUserBizService implements TopUpSer
 
                     @Override
                     protected void process(ToggleAutoReloadConfigRequest request, UserBizResult<String> response) {
-                        autoReloadConfigRepository.toggleAutoReloadConfig(request.getUserId(), request.isActive());;
+                        System.out.print(request.isActive());
+                        autoReloadConfigRepository.toggleAutoReloadConfig(request.getUserId(), request.isActive());
+                        ResponseBuilder.success(response, null, UserActionEnum.TOGGLE_AUTO_RELOAD.getCode(),
+                                UserActionEnum.TOGGLE_AUTO_RELOAD.getDesc());
                     }
                 });
     }
