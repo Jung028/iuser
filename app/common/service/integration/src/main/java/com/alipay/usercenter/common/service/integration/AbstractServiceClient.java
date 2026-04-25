@@ -12,7 +12,8 @@ public class AbstractServiceClient {
      * account service
      */
     @SofaReference(interfaceType = AccountService.class,
-            binding = @SofaReferenceBinding(bindingType = "rest", directUrl = "http://127.0.0.1:8341"),
+            binding = @SofaReferenceBinding(bindingType = "rest", 
+                    directUrl = "http://127.0.0.1:8341"),
             jvmFirst = true)
     protected AccountService accountService;
 

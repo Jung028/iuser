@@ -5,7 +5,7 @@ import com.alipay.account_center.common.service.facade.enums.AccountTypeEnum;
 import com.alipay.account_center.common.service.facade.item.AccountInfoItem;
 import com.alipay.account_center.common.service.facade.request.CreateAccountRequest;
 import com.alipay.account_center.common.service.facade.request.QueryAccountInfoRequest;
-import com.alipay.sofa.rpc.common.utils.JSONUtils;
+import com.alipay.sofa.rpc.common.json.JSON;
 import com.alipay.sofa.runtime.api.annotation.SofaService;
 import com.alipay.sofa.runtime.api.annotation.SofaServiceBinding;
 import com.alipay.usercenter.biz.helper.GenerateUserId;
@@ -37,10 +37,7 @@ import com.alipay.usercenter.core.enums.UserAccountStatusEnum;
 import com.alipay.usercenter.core.enums.UserActionEnum;
 import com.alipay.usercenter.core.model.UserSecurity;
 import com.alipay.usercenter.core.util.AssertUtil;
-import com.alipay.usercenter.common.service.facade.config.ExtInfo;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +60,9 @@ import static com.alipay.usercenter.common.service.facade.constant.GlobalUserCon
 )
 @Service
 public class UserServiceImpl extends AbstractUserBizService implements UserService {
+
+    @Autowired
+    private QrCodeGeneratorFactory qrCodeGeneratorFactory;
 
     @Override
     public UserBizResult<LoginResult> login(LoginRequest request) {
@@ -117,6 +117,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                         LoginResult loginResult = new LoginResult();
                         loginResult.setJwtToken(jwtToken);
                         loginResult.setUserId(userInfo.getUserId().toString());
+                        loginResult.setPhoneNo(userInfo.getPhoneNo());
 
                         // also return the account id for the queryBalance
                         QueryAccountInfoRequest queryAccountInfoRequest = new QueryAccountInfoRequest();
@@ -384,6 +385,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                 // convert userInfo to item
                 if (userInfo != null) {
                     UserInfoItem userInfoItem = UserInfoConvertor.convertToItem(userInfo);
+                    System.out.println(JSON.toJSONString(userInfoItem.getContactConfig()));
                     ResponseBuilder.success(response, userInfoItem, UserActionEnum.QUERY_USER_INFO.getCode(), "Query User Info Item");
                 } else {
                     ResponseBuilder.fail(response, UserActionEnum.QUERY_USER_INFO.getCode(), "Query User Info Item");

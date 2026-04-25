@@ -10,6 +10,7 @@ public class LoginResult {
     private String jwtToken;
     private String userId;
     private String accountId;
+    private String phoneNo;
 
     public String getJwtToken() {
         return jwtToken;
@@ -33,5 +34,13 @@ public class LoginResult {
 
     public void setAccountId(String accountId) {
         this.accountId = accountId;
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 }

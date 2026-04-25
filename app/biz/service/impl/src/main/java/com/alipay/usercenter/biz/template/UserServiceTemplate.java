@@ -12,11 +12,9 @@ import com.alipay.usercenter.core.context.IdigitalriskContextHolder;
 import com.alipay.usercenter.core.enums.UserActionEnum;
 import com.alipay.usercenter.common.util.EventContext;
 
-import com.alipay.usercenter.core.exception.BaseSlipException;
 import com.alipay.usercenter.core.exception.UserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 

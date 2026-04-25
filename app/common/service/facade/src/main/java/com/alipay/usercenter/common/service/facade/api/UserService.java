@@ -123,4 +123,13 @@ public interface UserService {
     @POST
     @Path("/setPasswordPin")
     UserBizResult<String> setPasswordPin(SetPasswordPinRequest request);
+
+    /**
+     * generate QR code
+     * @param request
+     * @return
+     */
+    @POST
+    @Path("/generateQrCode")
+    UserBizResult<GenerateQrCodeResult> generateQrCode(GenerateQrCodeRequest request);
 }

@@ -2,6 +2,8 @@ package com.alipay.usercenter.web.controller;
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.alipay.usercenter.biz.cache.UserSecurityCache;
+import com.alipay.usercenter.biz.jwt.JwtClaims;
+import com.alipay.usercenter.biz.jwt.JwtContextHolder;
 import com.alipay.usercenter.common.service.facade.api.UserService;
 import com.alipay.usercenter.common.service.facade.baseresult.UserBizResult;
 import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
@@ -10,11 +12,10 @@ import com.alipay.usercenter.common.service.facade.result.LoginResult;
 import com.alipay.usercenter.common.service.facade.result.OTPResult;
 import com.alipay.usercenter.core.model.UserSecurity;
 import jakarta.annotation.Resource;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
-@CrossOrigin(origins = "http://localhost:8083")
+@CrossOrigin(origins = "http://localhost:8085")
 @RestController
 @RequestMapping("/user/basic")
 public class UserBasicController {
@@ -117,6 +118,4 @@ public class UserBasicController {
             throw new RuntimeException(e);
         }
     }
-
-
 }

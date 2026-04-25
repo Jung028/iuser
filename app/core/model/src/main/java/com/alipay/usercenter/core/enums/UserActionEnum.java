@@ -23,7 +23,11 @@ public enum UserActionEnum {
 
     QUERY_USER_CARD_PROVIDER("QUERY_USER_CARD_PROVIDER", "query user card provider"),
 
-    SET_PASSWORD_PIN("SET_PASSWORD_PIN", "set password pin" ),;
+    SET_PASSWORD_PIN("SET_PASSWORD_PIN", "set password pin"),
+
+    GENERATE_QR_CODE("GENERATE_QR_CODE", "generate qr code"),
+
+    ;
 
     UserActionEnum(String code, String desc) {
         this.code = code;

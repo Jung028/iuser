@@ -1,5 +1,6 @@
 package com.alipay.usercenter.web.controller;
 
+import com.alipay.usercenter.common.util.TraceContext;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletRequest;
@@ -46,7 +47,7 @@ public class TraceIdFilter implements Filter {
             chain.doFilter(request, response);
 
         } finally {
-            logger.info("Finished request: {} {}", httpRequest.getMethod(), httpRequest.getRequestURI());
+            logger.info("Finished request: {} {} - Status: {}", httpRequest.getMethod(), httpRequest.getRequestURI(), httpResponse.getStatus());
             // 5. Always clean up (VERY IMPORTANT)
             TraceContext.clear();
         }

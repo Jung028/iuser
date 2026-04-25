@@ -1,9 +1,5 @@
-package com.alipay.usercenter.web.controller;
+package com.alipay.usercenter.common.util;
 
-/**
- * @author adam
- * @date 21/4/2026 5:05 PM
- */
 import org.slf4j.MDC;
 
 public class TraceContext {
