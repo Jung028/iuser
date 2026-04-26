@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="riskEventRepository" class="com.alipay.alipay_plus.biz.repository.impl.RiskEventRepositoryImpl">
+    </bean>
+
+    <bean id="abstractRiskBizService" class="com.alipay.alipay_plus.biz.service.impl.AbstractRiskBizService">
+        <property name="riskEventRepository" ref="riskEventRepository"/>
+    </bean>
+
+    <bean id="icbCancelProcessor" class="com.alipay.alipay_plus.biz.service.impl.user.processor.IcbCancelProcessor"/>
+
+
+    <bean id="disposalAbilityFactory" class="com.alipay.alipay_plus.biz.service.impl.disposal.DisposalAbilityFactory">
+            <property name="processorMap">
+                <map>
+                    <entry key="ICB_CANCEL" value-ref="icbCancelProcessor"/>
+                </map>
+            </property>
+    </bean>
+
+</beans>

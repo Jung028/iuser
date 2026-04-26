@@ -1,0 +1,17 @@
+package com.alipay.usercenter.core.service.repository;
+
+
+import com.alipay.usercenter.common.dal.auto.custom.UserAuthDAO;
+import com.alipay.usercenter.common.dal.auto.custom.UserInfoDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class AbstractUserRepository {
+
+    @Autowired
+    protected UserInfoDAO userInfoDAO;
+
+    @Autowired
+    protected UserAuthDAO userAuthDAO;
+}

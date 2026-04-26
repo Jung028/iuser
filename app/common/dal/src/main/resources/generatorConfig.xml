@@ -1,0 +1,40 @@
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "https://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="alipay" targetRuntime="MyBatis3">
+
+        <!-- JDBC connection -->
+        <jdbcConnection
+                driverClass="org.postgresql.Driver"
+                connectionURL="jdbc:postgresql://localhost:5432/user"
+                userId="adam"
+                password="1234" />
+
+        <!-- Java Model (DO) generation -->
+        <javaModelGenerator
+                targetPackage="com.alipay.usercenter.common.dal.auto.dataobject"
+                targetProject="src/main/java"/>
+
+        <!-- Mapper XML generation -->
+        <sqlMapGenerator
+                targetPackage="sqlmap.iuser.auto"
+                targetProject="src/main/resources"/>
+
+        <!-- Mapper interface generation -->
+        <javaClientGenerator
+                type="XMLMAPPER"
+                targetPackage="com.alipay.usercenter.common.dal.auto.daointerface"
+                targetProject="src/main/java"/>
+
+        <!-- Table(s) to generate -->
+        <table tableName="user_info" domainObjectName="UserInfoDO" />
+        <table tableName="user_auth" domainObjectName="UserAuthDO" />
+        <table tableName="user_card_detail" domainObjectName="UserCardDetailDO"/>
+        <table tableName="auto_reload_config" domainObjectName="AutoReloadConfigDO" />
+        <table tableName="user_card_provider" domainObjectName="UserCardProviderDO" />
+
+
+    </context>
+</generatorConfiguration>
