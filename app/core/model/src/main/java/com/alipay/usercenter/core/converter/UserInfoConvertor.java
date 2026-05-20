@@ -3,6 +3,7 @@ package com.alipay.usercenter.core.converter;
 import com.alipay.sofa.rpc.common.utils.JSONUtils;
 import com.alipay.usercenter.common.dal.auto.dataobject.UserInfoDO;
 import com.alipay.usercenter.common.service.facade.config.ContactConfig;
+import com.alipay.usercenter.common.service.facade.enums.UserStatus;
 import com.alipay.usercenter.common.service.facade.item.UserInfoItem;
 import com.alipay.usercenter.core.model.UserInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -75,7 +76,7 @@ public class UserInfoConvertor {
         userInfoItem.setId(userInfo.getId());
         userInfoItem.setHashedPassword(userInfo.getHashedPassword());
         userInfoItem.setPhoneNo(userInfo.getPhoneNo());
-        userInfoItem.setStatus(userInfo.getStatus());
+        userInfoItem.setStatus(UserStatus.valueOf(userInfo.getStatus()));
         userInfoItem.setUserId(userInfo.getUserId());
         userInfoItem.setContactConfig(userInfo.getContactConfig());
         userInfoItem.setExtInfo(JSONUtils.toJSONString(userInfo.getExtInfo()));

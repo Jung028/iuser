@@ -93,7 +93,4 @@ public class UserRequestChecker {
     public static void checkSetPasswordPinRequest(SetPasswordPinRequest request) {
     }
 
-    public static void checkGenerateQrCode(GenerateQrCodeRequest request) {
-
-    }
 }
