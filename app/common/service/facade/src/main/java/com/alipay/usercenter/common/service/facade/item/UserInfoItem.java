@@ -1,6 +1,6 @@
 package com.alipay.usercenter.common.service.facade.item;
 
-import com.alipay.usercenter.common.service.facade.config.ContactConfig;
+import com.alipay.usercenter.common.service.facade.enums.UserStatus;
 
 import java.util.Date;
 
@@ -39,7 +39,7 @@ public class UserInfoItem {
      *
      * @mbg.generated Sun Apr 05 19:40:51 AEST 2026
      */
-    private String status;
+    private UserStatus status;
 
     /**
      *
@@ -175,7 +175,7 @@ public class UserInfoItem {
      *
      * @mbg.generated Sun Apr 05 19:40:51 AEST 2026
      */
-    public String getStatus() {
+    public UserStatus getStatus() {
         return status;
     }
 
@@ -187,7 +187,7 @@ public class UserInfoItem {
      *
      * @mbg.generated Sun Apr 05 19:40:51 AEST 2026
      */
-    public void setStatus(String status) {
+    public void setStatus(UserStatus status) {
         this.status = status;
     }
 

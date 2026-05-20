@@ -61,9 +61,6 @@ import static com.alipay.usercenter.common.service.facade.constant.GlobalUserCon
 @Service
 public class UserServiceImpl extends AbstractUserBizService implements UserService {
 
-    @Autowired
-    private QrCodeGeneratorFactory qrCodeGeneratorFactory;
-
     @Override
     public UserBizResult<LoginResult> login(LoginRequest request) {
         return userServiceTemplate.execute(request, UserActionEnum.LOGIN, new UserBizCallback<>() {
