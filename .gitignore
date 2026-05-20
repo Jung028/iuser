@@ -27,3 +27,9 @@ Thumbs.db
 # -------------------------
 !**/src/main/java/
 !**/src/main/resources/
+
+# -------------------------
+# Secrets — never commit real credentials
+# -------------------------
+application-local.properties
+application-secrets.properties

@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.adam</groupId>
             <artifactId>usercenter-common-service-facade</artifactId>
-            <version>1.0.0.20260310-SNAPSHOT</version>
+            <version>${common-service-facade-version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
