@@ -1,8 +1,18 @@
-FROM eclipse-temurin:17-jdk
+FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /app
-COPY target/*.jar app.jar
 
-# Optional: enable remote debug with DEBUG_PORT
+ARG GITHUB_USERNAME
+ARG GITHUB_TOKEN
+ENV GITHUB_USERNAME=$GITHUB_USERNAME
+ENV GITHUB_TOKEN=$GITHUB_TOKEN
+
+COPY . .
+RUN mvn -B -DskipTests clean install -Pproduction
+
+FROM eclipse-temurin:17-jre-jammy
+WORKDIR /app
+COPY --from=build /app/app/web/target/usercenter-web-*.jar app.jar
+
 ENV DEBUG_PORT=""
 
 ENTRYPOINT ["sh", "-c", "\
