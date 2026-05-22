@@ -299,6 +299,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                     OtpVerifiedClaims otpVerifiedClaims = otpChallenge.verifyVerifiedToken(
                             request.getVerifiedToken());
                     System.out.println(otpVerifiedClaims.getPhoneNo());
+
                     //cross-check phone number
                     AssertUtil.isTrue(otpVerifiedClaims.getPhoneNo().equals(request.getPhoneNo()),
                             UserResultCode.PHONE_NO_MISMATCH,
