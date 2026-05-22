@@ -178,7 +178,7 @@
                 </repository>
                 <repository>
                     <id>github-iaccount</id>
-                    <url>https://maven.pkg.github.com/Jung028/iaccount</url>
+                    <url>https://Jung028:${env.GITHUB_TOKEN}@maven.pkg.github.com/Jung028/iaccount</url>
                     <releases><enabled>true</enabled></releases>
                     <snapshots><enabled>true</enabled></snapshots>
                 </repository>
@@ -186,7 +186,7 @@
             <distributionManagement>
                 <repository>
                     <id>github-iuser</id>
-                    <url>https://maven.pkg.github.com/Jung028/iuser</url>
+                    <url>https://Jung028:${env.GITHUB_TOKEN}@maven.pkg.github.com/Jung028/iuser</url>
                 </repository>
             </distributionManagement>
         </profile>
