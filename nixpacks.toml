@@ -5,7 +5,7 @@ nixPkgs = ["jdk17", "maven"]
 cmds = [
   # Write ~/.m2/settings.xml from Railway env vars so Maven can reach GitHub Packages
   "mkdir -p ~/.m2",
-  """cat > ~/.m2/settings.xml <<'EOF'
+  """cat > ~/.m2/settings.xml <<EOF
 <settings>
   <servers>
     <server>
