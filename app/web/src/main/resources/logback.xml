@@ -1,9 +1,10 @@
-
 <configuration>
 
+    <property name="SERVICE" value="iuser" />
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-            <customFields>{"service":"iuser","env":"dev"}</customFields>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] service=${SERVICE} traceId=%X{traceId:-} %logger{40} - %msg%n%ex</pattern>
         </encoder>
     </appender>
 
@@ -15,13 +16,14 @@
             <maxHistory>7</maxHistory>
             <totalSizeCap>500MB</totalSizeCap>
         </rollingPolicy>
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-            <customFields>{"service":"iuser","env":"dev"}</customFields>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] service=${SERVICE} traceId=%X{traceId:-} %logger{40} - %msg%n%ex</pattern>
         </encoder>
     </appender>
 
     <logger name="org.apache.kafka" level="WARN" />
     <logger name="org.springframework.kafka.listener" level="WARN" />
+    <logger name="io.opentelemetry.exporter" level="OFF" />
 
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
