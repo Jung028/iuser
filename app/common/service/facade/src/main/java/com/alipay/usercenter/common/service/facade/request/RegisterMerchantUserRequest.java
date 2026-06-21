@@ -1,7 +1,11 @@
 package com.alipay.usercenter.common.service.facade.request;
 
-public class RegisterMerchantUserRequest extends RegisterUserRequest {
 
+/**
+ * @author adam
+ * @date 21/6/2026 11:40 PM
+ */
+public class RegisterMerchantUserRequest extends RegisterUserRequest {
     private String merchantName;
     private String merchantCategory;
 

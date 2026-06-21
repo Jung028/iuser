@@ -9,6 +9,7 @@ import com.alipay.usercenter.biz.login.LoginFactory;
 import com.alipay.usercenter.biz.registration.RegistrationFactory;
 import com.alipay.usercenter.biz.template.UserServiceTemplate;
 import com.alipay.usercenter.common.service.integration.account.AccountServiceClient;
+import com.alipay.usercenter.common.service.integration.merchant.MerchantServiceClient;
 import com.alipay.usercenter.core.service.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,7 +98,7 @@ public abstract class AbstractUserBizService {
      * merchantService
      */
     @Autowired
-    protected MerchantService merchantService;
+    protected MerchantServiceClient merchantServiceClient;
 
     /**
      * loginFactory

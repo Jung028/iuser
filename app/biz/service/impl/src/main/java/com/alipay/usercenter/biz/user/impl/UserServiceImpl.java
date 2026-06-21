@@ -85,6 +85,7 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                 // set the handler to handle merchant, or user.
                 LoginHandler loginHandler = loginFactory.getHandler(request.getLoginType());
 
+                // set the context info
                 LoginContextInfo loginContextInfo = loginHandler.loadContext(request.getPhoneNo());
 
                 // query user security cache from redis.

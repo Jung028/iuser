@@ -16,7 +16,7 @@ public class MerchantLoginHandler extends AbstractUserBizService implements Logi
     public LoginContextInfo loadContext(String phoneNo) {
         QueryMerchantInfoRequest request = new QueryMerchantInfoRequest();
         request.setPhoneNo(phoneNo);
-        MerchantBizResult<MerchantInfoItem> merchantInfo = merchantService.queryMerchantInfoByPhoneNo(request);
+        MerchantBizResult<MerchantInfoItem> merchantInfo = merchantServiceClient.queryMerchantInfoByPhoneNo(request);
         LoginContextInfo loginContextInfo = new LoginContextInfo();
         loginContextInfo.setPhoneNo(phoneNo);
         loginContextInfo.setId(merchantInfo.getResult().getMerchantId());

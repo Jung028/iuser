@@ -56,6 +56,10 @@
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.alipay</groupId>
+            <artifactId>merchant-common-service-facade</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

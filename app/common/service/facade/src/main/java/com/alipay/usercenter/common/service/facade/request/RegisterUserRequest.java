@@ -2,14 +2,7 @@ package com.alipay.usercenter.common.service.facade.request;
 
 import com.alipay.usercenter.common.service.facade.baseresult.UserBaseRequest;
 import com.alipay.usercenter.common.service.facade.enums.RegistrationType;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "registrationType", visible = true)
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = RegisterUserRequest.class, name = "USER"),
-        @JsonSubTypes.Type(value = RegisterMerchantUserRequest.class, name = "MERCHANT")
-})
 public class RegisterUserRequest extends UserBaseRequest {
     private String verifiedToken;   // REQUIRED
     private String phoneNo;

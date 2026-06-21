@@ -28,7 +28,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
         <common-service-facade-version>1.0.0.20260520</common-service-facade-version>
-        <accountcenter.common.service.facade.version>1.0.0.20260520</accountcenter.common.service.facade.version>
+        <accountcenter.common.service.facade.version>1.0.0.20260621-SNAPSHOT</accountcenter.common.service.facade.version>
         <merchant.common.service.facade.version>1.0.0.20260621.2-SNAPSHOT</merchant.common.service.facade.version>
     </properties>
 

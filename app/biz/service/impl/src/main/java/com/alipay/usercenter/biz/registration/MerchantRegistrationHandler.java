@@ -8,16 +8,12 @@ import com.alipay.merchant.common.service.facade.enums.MerchantCategory;
 import com.alipay.merchant.common.service.facade.item.MerchantInfoItem;
 import com.alipay.merchant.common.service.facade.request.CreateMerchantAccountRequest;
 import com.alipay.merchant.common.service.facade.result.QueryMerchantInfoRequest;
-import com.alipay.usercenter.biz.helper.GenerateUserId;
-import com.alipay.usercenter.biz.user.checker.UserRequestChecker;
 import com.alipay.usercenter.biz.user.impl.AbstractUserBizService;
 import com.alipay.usercenter.common.service.facade.enums.AuthType;
 import com.alipay.usercenter.common.service.facade.enums.UserResultCode;
 import com.alipay.usercenter.common.service.facade.request.RegisterMerchantUserRequest;
 import com.alipay.usercenter.common.service.facade.request.RegisterUserRequest;
-import com.alipay.usercenter.core.enums.UserAccountStatusEnum;
 import com.alipay.usercenter.core.model.UserAuth;
-import com.alipay.usercenter.core.model.UserInfo;
 import com.alipay.usercenter.core.util.AssertUtil;
 
 import java.util.Date;
@@ -29,18 +25,10 @@ public class MerchantRegistrationHandler extends AbstractUserBizService implemen
 
     @Override
     public void validate(RegisterUserRequest request) {
-        RegisterMerchantUserRequest req = (RegisterMerchantUserRequest) request;
-        UserRequestChecker.checkRegisterMerchantUserRequest(req);
-
-        // No duplicate user
-        UserInfo existingUser = userInfoRepository.queryUserInfo(request.getPhoneNo());
-        AssertUtil.isNull(existingUser, UserResultCode.EXISTING_USER,
-                "User account already exists for phone: " + request.getPhoneNo());
-
         // No duplicate merchant
-        QueryMerchantInfoRequest q = new QueryMerchantInfoRequest();
-        q.setPhoneNo(request.getPhoneNo());
-        MerchantBizResult<MerchantInfoItem> merchantResult = merchantService.queryMerchantInfoByPhoneNo(q);
+        QueryMerchantInfoRequest queryMerchantInfoRequest = new QueryMerchantInfoRequest();
+        queryMerchantInfoRequest.setPhoneNo(request.getPhoneNo());
+        MerchantBizResult<MerchantInfoItem> merchantResult = merchantServiceClient.queryMerchantInfoByPhoneNo(queryMerchantInfoRequest);
         AssertUtil.notNull(merchantResult, UserResultCode.SYSTEM_EXCEPTION, "Merchant service query failed");
         AssertUtil.isNull(merchantResult.getResult(), UserResultCode.EXISTING_USER,
                 "Merchant account already exists for phone: " + request.getPhoneNo());
@@ -48,22 +36,22 @@ public class MerchantRegistrationHandler extends AbstractUserBizService implemen
 
     @Override
     public void createNewAccount(RegisterUserRequest request) {
-        RegisterMerchantUserRequest req = (RegisterMerchantUserRequest) request;
+        RegisterMerchantUserRequest merchantUserRequest = (RegisterMerchantUserRequest) request;
         String hashedPassword = hashPassword(request.getPassword());
 
         // Create merchant account in imerchant
         CreateMerchantAccountRequest createMerchantReq = new CreateMerchantAccountRequest();
-        createMerchantReq.setMerchantCategory(MerchantCategory.valueOf(req.getMerchantCategory()));
-        createMerchantReq.setMerchantName(req.getMerchantName());
+        createMerchantReq.setMerchantCategory(MerchantCategory.valueOf(merchantUserRequest.getMerchantCategory()));
+        createMerchantReq.setMerchantName(merchantUserRequest.getMerchantName());
         createMerchantReq.setPhoneNo(request.getPhoneNo());
         createMerchantReq.setHashedPassword(hashedPassword);
-        MerchantBizResult<String> merchantResult = merchantService.createMerchantAccount(createMerchantReq);
+        MerchantBizResult<String> merchantResult = merchantServiceClient.createMerchantAccount(createMerchantReq);
         AssertUtil.isTrue(merchantResult.isSuccess(), UserResultCode.SYSTEM_EXCEPTION, "Failed to create merchant account");
 
         // Create wallet account
         CreateAccountRequest createAccountRequest = new CreateAccountRequest();
-        createAccountRequest.setAccountName("Savings");
-        createAccountRequest.setAccountType(AccountTypeEnum.SAVINGS);
+        createAccountRequest.setAccountName(merchantUserRequest.getMerchantName());
+        createAccountRequest.setAccountType(AccountTypeEnum.MERCHANT_ACCOUNT);
         createAccountRequest.setUserId(merchantResult.getResult());
         createAccountRequest.setCurrency(DEFAULT_CURRENCY);
         AccountBizResult<String> createAccount = accountServiceClient.createAccount(createAccountRequest);

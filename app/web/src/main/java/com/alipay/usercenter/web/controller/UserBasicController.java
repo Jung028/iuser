@@ -78,6 +78,15 @@ public class UserBasicController {
         }
     }
 
+    @PostMapping("/registerMerchant.json")
+    public UserBizResult<Void> registerMerchant(@RequestBody RegisterMerchantUserRequest request) {
+        try {
+            return userService.register(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @PostMapping("/queryUserInfo.json")
     public UserBizResult<UserInfoItem> queryUserInfo(@RequestBody QueryUserInfoRequest request) {
         try {
