@@ -1,5 +1,6 @@
 package com.alipay.usercenter.biz.jwt;
 
+import com.alipay.usercenter.biz.login.LoginContextInfo;
 import com.alipay.usercenter.common.service.facade.enums.OTPSceneEnum;
 import com.alipay.usercenter.common.service.facade.item.OtpChallengeItem;
 import com.alipay.usercenter.core.model.UserInfo;
@@ -28,18 +29,18 @@ public class JwtUtil {
     /**
      * Generate a JWT token for the given user information
      *
-     * @param userInfo the user information
+     * @param loginContextInfo the user information
      * @return the generated JWT token
      */
-    public String generateTokenForUserInfo(UserInfo userInfo) {
+    public String generateTokenForUserInfo(LoginContextInfo loginContextInfo) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
         // expires in 10 minutes
         Date expiry = new Date(nowMillis + 100 * 60 * 100000);
 
         return Jwts.builder()
-                .setSubject(String.valueOf(userInfo.getUserId()))
-                .claim("status", userInfo.getStatus())
+                .setSubject(loginContextInfo.getId())
+                .claim("status", loginContextInfo.getStatus())
                 .setIssuedAt(now)
                 .setExpiration(expiry)
                 .setIssuer("user-center")

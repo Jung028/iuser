@@ -3,6 +3,7 @@ package com.alipay.usercenter.biz.user.impl;
 
 import com.alipay.sofa.runtime.api.annotation.SofaService;
 import com.alipay.sofa.runtime.api.annotation.SofaServiceBinding;
+import com.alipay.usercenter.biz.jwt.JwtContextHolder;
 import com.alipay.usercenter.biz.template.UserBizCallback;
 import com.alipay.usercenter.biz.user.checker.UserRequestChecker;
 import com.alipay.usercenter.biz.user.helper.ResponseBuilder;
@@ -15,6 +16,7 @@ import com.alipay.usercenter.common.service.facade.item.UserCardDetailItem;
 import com.alipay.usercenter.common.service.facade.item.UserCardProviderItem;
 import com.alipay.usercenter.common.service.facade.request.*;
 import com.alipay.usercenter.common.service.facade.result.QueryCardDetailsResult;
+import com.alipay.usercenter.common.util.LogUtil;
 import com.alipay.usercenter.core.converter.AutoReloadConfigConvertor;
 import com.alipay.usercenter.core.converter.UserCardDetailConvertor;
 import com.alipay.usercenter.core.converter.UserCardProviderConvertor;
@@ -31,6 +33,8 @@ import com.stripe.net.RequestOptions;
 import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.CustomerUpdateParams;
 import com.stripe.param.PaymentMethodAttachParams;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +60,9 @@ import static com.alipay.usercenter.biz.constant.GlobalBizConstant.*;
         }
 )
 public class TopUpServiceImpl extends AbstractUserBizService implements TopUpService {
+
+    private static final Logger logger = LoggerFactory.getLogger(TopUpServiceImpl.class);
+
 
     @Override
     public UserBizResult<QueryCardDetailsResult> queryCardDetails(QueryCardDetailsRequest request) {
@@ -141,6 +148,12 @@ public class TopUpServiceImpl extends AbstractUserBizService implements TopUpSer
                     @Override
                     protected void process(QueryAutoReloadConfigRequest request, UserBizResult<AutoReloadConfigItem> response) {
                         AutoReloadConfig autoReloadConfig = autoReloadConfigRepository.queryAutoReloadConfig(Long.parseLong(request.getUserId()));
+                        if (autoReloadConfig == null) {
+                            // Please setup auto reload config
+                            ResponseBuilder.success(response, null, UserActionEnum.QUERY_AUTO_RELOAD_CONFIG.getCode(),
+                                    "Please setup auto reload config");
+                            return;
+                        }
                         AutoReloadConfigItem item = AutoReloadConfigConvertor.convertToItem(autoReloadConfig);
                         ResponseBuilder.success(response, item, UserActionEnum.QUERY_AUTO_RELOAD_CONFIG.getCode(),
                                 UserActionEnum.QUERY_AUTO_RELOAD_CONFIG.getDesc());

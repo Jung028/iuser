@@ -15,7 +15,18 @@ public interface UserSecurityCache {
      */
     UserSecurity queryUserSecurity(QueryUserSecurityRequest request);
 
+    /**
+     * Update user security
+     *
+     * @param userSecurity
+     * @return
+     */
     UserSecurity update(UserSecurity userSecurity);
 
+    /**
+     * Delete user security cache key value
+     *
+     * @param userId
+     */
     void delete(Long userId);
 }

@@ -11,6 +11,9 @@ import com.alipay.sofa.runtime.api.annotation.SofaServiceBinding;
 import com.alipay.usercenter.biz.helper.GenerateUserId;
 import com.alipay.usercenter.biz.jwt.JwtClaims;
 import com.alipay.usercenter.biz.jwt.JwtContextHolder;
+import com.alipay.usercenter.biz.login.LoginContextInfo;
+import com.alipay.usercenter.biz.login.LoginHandler;
+import com.alipay.usercenter.biz.registration.RegistrationHandler;
 import com.alipay.usercenter.biz.template.UserBizCallback;
 import com.alipay.usercenter.biz.user.helper.BusinessServiceHelper;
 import com.alipay.usercenter.biz.user.helper.ResponseBuilder;
@@ -41,6 +44,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.login.LoginContext;
 import java.time.Duration;
 import java.util.Date;
 import java.time.Instant;
@@ -78,14 +82,14 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
             @Override
             protected void process(LoginRequest request, UserBizResult<LoginResult> response) {
                 //Check user_security cache for failed attempts/lockout.
-                UserInfo userInfo = userInfoRepository.queryUserInfo(request.getPhoneNo());
-                if (userInfo == null) {
-                    ResponseBuilder.fail(response, UserActionEnum.LOGIN.getCode(),  "Phone number not registered");
-                }
+                // set the handler to handle merchant, or user.
+                LoginHandler loginHandler = loginFactory.getHandler(request.getLoginType());
+
+                LoginContextInfo loginContextInfo = loginHandler.loadContext(request.getPhoneNo());
 
                 // query user security cache from redis.
                 QueryUserSecurityRequest queryUserSecurityRequest = new QueryUserSecurityRequest();
-                queryUserSecurityRequest.setUserId(userInfo.getUserId());
+                queryUserSecurityRequest.setUserId(Long.parseLong(loginContextInfo.getId()));
                 //get current datetime, before initialize lockout default time
                 Instant now = Instant.now();
 
@@ -104,21 +108,21 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                     }
                 } else {
                     //Fetch user info from DB and validate password hash.
-                    String hashedUserPassword = userInfo.getHashedPassword();
+                    String hashedUserPassword = loginContextInfo.getHashedPassword();
                     boolean isValidPassword = UserPasswordUtil.verifyPassword(request.getPassword(), hashedUserPassword);
                     if (isValidPassword) {
                         //directly delete the security upon success login.
                         userSecurityCache.delete(userSecurity.getUserId());
                         //Generate JWT token containing user_id, roles, expiration.
-                        String jwtToken = jwtUtil.generateTokenForUserInfo(userInfo);
+                        String jwtToken = jwtUtil.generateTokenForUserInfo(loginContextInfo);
                         LoginResult loginResult = new LoginResult();
                         loginResult.setJwtToken(jwtToken);
-                        loginResult.setUserId(userInfo.getUserId().toString());
-                        loginResult.setPhoneNo(userInfo.getPhoneNo());
+                        loginResult.setUserId(loginContextInfo.getId());
+                        loginResult.setPhoneNo(loginContextInfo.getPhoneNo());
 
                         // also return the account id for the queryBalance
                         QueryAccountInfoRequest queryAccountInfoRequest = new QueryAccountInfoRequest();
-                        queryAccountInfoRequest.setUserId(userInfo.getUserId().toString());
+                        queryAccountInfoRequest.setUserId(loginContextInfo.getId());
                         AccountBizResult<AccountInfoItem> accountResult = accountServiceClient.queryAccountInfoByUserId(queryAccountInfoRequest);
 
                         loginResult.setAccountId(accountResult.getResult().getAccountId());
@@ -309,48 +313,17 @@ public class UserServiceImpl extends AbstractUserBizService implements UserServi
                     AssertUtil.isTrue(request.getConfirmPassword().equals(request.getPassword()),
                             UserResultCode.PASSWORD_MISMATCH, "Passwords do not match");
 
-                    // check if there is already an existing account for this phone no
-                    UserInfo existingUser = userInfoRepository.queryUserInfo(
-                            request.getPhoneNo());
-                    AssertUtil.isNull(existingUser, UserResultCode.EXISTING_USER,
-                            "user account already exists, " + request.getPhoneNo());
+                    // add a handler, because in the future we not just need to user and merchant,
+                    // could have risk/other platforms
+                    RegistrationHandler handler = registrationFactory.getHandler(request.getRegistrationType());
 
-                    // hash password
-                    String hashedPassword = hashPassword(request.getPassword());
+                    // verify the user is not exist yet
+                    handler.validate(request);
 
-                    // then set the request, and update the db for user info.
-                    UserInfo userInfo = new UserInfo();
-                    userInfo.setUserId(GenerateUserId.nextId());
-                    userInfo.setGmtCreate(new Date());
-                    userInfo.setGmtModified(new Date());
-                    userInfo.setPhoneNo(request.getPhoneNo());
-                    userInfo.setStatus(UserAccountStatusEnum.ACTIVE.getCode());
-                    userInfo.setHashedPassword(hashedPassword);
+                    // insert into user, account and auth table
+                    handler.createNewAccount(request);
 
-                    // insert a new user info
-                    userInfoRepository.insertUserInfo(userInfo);
-
-                    // insert a new user account
-                    CreateAccountRequest createAccountRequest = new CreateAccountRequest();
-                    createAccountRequest.setAccountName("Savings");
-                    createAccountRequest.setAccountType(AccountTypeEnum.SAVINGS);
-                    createAccountRequest.setUserId(userInfo.getUserId().toString());
-                    createAccountRequest.setCurrency(DEFAULT_CURRENCY);
-                    AccountBizResult<String> createAccount = accountServiceClient.createAccount(createAccountRequest);
-                    AssertUtil.isTrue(createAccount.isSuccess(), UserResultCode.SYSTEM_EXCEPTION, "Failed to create account");
-
-                    // after success creation of account, insert password into user_auth table
-                    userAuthRepository.insertUserAuth(new UserAuth() {{
-                        setUserId(userInfo.getUserId().toString());
-                        setAuthType(AuthType.LOGIN_PASSWORD.getCode());
-                        setIsActive(true);
-                        setLastUsed(new Date());
-                        setCredentialHash(hashedPassword);
-                        setGmtCreate(new Date());
-                        setGmtModified(new Date());
-                    }});
-
-                    // insertinto user_auth
+                    // insert into user_auth
                     ResponseBuilder.success(result, null, UserActionEnum.REGISTER.getCode(), "Registered account");
                     return null;
                 });

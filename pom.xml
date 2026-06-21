@@ -29,7 +29,7 @@
         <java.version>17</java.version>
         <common-service-facade-version>1.0.0.20260520</common-service-facade-version>
         <accountcenter.common.service.facade.version>1.0.0.20260520</accountcenter.common.service.facade.version>
-
+        <merchant.common.service.facade.version>1.0.0.20260621.2-SNAPSHOT</merchant.common.service.facade.version>
     </properties>
 
     <parent>
@@ -91,6 +91,12 @@
                 <groupId>com.alipay</groupId>
                 <artifactId>usercenter-common-service-facade</artifactId>
                 <version>${common-service-facade-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alipay</groupId>
+                <artifactId>merchant-common-service-facade</artifactId>
+                <version>${merchant.common.service.facade.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

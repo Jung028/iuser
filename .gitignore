@@ -33,3 +33,5 @@ Thumbs.db
 # -------------------------
 application-local.properties
 application-secrets.properties
+
+graphify-out/

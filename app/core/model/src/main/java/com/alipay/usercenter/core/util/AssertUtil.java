@@ -48,6 +48,10 @@ public class AssertUtil {
         check(() -> Assert.isNull(userInfo, userAlreadyExists), userResultCode, userAlreadyExists);
     }
 
+    public static void isNull(final Object object, final UserResultCode userResultCode, final String resultMsg) {
+        check(() -> Assert.isNull(object, resultMsg), userResultCode, resultMsg);
+    }
+
     public static interface AssertTemplate {
         public void doAssert();
     }

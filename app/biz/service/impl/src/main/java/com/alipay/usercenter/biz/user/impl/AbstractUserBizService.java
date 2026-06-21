@@ -1,9 +1,12 @@
 package com.alipay.usercenter.biz.user.impl;
 
 
+import com.alipay.merchant.common.service.facade.api.MerchantService;
 import com.alipay.usercenter.biz.cache.OtpChallenge;
 import com.alipay.usercenter.biz.cache.UserSecurityCache;
 import com.alipay.usercenter.biz.jwt.JwtUtil;
+import com.alipay.usercenter.biz.login.LoginFactory;
+import com.alipay.usercenter.biz.registration.RegistrationFactory;
 import com.alipay.usercenter.biz.template.UserServiceTemplate;
 import com.alipay.usercenter.common.service.integration.account.AccountServiceClient;
 import com.alipay.usercenter.core.service.repository.*;
@@ -83,5 +86,23 @@ public abstract class AbstractUserBizService {
      */
     @Autowired
     protected AutoReloadConfigRepository autoReloadConfigRepository;
+
+    /**
+     * RegistrationFactory
+     */
+    @Autowired
+    protected RegistrationFactory registrationFactory;
+
+    /**
+     * merchantService
+     */
+    @Autowired
+    protected MerchantService merchantService;
+
+    /**
+     * loginFactory
+     */
+    @Autowired
+    protected LoginFactory loginFactory;
 
 }

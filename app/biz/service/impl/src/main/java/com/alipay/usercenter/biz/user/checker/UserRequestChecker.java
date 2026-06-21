@@ -26,6 +26,12 @@ public class UserRequestChecker {
         AssertUtil.notBlank(request.getConfirmPassword(), UserResultCode.PARAM_ILLEGAL, "confirm password cannot be blank");
     }
 
+    public static void checkRegisterMerchantUserRequest(RegisterMerchantUserRequest request) {
+        checkRegisterUserRequest(request);
+        AssertUtil.notBlank(request.getMerchantName(), UserResultCode.PARAM_ILLEGAL, "merchant name cannot be blank");
+        AssertUtil.notBlank(request.getMerchantCategory(), UserResultCode.PARAM_ILLEGAL, "merchant category cannot be blank");
+    }
+
 
     public static void checkOTPRequest(VerifyOtpRequest request) {
         AssertUtil.notNull(request, UserResultCode.PARAM_ILLEGAL, "request cannot be null");

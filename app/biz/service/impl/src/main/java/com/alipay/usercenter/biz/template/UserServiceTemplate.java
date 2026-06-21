@@ -11,6 +11,7 @@ import com.alipay.usercenter.common.util.enums.IpayTenantEnum;
 import com.alipay.usercenter.core.context.IdigitalriskContextHolder;
 import com.alipay.usercenter.core.enums.UserActionEnum;
 import com.alipay.usercenter.common.util.EventContext;
+import com.alipay.usercenter.common.util.TraceContext;
 
 import com.alipay.usercenter.core.exception.UserException;
 import org.slf4j.Logger;

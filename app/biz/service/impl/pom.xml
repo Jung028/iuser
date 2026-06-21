@@ -38,6 +38,13 @@
         </dependency>
 
         <dependency>
+            <groupId>com.alipay</groupId>
+            <artifactId>merchant-common-service-facade</artifactId>
+            <version>${merchant.common.service.facade.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
