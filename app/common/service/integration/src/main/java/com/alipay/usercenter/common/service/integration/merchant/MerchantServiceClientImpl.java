@@ -18,7 +18,7 @@ public class MerchantServiceClientImpl extends AbstractServiceClient implements 
     @Override
     public MerchantBizResult<MerchantInfoItem> queryMerchantInfoByPhoneNo(QueryMerchantInfoRequest request) {
         AssertUtil.notNull(request, UserResultCode.PARAM_ILLEGAL, "QueryMerchantInfoRequest cannot be null");
-        AssertUtil.notBlank(request.getMerchantId(), UserResultCode.PARAM_ILLEGAL, "merchant id cannot be blank");k");
+        AssertUtil.notBlank(request.getMerchantId(), UserResultCode.PARAM_ILLEGAL, "merchant id cannot be blank");
         AssertUtil.notBlank(request.getPhoneNo(), UserResultCode.PARAM_ILLEGAL, "phone no cannot be blank");
 
         MerchantBizResult<MerchantInfoItem> result = merchantService.queryMerchantInfoByPhoneNo(request);
