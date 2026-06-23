@@ -3,6 +3,7 @@ package com.alipay.usercenter.biz.login;
 import com.alipay.usercenter.common.service.facade.enums.LoginType;
 import com.alipay.usercenter.common.service.facade.enums.UserResultCode;
 import com.alipay.usercenter.core.util.AssertUtil;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import java.util.Map;
  * @author adam
  * @date 21/6/2026 5:26 PM
  */
+@Component
 public class LoginFactory {
     private final Map<String, LoginHandler> loginHandler;
 

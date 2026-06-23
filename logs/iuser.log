@@ -175,3 +175,62 @@ Action:
 
 Consider defining a bean of type 'com.alipay.usercenter.biz.registration.RegistrationFactory' in your configuration.
 
+2026-06-23 15:46:39.939 INFO  [main] service=iuser traceId= userId= c.alipay.usercenter.web.controller.Main - Starting Main using Java 25.0.2 with PID 71999 (/Users/adam/IdeaProjects/iuser/app/web/target/classes started by adam in /Users/adam/IdeaProjects/iuser)
+2026-06-23 15:46:39.940 INFO  [main] service=iuser traceId= userId= c.alipay.usercenter.web.controller.Main - No active profile set, falling back to 1 default profile: "default"
+2026-06-23 15:46:40.442 INFO  [main] service=iuser traceId= userId= o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-23 15:46:40.443 INFO  [main] service=iuser traceId= userId= o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-23 15:46:40.450 INFO  [main] service=iuser traceId= userId= o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 1 ms. Found 0 JPA repository interfaces.
+2026-06-23 15:46:40.457 INFO  [main] service=iuser traceId= userId= o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-23 15:46:40.457 INFO  [main] service=iuser traceId= userId= o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-23 15:46:40.461 INFO  [main] service=iuser traceId= userId= o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 0 ms. Found 0 Redis repository interfaces.
+2026-06-23 15:46:40.574 WARN  [main] service=iuser traceId= userId= o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'asyncInitMethodManager' of type [com.alipay.sofa.runtime.async.AsyncInitMethodManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [asyncProxyBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-06-23 15:46:40.815 INFO  [main] service=iuser traceId= userId= o.s.b.w.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8085 (http)
+2026-06-23 15:46:40.821 INFO  [main] service=iuser traceId= userId= o.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-0.0.0.0-8085"]
+2026-06-23 15:46:40.822 INFO  [main] service=iuser traceId= userId= o.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-23 15:46:40.822 INFO  [main] service=iuser traceId= userId= org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-06-23 15:46:40.842 INFO  [main] service=iuser traceId= userId= o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-23 15:46:40.842 INFO  [main] service=iuser traceId= userId= o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 885 ms
+2026-06-23 15:46:41.007 INFO  [main] service=iuser traceId= userId= o.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-23 15:46:41.043 INFO  [main] service=iuser traceId= userId= org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-06-23 15:46:41.061 INFO  [main] service=iuser traceId= userId= o.h.c.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-23 15:46:41.183 INFO  [main] service=iuser traceId= userId= o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-23 15:46:41.195 INFO  [main] service=iuser traceId= userId= com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-23 15:46:41.232 INFO  [main] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@606f0f70
+2026-06-23 15:46:41.232 INFO  [main] service=iuser traceId= userId= com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-23 15:46:41.246 WARN  [main] service=iuser traceId= userId= org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-23 15:46:41.253 INFO  [main] service=iuser traceId= userId= org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 18.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-23 15:46:41.386 INFO  [main] service=iuser traceId= userId= o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-23 15:46:41.387 INFO  [main] service=iuser traceId= userId= o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-23 15:46:42.159 WARN  [main] service=iuser traceId= userId= o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'topUpServiceImpl': Unsatisfied dependency expressed through field 'loginFactory': No qualifying bean of type 'com.alipay.usercenter.biz.login.LoginFactory' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2026-06-23 15:46:42.163 INFO  [main] service=iuser traceId= userId= o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-23 15:46:42.163 INFO  [main] service=iuser traceId= userId= com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-23 15:46:42.164 INFO  [main] service=iuser traceId= userId= com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-23 15:46:42.165 INFO  [main] service=iuser traceId= userId= o.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2026-06-23 15:46:42.172 INFO  [main] service=iuser traceId= userId= o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-23 15:46:42.180 ERROR [main] service=iuser traceId= userId= o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field loginFactory in com.alipay.usercenter.biz.user.impl.AbstractUserBizService required a bean of type 'com.alipay.usercenter.biz.login.LoginFactory' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.alipay.usercenter.biz.login.LoginFactory' in your configuration.
+
