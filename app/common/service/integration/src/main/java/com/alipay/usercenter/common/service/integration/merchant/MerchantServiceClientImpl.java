@@ -8,11 +8,13 @@ import com.alipay.merchant.common.service.facade.result.QueryMerchantInfoRequest
 import com.alipay.usercenter.common.service.facade.enums.UserResultCode;
 import com.alipay.usercenter.common.service.integration.AbstractServiceClient;
 import com.alipay.usercenter.core.util.AssertUtil;
+import org.springframework.stereotype.Component;
 
 /**
  * @author adam
  * @date 21/6/2026 6:13 PM
  */
+@Component
 public class MerchantServiceClientImpl extends AbstractServiceClient implements MerchantServiceClient {
 
     @Override

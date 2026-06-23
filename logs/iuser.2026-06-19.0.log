@@ -1,0 +1,303 @@
+2026-06-19 01:24:55.370 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h18m53s667ms).
+2026-06-19 01:41:47.170 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m51s813ms).
+2026-06-19 01:44:44.804 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m57s620ms).
+2026-06-19 01:54:59.772 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m14s966ms).
+2026-06-19 01:56:16.028 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46s223ms).
+2026-06-19 02:07:25.104 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m39s61ms).
+2026-06-19 02:22:53.671 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s572ms).
+2026-06-19 02:48:22.270 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s475ms).
+2026-06-19 03:05:20.492 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s207ms).
+2026-06-19 03:21:18.712 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s213ms).
+2026-06-19 03:36:47.714 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s996ms).
+2026-06-19 03:52:46.766 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m29s37ms).
+2026-06-19 04:11:47.839 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m31s32ms).
+2026-06-19 04:16:31.836 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m43s996ms).
+2026-06-19 04:21:45.809 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m43s966ms).
+2026-06-19 04:37:47.770 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m31s956ms).
+2026-06-19 04:54:02.687 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m44s911ms).
+2026-06-19 05:10:02.663 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m59s975ms).
+2026-06-19 05:26:05.198 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m32s527ms).
+2026-06-19 05:42:43.602 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m38s404ms).
+2026-06-19 06:00:50.996 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m37s385ms).
+2026-06-19 06:03:11.973 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m50s971ms).
+2026-06-19 06:20:20.917 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m38s936ms).
+2026-06-19 06:36:33.331 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m12s412ms).
+2026-06-19 06:53:09.871 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m6s533ms).
+2026-06-19 07:09:29.321 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m19s449ms).
+2026-06-19 07:26:48.692 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m49s367ms).
+2026-06-19 07:43:38.151 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m49s459ms).
+2026-06-19 08:00:56.778 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m48s616ms).
+2026-06-19 08:04:10.803 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m44s21ms).
+2026-06-19 08:15:26.771 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m45s964ms).
+2026-06-19 08:32:07.746 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m40s976ms).
+2026-06-19 08:38:26.725 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m18s956ms).
+2026-06-19 09:05:19.264 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=26m22s530ms).
+2026-06-19 09:22:43.247 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m23s979ms).
+2026-06-19 09:55:54.535 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=33m11s292ms).
+2026-06-19 10:06:05.506 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m10s970ms).
+2026-06-19 11:07:03.426 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h27s908ms).
+2026-06-19 11:55:11.737 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=47m38s303ms).
+2026-06-19 12:08:31.413 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=13m19s676ms).
+2026-06-19 12:59:04.715 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=50m33s302ms).
+2026-06-19 13:09:29.363 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m24s647ms).
+2026-06-19 13:43:10.922 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=33m41s559ms).
+2026-06-19 14:10:27.217 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=27m16s295ms).
+2026-06-19 14:41:56.869 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=31m29s652ms).
+2026-06-19 15:11:25.199 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=29m28s331ms).
+2026-06-19 15:28:24.257 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m59s57ms).
+2026-06-19 16:12:23.276 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=43m59s20ms).
+2026-06-19 16:28:02.270 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m38s991ms).
+2026-06-19 17:13:09.510 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=44m37s227ms).
+2026-06-19 18:02:18.885 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48m39s363ms).
+2026-06-19 18:14:37.525 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m18s640ms).
+2026-06-19 19:03:43.810 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=49m6s282ms).
+2026-06-19 19:15:35.264 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m51s457ms).
+2026-06-19 19:49:50.723 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=34m15s460ms).
+2026-06-19 20:16:33.030 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=26m42s306ms).
+2026-06-19 20:39:05.483 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=22m32s454ms).
+2026-06-19 20:42:27.821 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m52s327ms).
+2026-06-19 20:52:23.705 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m25s880ms).
+2026-06-19 21:00:49.982 WARN  [HikariPool-1:housekeeper] service=iuser traceId= userId= com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m26s264ms).
+2026-06-19 21:05:31.147 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId= c.a.u.web.controller.TraceIdFilter - Starting request: POST /user/topup/queryCardDetails.json
+2026-06-19 21:05:31.147 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId= c.a.u.web.controller.TraceIdFilter - Starting request: POST /user/topup/queryDefaultCard.json
+2026-06-19 21:05:31.161 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId= c.a.usercenter.web.aspect.LoggingAspect - Entering: JwtUtil.extractToken(..)
+2026-06-19 21:05:31.161 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId= c.a.usercenter.web.aspect.LoggingAspect - Entering: JwtUtil.extractToken(..)
+2026-06-19 21:05:31.164 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId= c.a.usercenter.web.aspect.LoggingAspect - Exiting: JwtUtil.extractToken(..) (2ms)
+2026-06-19 21:05:31.164 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId= c.a.usercenter.web.aspect.LoggingAspect - Exiting: JwtUtil.extractToken(..) (2ms)
+2026-06-19 21:05:31.165 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId= c.a.usercenter.web.aspect.LoggingAspect - Entering: JwtUtil.validate(..)
+2026-06-19 21:05:31.165 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId= c.a.usercenter.web.aspect.LoggingAspect - Entering: JwtUtil.validate(..)
+2026-06-19 21:05:31.295 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId= c.a.usercenter.web.aspect.LoggingAspect - Exiting: JwtUtil.validate(..) (130ms)
+2026-06-19 21:05:31.295 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId= c.a.usercenter.web.aspect.LoggingAspect - Exiting: JwtUtil.validate(..) (130ms)
+2026-06-19 21:05:31.295 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId= c.a.usercenter.web.aspect.LoggingAspect - Entering: JwtUtil.parse(..)
+2026-06-19 21:05:31.295 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId= c.a.usercenter.web.aspect.LoggingAspect - Entering: JwtUtil.parse(..)
+2026-06-19 21:05:31.297 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId= c.a.usercenter.web.aspect.LoggingAspect - Exiting: JwtUtil.parse(..) (2ms)
+2026-06-19 21:05:31.298 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId= c.a.usercenter.web.aspect.LoggingAspect - Exiting: JwtUtil.parse(..) (3ms)
+2026-06-19 21:05:31.387 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Entering: UserTopUpController.queryCardDetails(..)
+2026-06-19 21:05:31.387 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Entering: UserTopUpController.queryDefaultCard(..)
+2026-06-19 21:05:31.393 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Entering: TopUpServiceImpl.queryCardDetails(..)
+2026-06-19 21:05:31.393 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Entering: TopUpServiceImpl.queryDefaultCard(..)
+2026-06-19 21:05:31.393 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Entering: UserServiceTemplate.execute(..)
+2026-06-19 21:05:31.393 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Entering: UserServiceTemplate.execute(..)
+2026-06-19 21:05:31.394 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId=284740624875520 USER-BIZ-SERVICE - service request[[com.alipay.usercenter.common.service.facade.request.QueryDefaultCardRequest@6db2b4dd]
+2026-06-19 21:05:31.394 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId=284740624875520 USER-BIZ-SERVICE - service request[[com.alipay.usercenter.common.service.facade.request.QueryCardDetailsRequest@57961eee]
+2026-06-19 21:05:31.394 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Entering: AutoReloadConfigRepositoryImpl.queryAutoReloadConfig(..)
+2026-06-19 21:05:31.394 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Entering: UserCardDetailRepositoryImpl.queryCardDetailList(..)
+2026-06-19 21:05:31.451 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Exiting: AutoReloadConfigRepositoryImpl.queryAutoReloadConfig(..) (57ms)
+2026-06-19 21:05:31.455 ERROR [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId=284740624875520 USER-BIZ-SERVICE - service process unexpected exception[[com.alipay.usercenter.common.service.facade.request.QueryDefaultCardRequest@6db2b4dd]
+com.alipay.usercenter.core.exception.BaseSlipException: System Exception:auto reload config not exist for user, cannot get default card
+	at com.alipay.usercenter.core.util.AssertUtil.check(AssertUtil.java:73)
+	at com.alipay.usercenter.core.util.AssertUtil.notNull(AssertUtil.java:25)
+	at com.alipay.usercenter.biz.user.impl.TopUpServiceImpl$6.process(TopUpServiceImpl.java:332)
+	at com.alipay.usercenter.biz.user.impl.TopUpServiceImpl$6.process(TopUpServiceImpl.java:317)
+	at com.alipay.usercenter.biz.template.UserServiceTemplate.execute(UserServiceTemplate.java:49)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)
+	at com.alipay.usercenter.web.aspect.LoggingAspect.logMethod(LoggingAspect.java:34)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:649)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:631)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.alipay.usercenter.biz.template.UserServiceTemplate$$SpringCGLIB$$0.execute(<generated>)
+	at com.alipay.usercenter.biz.user.impl.TopUpServiceImpl.queryDefaultCard(TopUpServiceImpl.java:316)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)
+	at com.alipay.usercenter.web.aspect.LoggingAspect.logMethod(LoggingAspect.java:34)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:649)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:631)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.alipay.usercenter.biz.user.impl.TopUpServiceImpl$$SpringCGLIB$$0.queryDefaultCard(<generated>)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at com.alipay.sofa.runtime.service.binding.JvmServiceInvoker.doInvoke(JvmServiceInvoker.java:151)
+	at com.alipay.sofa.runtime.spi.service.ServiceProxy.invoke(ServiceProxy.java:42)
+	at com.alipay.sofa.runtime.service.binding.JvmServiceInvoker.invoke(JvmServiceInvoker.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy2/jdk.proxy2.$Proxy151.queryDefaultCard(Unknown Source)
+	at com.alipay.usercenter.web.controller.UserTopUpController.queryDefaultCard(UserTopUpController.java:74)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)
+	at com.alipay.usercenter.web.aspect.LoggingAspect.logMethod(LoggingAspect.java:34)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:649)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:631)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at com.alipay.usercenter.web.controller.UserTopUpController$$SpringCGLIB$$0.queryDefaultCard(<generated>)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at com.alipay.usercenter.biz.jwt.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at com.alipay.usercenter.web.controller.TraceIdFilter.doFilter(TraceIdFilter.java:47)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:490)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:351)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:83)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:129)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:125)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:334)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:319)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$4(HandlerMappingIntrospector.java:267)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:240)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+2026-06-19 21:05:31.483 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId=284740624875520 USER-BIZ-SERVICE - service result[[com.alipay.usercenter.common.service.facade.baseresult.UserBizResult@4ee4da67]] [request =[com.alipay.usercenter.common.service.facade.request.QueryDefaultCardRequest@6db2b4dd]
+2026-06-19 21:05:31.483 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Exiting: UserServiceTemplate.execute(..) (90ms)
+2026-06-19 21:05:31.483 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Exiting: TopUpServiceImpl.queryDefaultCard(..) (90ms)
+2026-06-19 21:05:31.483 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Exiting: UserTopUpController.queryDefaultCard(..) (95ms)
+2026-06-19 21:05:31.515 INFO  [http-nio-0.0.0.0-8085-exec-2] service=iuser traceId=0ae1941d-6145-4a8b-98ba-d3d7db9cd6f9 userId=284740624875520 c.a.u.web.controller.TraceIdFilter - Finished request: POST /user/topup/queryDefaultCard.json - Status: 200
+2026-06-19 21:05:31.566 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Exiting: UserCardDetailRepositoryImpl.queryCardDetailList(..) (172ms)
+2026-06-19 21:05:31.568 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId=284740624875520 USER-BIZ-SERVICE - service result[[com.alipay.usercenter.common.service.facade.baseresult.UserBizResult@48c47213]] [request =[com.alipay.usercenter.common.service.facade.request.QueryCardDetailsRequest@57961eee]
+2026-06-19 21:05:31.568 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Exiting: UserServiceTemplate.execute(..) (175ms)
+2026-06-19 21:05:31.568 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Exiting: TopUpServiceImpl.queryCardDetails(..) (175ms)
+2026-06-19 21:05:31.568 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId=284740624875520 c.a.usercenter.web.aspect.LoggingAspect - Exiting: UserTopUpController.queryCardDetails(..) (180ms)
+2026-06-19 21:05:31.573 INFO  [http-nio-0.0.0.0-8085-exec-3] service=iuser traceId=59580752-eea4-4a47-8ba6-0b3bd101bca8 userId=284740624875520 c.a.u.web.controller.TraceIdFilter - Finished request: POST /user/topup/queryCardDetails.json - Status: 200
