@@ -1,5 +1,6 @@
 package com.alipay.usercenter.biz.registration;
 
+import com.alipay.usercenter.common.service.facade.enums.RegistrationType;
 import com.alipay.usercenter.common.service.facade.request.RegisterUserRequest;
 
 /**
@@ -8,7 +9,11 @@ import com.alipay.usercenter.common.service.facade.request.RegisterUserRequest;
  */
 public interface RegistrationHandler {
 
+    RegistrationType getType();
+
     void validate(RegisterUserRequest request);
 
     void createNewAccount(RegisterUserRequest request);
+
+
 }

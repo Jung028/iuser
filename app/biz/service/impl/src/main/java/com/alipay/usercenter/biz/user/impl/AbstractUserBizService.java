@@ -89,21 +89,9 @@ public abstract class AbstractUserBizService {
     protected AutoReloadConfigRepository autoReloadConfigRepository;
 
     /**
-     * RegistrationFactory
-     */
-    @Autowired
-    protected RegistrationFactory registrationFactory;
-
-    /**
      * merchantService
      */
     @Autowired
     protected MerchantServiceClient merchantServiceClient;
-
-    /**
-     * loginFactory
-     */
-    @Autowired
-    protected LoginFactory loginFactory;
 
 }

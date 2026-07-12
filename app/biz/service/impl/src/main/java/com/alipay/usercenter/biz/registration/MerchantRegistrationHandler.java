@@ -10,18 +10,26 @@ import com.alipay.merchant.common.service.facade.request.CreateMerchantAccountRe
 import com.alipay.merchant.common.service.facade.result.QueryMerchantInfoRequest;
 import com.alipay.usercenter.biz.user.impl.AbstractUserBizService;
 import com.alipay.usercenter.common.service.facade.enums.AuthType;
+import com.alipay.usercenter.common.service.facade.enums.RegistrationType;
 import com.alipay.usercenter.common.service.facade.enums.UserResultCode;
 import com.alipay.usercenter.common.service.facade.request.RegisterMerchantUserRequest;
 import com.alipay.usercenter.common.service.facade.request.RegisterUserRequest;
 import com.alipay.usercenter.core.model.UserAuth;
 import com.alipay.usercenter.core.util.AssertUtil;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 import static com.alipay.usercenter.biz.util.UserPasswordUtil.hashPassword;
 import static com.alipay.usercenter.common.service.facade.constant.GlobalUserConstant.DEFAULT_CURRENCY;
 
+@Component
 public class MerchantRegistrationHandler extends AbstractUserBizService implements RegistrationHandler {
+
+    @Override
+    public RegistrationType getType() {
+        return RegistrationType.MERCHANT;
+    }
 
     @Override
     public void validate(RegisterUserRequest request) {

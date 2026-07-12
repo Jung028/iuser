@@ -12,7 +12,9 @@ import com.alipay.usercenter.biz.helper.GenerateUserId;
 import com.alipay.usercenter.biz.jwt.JwtClaims;
 import com.alipay.usercenter.biz.jwt.JwtContextHolder;
 import com.alipay.usercenter.biz.login.LoginContextInfo;
+import com.alipay.usercenter.biz.login.LoginFactory;
 import com.alipay.usercenter.biz.login.LoginHandler;
+import com.alipay.usercenter.biz.registration.RegistrationFactory;
 import com.alipay.usercenter.biz.registration.RegistrationHandler;
 import com.alipay.usercenter.biz.template.UserBizCallback;
 import com.alipay.usercenter.biz.user.helper.BusinessServiceHelper;
@@ -64,6 +66,20 @@ import static com.alipay.usercenter.common.service.facade.constant.GlobalUserCon
 )
 @Service
 public class UserServiceImpl extends AbstractUserBizService implements UserService {
+
+    /**
+     * RegistrationFactory
+     */
+    @Autowired
+    protected RegistrationFactory registrationFactory;
+
+
+    /**
+     * loginFactory
+     */
+    @Autowired
+    protected LoginFactory loginFactory;
+
 
     @Override
     public UserBizResult<LoginResult> login(LoginRequest request) {

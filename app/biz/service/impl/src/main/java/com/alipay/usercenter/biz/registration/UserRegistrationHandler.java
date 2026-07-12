@@ -6,12 +6,14 @@ import com.alipay.account_center.common.service.facade.request.CreateAccountRequ
 import com.alipay.usercenter.biz.helper.GenerateUserId;
 import com.alipay.usercenter.biz.user.impl.AbstractUserBizService;
 import com.alipay.usercenter.common.service.facade.enums.AuthType;
+import com.alipay.usercenter.common.service.facade.enums.RegistrationType;
 import com.alipay.usercenter.common.service.facade.enums.UserResultCode;
 import com.alipay.usercenter.common.service.facade.request.RegisterUserRequest;
 import com.alipay.usercenter.core.enums.UserAccountStatusEnum;
 import com.alipay.usercenter.core.model.UserAuth;
 import com.alipay.usercenter.core.model.UserInfo;
 import com.alipay.usercenter.core.util.AssertUtil;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -22,7 +24,14 @@ import static com.alipay.usercenter.common.service.facade.constant.GlobalUserCon
  * @author adam
  * @date 21/6/2026 1:12 PM
  */
+@Component
 public class UserRegistrationHandler extends AbstractUserBizService implements RegistrationHandler {
+
+    @Override
+    public RegistrationType getType() {
+        return RegistrationType.USER;
+    }
+
     @Override
     public void validate(RegisterUserRequest request) {
         // check if there is already an existing account for this phone no
